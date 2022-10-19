@@ -1,5 +1,7 @@
 package fr.groupeh6.sae;
 
+import fr.groupeh6.sae.columns.IColumn;
+
 /**
  * Decrit un Point (ou donnee, ou ligne) dans un DataSet.
  */

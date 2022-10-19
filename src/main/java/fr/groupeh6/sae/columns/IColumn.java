@@ -1,4 +1,8 @@
-package fr.groupeh6.sae;
+package fr.groupeh6.sae.columns;
+
+import fr.groupeh6.sae.IDataset;
+import fr.groupeh6.sae.IPoint;
+import fr.groupeh6.sae.normalizer.IValueNormalizer;
 
 /**
  * Decrit une <i>colonne</i> d'un DataSet.

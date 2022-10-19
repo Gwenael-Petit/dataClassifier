@@ -3,6 +3,8 @@ package fr.groupeh6.sae;
 import java.util.Collection;
 import java.util.List;
 
+import fr.groupeh6.sae.columns.IColumn;
+
 /**
  * Decrit un modele de donnee dans le MVC.
  *
