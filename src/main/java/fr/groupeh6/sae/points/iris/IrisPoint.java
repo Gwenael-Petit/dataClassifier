@@ -2,7 +2,6 @@ package fr.groupeh6.sae.points.iris;
 
 
 import com.opencsv.bean.CsvBindByName;
-
 import fr.groupeh6.sae.columns.IColumn;
 import fr.groupeh6.sae.points.IPoint;
 
@@ -27,13 +26,24 @@ public class IrisPoint implements IPoint {
 	public IrisPoint() {}
 
 	public Object getValue(IColumn col) {
-		// TODO Auto-generated method stub
-		return null;
+		switch(col.getName()) {
+			case "sepal.length" : return sepalLength;
+			case "sepal.width" : return sepalWidth;
+			case "petal.length" : return petalLength;
+			case "petal.width" : return petalWidth;
+			case "variety" : return variety;
+			default : return null;
+		}
 	}
 
 	public double getNormalizedValue(IColumn xcol) {
-		// TODO Auto-generated method stub
-		return 0;
+		switch(xcol.getName()) {
+			case "sepal.length" : return sepalLength;
+			case "sepal.width" : return sepalWidth;
+			case "petal.length" : return petalLength;
+			case "petal.width" : return petalWidth;
+			default : return 0.0;
+		}
 	}
 
 }
