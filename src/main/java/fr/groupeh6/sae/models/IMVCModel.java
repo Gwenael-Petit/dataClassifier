@@ -1,9 +1,11 @@
-package fr.groupeh6.sae;
+package fr.groupeh6.sae.models;
 
 import java.util.Collection;
 import java.util.List;
 
+import fr.groupeh6.sae.ICategory;
 import fr.groupeh6.sae.columns.IColumn;
+import fr.groupeh6.sae.dataset.IDataset;
 
 /**
  * Decrit un modele de donnee dans le MVC.

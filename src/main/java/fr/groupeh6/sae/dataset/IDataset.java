@@ -1,6 +1,8 @@
-package fr.groupeh6.sae;
+package fr.groupeh6.sae.dataset;
 
 import java.util.List;
+
+import fr.groupeh6.sae.points.IPoint;
 
 /**
 * Decrit un <i>DatSet</i>, c'est a dire un ensemble de points (ou lignes,
@@ -12,7 +14,7 @@ import java.util.List;
 * d'un DataSet.
 */
 
-public interface IDataset extends Iterable<IPoint>{
+public interface IDataset extends Iterable<IPoint> {
 	
 	/**
 	* Le nom du DataSet ex: Titanic, Iris, Pokemon, ...

@@ -1,9 +1,9 @@
 package fr.groupeh6.sae.columns.iris;
 
-import fr.groupeh6.sae.IDataset;
-import fr.groupeh6.sae.IPoint;
 import fr.groupeh6.sae.columns.IColumn;
+import fr.groupeh6.sae.dataset.IDataset;
 import fr.groupeh6.sae.normalizer.IValueNormalizer;
+import fr.groupeh6.sae.points.IPoint;
 
 public class SepalLengthColumn implements IColumn {
 

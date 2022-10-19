@@ -1,5 +1,7 @@
 package fr.groupeh6.sae;
 
+import fr.groupeh6.sae.dataset.IDataset;
+
 /**
  * Decrit une categorie. Toute categorie peut etre vue comme un Dataset, elle a
  * un nom et un ensemble de point qui lui appartiennent.

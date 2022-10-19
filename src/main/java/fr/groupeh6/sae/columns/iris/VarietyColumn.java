@@ -1,15 +1,14 @@
 package fr.groupeh6.sae.columns.iris;
 
-import fr.groupeh6.sae.IDataset;
-import fr.groupeh6.sae.IPoint;
 import fr.groupeh6.sae.columns.IColumn;
+import fr.groupeh6.sae.dataset.IDataset;
 import fr.groupeh6.sae.normalizer.IValueNormalizer;
+import fr.groupeh6.sae.points.IPoint;
 
 public class VarietyColumn implements IColumn {
 
 	public void setNormalizer(IValueNormalizer valueNormalizer) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	public double getNormalizedValue(IPoint point) {

@@ -1,4 +1,4 @@
-package fr.groupeh6.sae;
+package fr.groupeh6.sae.points;
 
 import fr.groupeh6.sae.columns.IColumn;
 
