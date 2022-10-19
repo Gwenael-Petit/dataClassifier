@@ -23,7 +23,20 @@ public class IrisPoint implements IPoint {
 	private String variety;
 	
 	
+	public IrisPoint(double sepalLength, double sepalWidth, double petalLength, double petalWidth, String variety) {
+		this.sepalLength = sepalLength;
+		this.sepalWidth = sepalWidth;
+		this.petalLength = petalLength;
+		this.petalWidth = petalWidth;
+		this.variety = variety;
+	}
+	
 	public IrisPoint() {}
+	
+	@Override
+	public String toString() {
+		return variety + "[" + sepalLength + "," + sepalWidth + "," + petalLength + "," + petalWidth + "]";
+	}
 
 	public Object getValue(IColumn col) {
 		switch(col.getName()) {
@@ -37,13 +50,27 @@ public class IrisPoint implements IPoint {
 	}
 
 	public double getNormalizedValue(IColumn xcol) {
-		switch(xcol.getName()) {
-			case "sepal.length" : return sepalLength;
-			case "sepal.width" : return sepalWidth;
-			case "petal.length" : return petalLength;
-			case "petal.width" : return petalWidth;
-			default : return 0.0;
-		}
+		return 0.0;
+	}
+	
+	public double getSepalLength() {
+		return sepalLength;
+	}
+	
+	public double getSepalWidth() {
+		return sepalWidth;
+	}
+	
+	public double getPetalLength() {
+		return petalLength;
+	}
+	
+	public double getPetalWidth() {
+		return petalWidth;
+	}
+	
+	public String getVariety() {
+		return variety;
 	}
 
 }

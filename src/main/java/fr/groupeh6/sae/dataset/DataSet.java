@@ -1,5 +1,6 @@
 package fr.groupeh6.sae.dataset;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -9,6 +10,10 @@ import fr.groupeh6.sae.points.IPoint;
 public abstract class DataSet implements IDataset {
 	
 	protected List<IPoint> points;
+	
+	public DataSet() {
+		points = new ArrayList();
+	}
 	
 	public void setLines(List<IPoint> lines) {
 		this.points = lines;	
@@ -28,6 +33,10 @@ public abstract class DataSet implements IDataset {
 	
 	public Iterator<IPoint> iterator() {
 		return points.iterator();
+	}
+	
+	public List<IPoint> getPoints() {
+		return points;
 	}
 
 }

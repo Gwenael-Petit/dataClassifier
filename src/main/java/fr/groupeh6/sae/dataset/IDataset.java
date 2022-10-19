@@ -5,7 +5,7 @@ import java.util.List;
 import fr.groupeh6.sae.points.IPoint;
 
 /**
-* Decrit un <i>DatSet</i>, c'est a dire un ensemble de points (ou lignes,
+* Decrit un <i>DataSet</i>, c'est a dire un ensemble de points (ou lignes,
 * ou donnees) ayant tous la meme structure (les memes colonnes)
 *
 * Un DataSet est <i>Iterable</i> pour pouvoir parcourir l'ensemble des

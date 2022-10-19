@@ -1,7 +1,5 @@
 package fr.groupeh6.sae;
 
-
-
 public class ColumnFactory {
 	
 	private static ColumnFactory instance;
