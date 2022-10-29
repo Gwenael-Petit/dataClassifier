@@ -1,8 +1,8 @@
 package fr.groupeh6.sae.points.iris;
 
-
 import com.opencsv.bean.CsvBindByName;
-import fr.groupeh6.sae.columns.IColumn;
+
+import fr.groupeh6.sae.columns.Column;
 import fr.groupeh6.sae.points.IPoint;
 
 public class IrisPoint implements IPoint {
@@ -38,7 +38,7 @@ public class IrisPoint implements IPoint {
 		return variety + "[" + sepalLength + "," + sepalWidth + "," + petalLength + "," + petalWidth + "]";
 	}
 
-	public Object getValue(IColumn col) {
+	public Object getValue(Column col) {
 		switch(col.getName()) {
 			case "sepal.length" : return sepalLength;
 			case "sepal.width" : return sepalWidth;
@@ -49,7 +49,7 @@ public class IrisPoint implements IPoint {
 		}
 	}
 
-	public double getNormalizedValue(IColumn xcol) {
+	public double getNormalizedValue(Column col) {
 		return 0.0;
 	}
 	

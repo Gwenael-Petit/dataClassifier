@@ -12,7 +12,7 @@ import fr.groupeh6.sae.dataset.iris.IrisDataSet;
 import fr.groupeh6.sae.points.IPoint;
 import fr.groupeh6.sae.points.iris.IrisPoint;
 
-public class Loader {
+public class CSVLoader {
 	
 	public static List<IrisPoint> loadIris(String fileName) throws IOException {
 		return new CsvToBeanBuilder<IrisPoint>(Files.newBufferedReader(Paths.get(fileName)))
@@ -22,7 +22,7 @@ public class Loader {
 	}
 	
 	public static void main(String[] args) {
-		List<IPoint> irisPoints = new CsvToBeanBuilder<IPoint>(new InputStreamReader(Loader.class.getResourceAsStream("iris.csv")))
+		List<IPoint> irisPoints = new CsvToBeanBuilder<IPoint>(new InputStreamReader(CSVLoader.class.getResourceAsStream("iris.csv")))
 				.withSeparator(',').withType(IrisPoint.class).build().parse();
 		IrisDataSet dataSet = new IrisDataSet();
 		dataSet.setLines(irisPoints);

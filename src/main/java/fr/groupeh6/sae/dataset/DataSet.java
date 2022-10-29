@@ -4,23 +4,31 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import fr.groupeh6.sae.columns.IColumn;
+import fr.groupeh6.sae.columns.Column;
 import fr.groupeh6.sae.points.IPoint;
 
-public abstract class DataSet implements IDataset {
+public abstract class DataSet implements Iterable<IPoint> {
 	
+	private String name;
 	protected List<IPoint> points;
+	protected List<Column> columns;
 	
-	public DataSet() {
-		points = new ArrayList();
+	public DataSet(String name, List<Column> columns) {
+		this.name = name;
+		this.columns = columns;
+		this.points = new ArrayList<IPoint>();
 	}
 	
-	public void setLines(List<IPoint> lines) {
-		this.points = lines;	
+	public String getName() {
+		return name;
 	}
 	
 	public int getNbLines() {
 		return points.size();
+	}
+	
+	public void setLines(List<IPoint> lines) {
+		this.points = lines;	
 	}
 	
 	public void addLine(IPoint element) {
@@ -29,6 +37,10 @@ public abstract class DataSet implements IDataset {
 	
 	public void addAllLine(List<IPoint> elements) {
 		this.points.addAll(elements);
+	}
+	
+	public List<Column> getNormalizableColumns() {
+		return null;
 	}
 	
 	public Iterator<IPoint> iterator() {

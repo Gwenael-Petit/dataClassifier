@@ -2,7 +2,7 @@ package fr.groupeh6.sae.points.titanic;
 
 import com.opencsv.bean.CsvBindByName;
 
-import fr.groupeh6.sae.columns.IColumn;
+import fr.groupeh6.sae.columns.Column;
 import fr.groupeh6.sae.points.IPoint;
 
 public class TitanicPoint implements IPoint {
@@ -45,13 +45,11 @@ public class TitanicPoint implements IPoint {
 	
 	public TitanicPoint() {}
 
-	public Object getValue(IColumn col) {
-		// TODO Auto-generated method stub
+	public Object getValue(Column col) {
 		return null;
 	}
 
-	public double getNormalizedValue(IColumn xcol) {
-		// TODO Auto-generated method stub
+	public double getNormalizedValue(Column xcol) {
 		return 0;
 	}
 

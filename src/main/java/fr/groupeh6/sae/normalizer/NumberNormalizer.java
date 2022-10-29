@@ -1,6 +1,6 @@
 package fr.groupeh6.sae.normalizer;
 
-public class BooleanNormalizer implements IValueNormalizer {
+public class NumberNormalizer implements IValueNormalizer {
 
 	@Override
 	public double normalize(Object value) {
