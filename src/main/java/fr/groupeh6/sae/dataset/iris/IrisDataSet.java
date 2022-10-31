@@ -5,9 +5,9 @@ import java.util.Arrays;
 import fr.groupeh6.sae.columns.Column;
 import fr.groupeh6.sae.columns.NumberColumn;
 import fr.groupeh6.sae.columns.StringColumn;
-import fr.groupeh6.sae.dataset.DataSet;
+import fr.groupeh6.sae.dataset.Dataset;
 
-public class IrisDataSet extends DataSet {
+public class IrisDataSet extends Dataset {
 	
 	private static final String NAME = "Iris";
 	private static final Column[] COLUMNS = new Column[] {

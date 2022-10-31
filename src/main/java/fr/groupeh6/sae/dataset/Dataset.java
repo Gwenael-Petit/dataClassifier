@@ -7,13 +7,13 @@ import java.util.List;
 import fr.groupeh6.sae.columns.Column;
 import fr.groupeh6.sae.points.IPoint;
 
-public abstract class DataSet implements Iterable<IPoint> {
+public abstract class Dataset implements Iterable<IPoint> {
 	
 	private String name;
 	protected List<IPoint> points;
 	protected List<Column> columns;
 	
-	public DataSet(String name, List<Column> columns) {
+	public Dataset(String name, List<Column> columns) {
 		this.name = name;
 		this.columns = columns;
 		this.points = new ArrayList<IPoint>();

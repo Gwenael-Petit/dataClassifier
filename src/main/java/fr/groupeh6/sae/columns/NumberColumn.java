@@ -1,6 +1,6 @@
 package fr.groupeh6.sae.columns;
 
-import fr.groupeh6.sae.normalizer.NumberNormalizer;
+import fr.groupeh6.sae.columns.normalizer.NumberNormalizer;
 
 public class NumberColumn extends Column {
 

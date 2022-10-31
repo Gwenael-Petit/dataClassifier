@@ -1,6 +1,6 @@
 package fr.groupeh6.sae.columns;
 
-import fr.groupeh6.sae.normalizer.IValueNormalizer;
+import fr.groupeh6.sae.columns.normalizer.IValueNormalizer;
 import fr.groupeh6.sae.points.IPoint;
 
 public abstract class Column {

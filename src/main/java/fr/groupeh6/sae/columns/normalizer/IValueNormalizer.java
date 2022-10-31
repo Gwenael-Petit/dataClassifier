@@ -1,4 +1,4 @@
-package fr.groupeh6.sae.normalizer;
+package fr.groupeh6.sae.columns.normalizer;
 
 /**
  * Decrit un <i>Normaliseur</i>, c'est a dire un objet qui peut transformer une
