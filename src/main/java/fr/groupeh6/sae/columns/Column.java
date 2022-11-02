@@ -1,5 +1,7 @@
 package fr.groupeh6.sae.columns;
 
+import java.util.Objects;
+
 import fr.groupeh6.sae.columns.normalizer.IValueNormalizer;
 import fr.groupeh6.sae.points.IPoint;
 
@@ -37,6 +39,20 @@ public abstract class Column {
 	public void updateMinMax(double value) {
 		if(value > max) max = value;
 		if(value < min) min = value;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (getClass() != obj.getClass()) return false;
+		Column other = (Column) obj;
+		return Objects.equals(name, other.name);
+	}
+	
+	@Override
+	public String toString() {
+		return name;
 	}
 
 }

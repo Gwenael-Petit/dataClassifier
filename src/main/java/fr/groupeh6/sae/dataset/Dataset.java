@@ -60,5 +60,7 @@ public abstract class Dataset implements Iterable<IPoint> {
 	public double robustesse() {
 		return 0.0;
 	}
+	
+	public abstract IPoint getType();
 
 }
