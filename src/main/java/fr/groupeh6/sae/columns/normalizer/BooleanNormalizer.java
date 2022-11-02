@@ -4,12 +4,12 @@ public class BooleanNormalizer implements IValueNormalizer {
 
 	@Override
 	public double normalize(Object value) {
-		return 0.0;
+		return value.equals(true) ? 1.0 : 0.0;
 	}
 
 	@Override
 	public Object denormalize(double value) {
-		return null;
+		return value == 1.0 ? true : false;
 	}
 
 }
