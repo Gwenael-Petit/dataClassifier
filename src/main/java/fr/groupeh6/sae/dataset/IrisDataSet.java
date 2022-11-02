@@ -1,25 +1,24 @@
-package fr.groupeh6.sae.dataset.iris;
+package fr.groupeh6.sae.dataset;
 
-import java.util.Arrays;
+import java.util.List;
 
 import fr.groupeh6.sae.columns.Column;
 import fr.groupeh6.sae.columns.NumberColumn;
 import fr.groupeh6.sae.columns.StringColumn;
-import fr.groupeh6.sae.dataset.Dataset;
 
 public class IrisDataSet extends Dataset {
 	
 	private static final String NAME = "Iris";
-	private static final Column[] COLUMNS = new Column[] {
+	private static final List<Column> COLUMNS = List.of(
 			new NumberColumn("sepal.length"),
 			new NumberColumn("sepal.width"),
 			new NumberColumn("petal.length"),
 			new NumberColumn("petal.width"),
 			new StringColumn("variety")
-	};
+			);
 	
 	public IrisDataSet() {
-		super(NAME, Arrays.asList(COLUMNS));
+		super(NAME, COLUMNS);
 	}
 
 }

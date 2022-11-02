@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import fr.groupeh6.sae.classifier.Classifier;
 import fr.groupeh6.sae.columns.Column;
 import fr.groupeh6.sae.points.IPoint;
 
@@ -12,6 +13,7 @@ public abstract class Dataset implements Iterable<IPoint> {
 	private String name;
 	protected List<IPoint> points;
 	protected List<Column> columns;
+	protected Classifier classifier;
 	
 	public Dataset(String name, List<Column> columns) {
 		this.name = name;
@@ -40,15 +42,23 @@ public abstract class Dataset implements Iterable<IPoint> {
 	}
 	
 	public List<Column> getNormalizableColumns() {
-		return null;
+		List<Column> res = new ArrayList<>();
+		for(Column column : this.columns) {
+			if(column.isNormalizable()) res.add(column);
+		}
+		return res;
 	}
 	
 	public Iterator<IPoint> iterator() {
 		return points.iterator();
 	}
 	
-	public List<IPoint> getPoints() {
-		return points;
+	public void setClassifier(Classifier classifier) {
+		this.classifier = classifier;
+	}
+	
+	public double robustesse() {
+		return 0.0;
 	}
 
 }

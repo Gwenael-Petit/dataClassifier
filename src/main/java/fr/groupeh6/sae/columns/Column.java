@@ -6,25 +6,24 @@ import fr.groupeh6.sae.points.IPoint;
 public abstract class Column {
 	
 	private String name;
-	private double min;
-	private double max;
+	protected double min;
+	protected double max;
 	
 	protected IValueNormalizer normalizer;
 	
 	public Column(String name, IValueNormalizer normalizer) {
-		
-	}
-	
-	public Column(String name) {
-		this(name, null);
+		this.name = name;
+		this.normalizer = normalizer;
 	}
 	
 	public double getNormalizedValue(IPoint point) {
-		return 0.0;
+		// traiter si normalizer est null
+		return normalizer.normalize(point);
 	}
 	
 	public Object getDenormalizedValue(double value) {
-		return null;
+		// traiter si normalizer est null
+		return normalizer.denormalize(value);
 	}
 	
 	public String getName() {
@@ -32,11 +31,12 @@ public abstract class Column {
 	}
 	
 	public boolean isNormalizable() {
-		return false;
+		return normalizer != null;
 	}
 	
 	public void updateMinMax(double value) {
-		
+		if(value > max) max = value;
+		if(value < min) min = value;
 	}
 
 }

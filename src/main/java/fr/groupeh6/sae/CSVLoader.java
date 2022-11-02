@@ -7,13 +7,15 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.opencsv.bean.CsvToBeanBuilder;
 
 import fr.groupeh6.sae.columns.Column;
 import fr.groupeh6.sae.dataset.Dataset;
-import fr.groupeh6.sae.dataset.iris.IrisDataSet;
+import fr.groupeh6.sae.dataset.IrisDataSet;
 import fr.groupeh6.sae.points.IPoint;
-import fr.groupeh6.sae.points.iris.IrisPoint;
+import fr.groupeh6.sae.points.IrisPoint;
 
 public class CSVLoader {
 	
@@ -21,8 +23,10 @@ public class CSVLoader {
 		return false;
 	}
 	
-	private static char getDelimiter() {
-		return '0';
+	private static char getDelimiter(String firstLine) {
+		int c1 = StringUtils.countMatches(firstLine, ',');
+		int c2 = StringUtils.countMatches(firstLine, ';');
+		return c1 > c2 ? ',' : ';';
 	}
 	
 	private static String[] getColumnsName() {
@@ -66,7 +70,7 @@ public class CSVLoader {
 				.withSeparator(',').withType(IrisPoint.class).build().parse();
 		IrisDataSet dataSet = new IrisDataSet();
 		dataSet.setLines(irisPoints);
-		dataSet.getPoints().forEach(p -> System.out.println(p));
+		dataSet.iterator().forEachRemaining(e -> System.out.println(e));
 	}
 
 }

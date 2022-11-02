@@ -1,9 +1,8 @@
-package fr.groupeh6.sae.points.titanic;
+package fr.groupeh6.sae.points;
 
 import com.opencsv.bean.CsvBindByName;
 
 import fr.groupeh6.sae.columns.Column;
-import fr.groupeh6.sae.points.IPoint;
 
 public class TitanicPoint implements IPoint {
 
@@ -50,6 +49,12 @@ public class TitanicPoint implements IPoint {
 	}
 
 	public double getNormalizedValue(Column xcol) {
+		return 0;
+	}
+
+	@Override
+	public double distanceTo(IPoint other) {
+		// TODO Auto-generated method stub
 		return 0;
 	}
 
