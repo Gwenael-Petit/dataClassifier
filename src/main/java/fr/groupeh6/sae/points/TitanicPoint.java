@@ -42,14 +42,50 @@ public class TitanicPoint implements IPoint {
 	@CsvBindByName(column = "Embarked")
 	private char embarked;
 	
-	public TitanicPoint() {}
+	public TitanicPoint(int passengerId, boolean survived, int placeClass, String name, boolean sex, double age, int sibSp, int parch, String ticket, double fare, String cabin, char embarked ) {
+		this.passengerId = passengerId;
+		this.survived = survived;
+		this.placeClass = placeClass;
+		this.name = name;
+		this.sex = sex;
+		this.age = age;
+		this.sibSp = sibSp;
+		this.parch = parch;
+		this.ticket = ticket;
+		this.fare = fare;
+		this.cabin = cabin;
+		this.embarked = embarked;
+	}
+	
+	public TitanicPoint(){}
+
+	@Override
+	public String toString() {
+		return "TitanicPoint [passengerId=" + passengerId + ", survived=" + survived + ", placeClass=" + placeClass
+				+ ", name=" + name + ", sex=" + sex + ", age=" + age + ", sibSp=" + sibSp + ", parch=" + parch
+				+ ", ticket=" + ticket + ", fare=" + fare + ", cabin=" + cabin + ", embarked=" + embarked + "]";
+	}
 
 	public Object getValue(Column col) {
-		return null;
+		switch(col.getName()) {
+		case "PassengerId" : return passengerId;
+		case "Survived" : return survived;
+		case "Pclass" : return placeClass;
+		case "Name" : return name;
+		case "Sex" : return sex;
+		case "Age" : return age;
+		case "SibSp" : return sibSp;
+		case "Parch" : return parch;
+		case "Ticket" : return ticket;
+		case "Fare" : return fare;
+		case "Cabin" : return cabin;
+		case "Embarked" : return embarked;
+		default : return null;
+	}
 	}
 
 	public double getNormalizedValue(Column xcol) {
-		return 0;
+		return xcol.getNormalizedValue(this);
 	}
 
 	@Override
