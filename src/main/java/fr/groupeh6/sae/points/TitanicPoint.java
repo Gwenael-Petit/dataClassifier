@@ -84,8 +84,8 @@ public class TitanicPoint implements IPoint {
 	}
 	}
 
-	public double getNormalizedValue(Column xcol) {
-		return xcol.getNormalizedValue(this);
+	public double getNormalizedValue(Column col) {
+		return col.getNormalizedValue(this);
 	}
 
 	@Override
