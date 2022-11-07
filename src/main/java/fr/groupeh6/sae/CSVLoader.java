@@ -77,14 +77,6 @@ public class CSVLoader {
 		return load(new File(fileName));
 	}
 	
-	// A delete
-	public static List<IrisPoint> loadIris(String fileName) throws IOException {
-		return new CsvToBeanBuilder<IrisPoint>(Files.newBufferedReader(Paths.get(fileName)))
-				.withSeparator(',')
-				.withType(IrisPoint.class)
-				.build().parse();
-	}
-	
 	public static void main(String[] args) {
 		String sep = System.getProperty("file.separator");
 		String path = System.getProperty("user.dir") + sep + "src" + sep + "main" + sep + "resources" + sep + "fr" + sep + "groupeh6" + sep + "sae" + sep + "iris.csv";
@@ -95,13 +87,5 @@ public class CSVLoader {
 			e.printStackTrace();
 		}
 	}
-	
-	/*public static void main(String[] args) {
-		List<IPoint> irisPoints = new CsvToBeanBuilder<IPoint>(new InputStreamReader(CSVLoader.class.getResourceAsStream("iris.csv")))
-				.withSeparator(',').withType(IrisPoint.class).build().parse();
-		IrisDataSet dataSet = new IrisDataSet();
-		dataSet.setLines(irisPoints);
-		dataSet.iterator().forEachRemaining(e -> System.out.println(e));
-	}*/
 
 }

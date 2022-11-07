@@ -2,43 +2,34 @@ package fr.groupeh6.sae.columns;
 
 import java.util.Objects;
 
-import fr.groupeh6.sae.columns.normalizer.IValueNormalizer;
+import fr.groupeh6.sae.dataset.Dataset;
 import fr.groupeh6.sae.points.IPoint;
 
-public abstract class Column {
+public abstract class Column implements IValueNormalizer {
 	
 	private String name;
-	protected double min;
-	protected double max;
+	protected Dataset dataset;
 	
-	protected IValueNormalizer normalizer;
-	
-	public Column(String name, IValueNormalizer normalizer) {
+	public Column(String name) {
 		this.name = name;
-		this.normalizer = normalizer;
 	}
 	
 	public double getNormalizedValue(IPoint point) {
-		// traiter si normalizer est null
-		return normalizer.normalize(point);
+		return normalize(point.getValue(this));
 	}
 	
 	public Object getDenormalizedValue(double value) {
-		// traiter si normalizer est null
-		return normalizer.denormalize(value);
+		return denormalize(value);
 	}
 	
 	public String getName() {
 		return name;
 	}
 	
-	public boolean isNormalizable() {
-		return normalizer != null;
-	}
+	public abstract boolean isNormalizable();
 	
-	public void updateMinMax(double value) {
-		if(value > max) max = value;
-		if(value < min) min = value;
+	public void setDataset(Dataset dataset) {
+		this.dataset = dataset;
 	}
 
 	@Override

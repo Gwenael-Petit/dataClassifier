@@ -18,6 +18,7 @@ public abstract class Dataset implements Iterable<IPoint> {
 	public Dataset(String name, List<Column> columns) {
 		this.name = name;
 		this.columns = columns;
+		this.columns.forEach(column -> column.setDataset(this));
 		this.points = new ArrayList<IPoint>();
 	}
 	
