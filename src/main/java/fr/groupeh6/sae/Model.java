@@ -34,4 +34,7 @@ public class Model extends Subject {
 		return 0;
 	}
 
+	public Dataset getDataset() {
+		return this.dataset;
+	}
 }
