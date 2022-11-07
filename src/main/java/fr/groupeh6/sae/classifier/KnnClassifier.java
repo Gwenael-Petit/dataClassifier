@@ -1,7 +1,6 @@
 package fr.groupeh6.sae.classifier;
 
 import java.util.List;
-
 import fr.groupeh6.sae.columns.Column;
 import fr.groupeh6.sae.distance.Distance;
 import fr.groupeh6.sae.points.IPoint;

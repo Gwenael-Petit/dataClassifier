@@ -12,8 +12,10 @@ class IrisPointTest {
 	@Test
 	void Test() {
 		IrisPoint iris = new IrisPoint(5.1,3.5,1.4,.2,"Setosa");
-		StringColumn col = new StringColumn("sepal.length");
-		iris.getValue(col);
+		StringColumn col1 = new StringColumn("sepal.length");
+		StringColumn col2 = new StringColumn("sepal.width");
+		assertEquals(5.1,iris.getValue(col1));
+		assertEquals(3.5,iris.getValue(col2));
 	}
 
 }
