@@ -31,6 +31,10 @@ public abstract class Column implements IValueNormalizer {
 	public void setDataset(Dataset dataset) {
 		this.dataset = dataset;
 	}
+	
+	public boolean isLinkedToADataset() {
+		return dataset != null;
+	}
 
 	@Override
 	public boolean equals(Object obj) {
