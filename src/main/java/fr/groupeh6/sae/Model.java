@@ -37,4 +37,20 @@ public class Model extends Subject {
 	public Dataset getDataset() {
 		return this.dataset;
 	}
+
+	public Column getxColumn() {
+		return xColumn;
+	}
+
+	public void setxColumn(Column xColumn) {
+		this.xColumn = xColumn;
+	}
+
+	public Column getyColumn() {
+		return yColumn;
+	}
+
+	public void setyColumn(Column yColumn) {
+		this.yColumn = yColumn;
+	}
 }

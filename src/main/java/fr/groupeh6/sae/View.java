@@ -5,6 +5,7 @@ import fr.groupeh6.sae.utils.Observer;
 import fr.groupeh6.sae.utils.Subject;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
@@ -16,9 +17,11 @@ public class View extends Stage implements Observer{
 	ComboBox<Column> xColumn;
 	ComboBox<Column> yColumn;
 	Model model;
+	Controller controller;
 	
-	public View(Model model) {
+	public View(Model model, Controller controller) {
 		this.model = model;
+		this.controller = controller;
 		model.attach(this);
 		xColumn = new ComboBox<Column>();
 		yColumn = new ComboBox<Column>();
@@ -30,6 +33,15 @@ public class View extends Stage implements Observer{
 		xColumn.getItems().addAll(model.getDataset().getNormalizableColumns());
 		yColumn.getItems().addAll(model.getDataset().getNormalizableColumns());
 		
+		xColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setXColumn(newV));
+		yColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setYColumn(newV));
+		
+		for(int i =0; i < model.allCategories().size(); i++) {
+			XYChart.Series series = new XYChart.Series();
+			for(int j = 0; j < model.getxColumn(); j++) {
+				series.getData().addAll(model);
+			}
+		}
 	}
 
 	@Override
