@@ -27,11 +27,11 @@ import fr.groupeh6.sae.points.IrisPoint;
 
 public class CSVLoader {
 	
-	private static boolean isValid(File file) {
+	public static boolean isValid(File file) {
 		return file.exists() && file.isFile() && file.getName().endsWith(".csv");
 	}
 	
-	private static char getDelimiter(String firstLine) {
+	public static char getDelimiter(String firstLine) {
 		int c1 = StringUtils.countMatches(firstLine, ',');
 		int c2 = StringUtils.countMatches(firstLine, ';');
 		return c1 > c2 ? ',' : ';';
@@ -61,15 +61,21 @@ public class CSVLoader {
 		if(!isValid(file)) throw new NoSuchElementException();
 		Dataset dataset;
 		try(BufferedReader br = new BufferedReader(new FileReader(file))) {
-			String line = br.readLine().replace("\"", "");
-			char delimiter = getDelimiter(line);
-			String[] columns = getColumnsName(line, delimiter);
-			dataset = Factory.getInstance().getDataset(getColumns(columns));
-			IPoint dataType = dataset.getType();
-			dataset.setLines(loadDatas(new BufferedReader(new FileReader(file)), dataType, delimiter));
+			dataset = loadFromReader(file, br);
 		} catch(IOException e) {
 			throw e;
 		}
+		return dataset;
+	}
+
+	private static Dataset loadFromReader(File file, BufferedReader br) throws IOException, FileNotFoundException {
+		Dataset dataset;
+		String line = br.readLine().replace("\"", "");
+		char delimiter = getDelimiter(line);
+		String[] columns = getColumnsName(line, delimiter);
+		dataset = Factory.getInstance().getDataset(getColumns(columns));
+		IPoint dataType = dataset.getType();
+		dataset.setLines(loadDatas(new BufferedReader(new FileReader(file)), dataType, delimiter));
 		return dataset;
 	}
 	
