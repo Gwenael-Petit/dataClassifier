@@ -28,7 +28,7 @@ import fr.groupeh6.sae.points.IrisPoint;
 public class CSVLoader {
 	
 	public static boolean isValid(File file) {
-		return file.exists() && file.isFile() && file.getName().endsWith(".csv");
+		return file != null && file.exists() && file.isFile() && file.getName().endsWith(".csv");
 	}
 	
 	public static char getDelimiter(String firstLine) {
@@ -37,7 +37,7 @@ public class CSVLoader {
 		return c1 > c2 ? ',' : ';';
 	}
 	
-	private static String[] getColumnsName(String firstLine, char delimiter) {
+	public static String[] getColumnsName(String firstLine, char delimiter) {
 		return firstLine.split(""+delimiter);
 	}
 	
