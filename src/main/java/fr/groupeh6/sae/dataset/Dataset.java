@@ -6,6 +6,7 @@ import java.util.List;
 
 import fr.groupeh6.sae.classifier.Classifier;
 import fr.groupeh6.sae.columns.Column;
+import fr.groupeh6.sae.columns.Updatable;
 import fr.groupeh6.sae.points.IPoint;
 
 public abstract class Dataset implements Iterable<IPoint> {
@@ -37,11 +38,13 @@ public abstract class Dataset implements Iterable<IPoint> {
 	
 	public void addLine(IPoint element) {
 		this.points.add(element);
-		columns.forEach(c -> c.updateNewPoint(element));
+		for(Column column : this.columns) {
+			if(column.isUpdatable()) ((Updatable)column).update(element);
+		}
 	}
 	
 	public void addAllLine(List<IPoint> elements) {
-		this.points.addAll(elements);
+		elements.forEach(e -> addLine(e));
 	}
 	
 	public List<Column> getNormalizableColumns() {

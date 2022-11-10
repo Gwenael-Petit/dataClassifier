@@ -2,7 +2,7 @@ package fr.groupeh6.sae.columns;
 
 import fr.groupeh6.sae.points.IPoint;
 
-public class NumberColumn extends Column {
+public class NumberColumn extends Column implements Updatable {
 	
 	protected double max;
 	protected double min;
@@ -27,10 +27,15 @@ public class NumberColumn extends Column {
 	}
 
 	@Override
-	public void updateNewPoint(IPoint point) {
+	public void update(IPoint point) {
 		double value = (double) point.getValue(this);
 		if(value > max) max = value;
 		if(value < min) min = value;
+	}
+
+	@Override
+	public boolean isUpdatable() {
+		return true;
 	}
 
 }

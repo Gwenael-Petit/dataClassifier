@@ -1,7 +1,5 @@
 package fr.groupeh6.sae.columns;
 
-import fr.groupeh6.sae.points.IPoint;
-
 public class StringColumn extends Column {
 
 	public StringColumn(String name) {
@@ -24,8 +22,8 @@ public class StringColumn extends Column {
 	}
 
 	@Override
-	public void updateNewPoint(IPoint point) {
-		//nothing to do
+	public boolean isUpdatable() {
+		return false;
 	}
 
 }

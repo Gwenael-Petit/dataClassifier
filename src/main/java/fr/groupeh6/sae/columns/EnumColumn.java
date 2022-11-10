@@ -1,7 +1,5 @@
 package fr.groupeh6.sae.columns;
 
-import fr.groupeh6.sae.points.IPoint;
-
 public class EnumColumn<T extends Enum<T>> extends Column {
 
 	private Class<T> enumClass;
@@ -43,8 +41,8 @@ public class EnumColumn<T extends Enum<T>> extends Column {
 	}
 
 	@Override
-	public void updateNewPoint(IPoint point) {
-		
+	public boolean isUpdatable() {
+		return false;
 	}
 
 }

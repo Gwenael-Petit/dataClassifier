@@ -50,6 +50,6 @@ public abstract class Column implements IValueNormalizer {
 		return name;
 	}
 	
-	public abstract void updateNewPoint(IPoint point);
+	public abstract boolean isUpdatable();
 
 }
