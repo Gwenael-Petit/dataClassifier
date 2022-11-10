@@ -1,21 +1,27 @@
 package fr.groupeh6.sae.points;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 import fr.groupeh6.sae.columns.NotNormalizableException;
+import fr.groupeh6.sae.columns.NumberColumn;
 import fr.groupeh6.sae.columns.StringColumn;
 
 class IrisPointTest {
-	
+
 	IrisPoint setosa = new IrisPoint(5.1, 3.5, 1.4, .2, "Setosa");
+	IrisPoint setosa1 = new IrisPoint(10, 5, 1, 1.2, "Setosa");
+	IrisPoint setosa2 = new IrisPoint(3, 3, 0.4, 4.2, "Setosa");
 	IrisPoint virginica = new IrisPoint(6.3, 3.3, 6, 2.5, "Virginica");
 	IrisPoint versicolor = new IrisPoint(5.7, 2.8, 4.1, 1.3, "Versicolor");
-	StringColumn spL = new StringColumn("sepal.length");
-	StringColumn spW = new StringColumn("sepal.width");
-	StringColumn ptL = new StringColumn("petal.length");
-	StringColumn ptW = new StringColumn("petal.width");
+	NumberColumn spL = new NumberColumn("sepal.length");
+	NumberColumn spW = new NumberColumn("sepal.width");
+	NumberColumn ptL = new NumberColumn("petal.length");
+	NumberColumn ptW = new NumberColumn("petal.width");
 	StringColumn var = new StringColumn("variety");
+
 
 	@Test
 	void get_value_test() {
@@ -29,12 +35,16 @@ class IrisPointTest {
 	
 	@Test
 	void get_normalized_test() {
-		/*
-		 * assertEquals(0.2222,setosa.getNormalizedValue(spL));
-		 * assertEquals(0.541666,virginica.getNormalizedValue(spW));
-		 * assertEquals(0.5254237288,versicolor.getNormalizedValue(ptL));
-		 * assertEquals(0.041666,setosa.getNormalizedValue(ptW));
-		 */
+		
+		spL.updateNewPoint(setosa);
+		spL.updateNewPoint(setosa1);
+		spL.updateNewPoint(setosa2);
+		//assertEquals(0.2222, setosa.getNormalizedValue(spL));
+		//assertEquals(0.541666, virginica.getNormalizedValue(spW));
+		//assertEquals(0.5254237288, versicolor.getNormalizedValue(ptL));
+		//assertEquals(0.041666, setosa.getNormalizedValue(ptW));
+		
+		assertEquals(0.3,setosa.getNormalizedValue(spL));
 		assertThrows(NotNormalizableException.class, () -> setosa.getNormalizedValue(var));
 
 	}
