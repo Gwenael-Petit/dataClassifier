@@ -24,8 +24,8 @@ public class StringColumn extends Column {
 	}
 
 	@Override
-	public void newPoint(IPoint point) {
-		
+	public void updateNewPoint(IPoint point) {
+		//nothing to do
 	}
 
 }

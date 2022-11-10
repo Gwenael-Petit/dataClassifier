@@ -24,7 +24,7 @@ public class BooleanColumn extends Column {
 	}
 
 	@Override
-	public void newPoint(IPoint point) {
+	public void updateNewPoint(IPoint point) {
 		
 	}
 

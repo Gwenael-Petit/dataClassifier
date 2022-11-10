@@ -27,7 +27,7 @@ public class NumberColumn extends Column {
 	}
 
 	@Override
-	public void newPoint(IPoint point) {
+	public void updateNewPoint(IPoint point) {
 		double value = (double) point.getValue(this);
 		if(value > max) max = value;
 		if(value < min) min = value;
