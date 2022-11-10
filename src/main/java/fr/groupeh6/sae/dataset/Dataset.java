@@ -37,7 +37,7 @@ public abstract class Dataset implements Iterable<IPoint> {
 	
 	public void addLine(IPoint element) {
 		this.points.add(element);
-		columns.forEach(c -> c.newPoint(element));
+		columns.forEach(c -> c.updateNewPoint(element));
 	}
 	
 	public void addAllLine(List<IPoint> elements) {
