@@ -61,21 +61,23 @@ public class CSVLoader {
 		if(!isValid(file)) throw new NoSuchElementException();
 		Dataset dataset;
 		try(BufferedReader br = new BufferedReader(new FileReader(file))) {
-			dataset = loadFromReader(file, br);
+			dataset = loadFromReader(br);
 		} catch(IOException e) {
 			throw e;
 		}
 		return dataset;
 	}
 
-	private static Dataset loadFromReader(File file, BufferedReader br) throws IOException, FileNotFoundException {
+	private static Dataset loadFromReader(BufferedReader br) throws IOException, FileNotFoundException {
 		Dataset dataset;
+		br.mark(1);
 		String line = br.readLine().replace("\"", "");
 		char delimiter = getDelimiter(line);
 		String[] columns = getColumnsName(line, delimiter);
 		dataset = Factory.getInstance().getDataset(getColumns(columns));
 		IPoint dataType = dataset.getType();
-		dataset.setLines(loadDatas(new BufferedReader(new FileReader(file)), dataType, delimiter));
+		br.reset();
+		dataset.setLines(loadDatas(br, dataType, delimiter));
 		return dataset;
 	}
 	
