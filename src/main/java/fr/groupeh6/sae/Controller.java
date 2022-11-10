@@ -4,14 +4,18 @@ import fr.groupeh6.sae.columns.Column;
 
 
 public class Controller {
+	Model model;
+	
+	public Controller(Model m) {
+		this.model = m;
+	}
 
 	
 	public void setXColumn(Column column) {
-		
+		this.model.setxColumn(column);
 	}
 
-	public Object setYColumn(Column selectedItem) {
-		// TODO Auto-generated method stub
-		return null;
+	public void setYColumn(Column column) {
+		this.model.setyColumn(column);
 	}
 }

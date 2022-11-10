@@ -31,11 +31,13 @@ public abstract class Dataset implements Iterable<IPoint> {
 	}
 	
 	public void setLines(List<IPoint> lines) {
-		this.points = lines;	
+		this.points.clear();
+		lines.forEach(l -> addLine(l));
 	}
 	
 	public void addLine(IPoint element) {
 		this.points.add(element);
+		columns.forEach(c -> c.newPoint(element));
 	}
 	
 	public void addAllLine(List<IPoint> elements) {

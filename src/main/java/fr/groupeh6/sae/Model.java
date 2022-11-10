@@ -15,7 +15,13 @@ public class Model extends Subject {
 	private Column yColumn;
 	
 	public void loadFromFile(String dataFile) {
-		
+		try {
+			dataset = CSVLoader.load(dataFile);
+			categories.add(dataset);
+			notifyObservers();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	public void loadFromString(String data) {
@@ -44,6 +50,7 @@ public class Model extends Subject {
 
 	public void setxColumn(Column xColumn) {
 		this.xColumn = xColumn;
+		notifyObservers();
 	}
 
 	public Column getyColumn() {
@@ -52,5 +59,6 @@ public class Model extends Subject {
 
 	public void setyColumn(Column yColumn) {
 		this.yColumn = yColumn;
+		notifyObservers();
 	}
 }
