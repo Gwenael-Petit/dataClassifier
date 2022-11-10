@@ -16,23 +16,16 @@ public class EnumColumn<T extends Enum<T>> extends Column {
 	public int enumSize() {
 		return values().length;
 	}
-	
-	public T getValue(Object value) {
-		for(T t : values()) {
-			if(t.equals(t)) return t;
-		}
-		return null;
-	}
 
 	@Override
 	public double normalize(Object value) {
-		T val = getValue(value);
-		return 1.0*(val.ordinal()-1)/(enumSize()-1);
+		T val = (T) value;
+		return 1.0*(val.ordinal())/(enumSize()-1);
 	}
 
 	@Override
 	public Object denormalize(double value) {
-		return values()[(int) Math.round(value*(enumSize()-1)+1)];
+		return values()[(int) Math.round(value*(enumSize()-1))];
 	}
 
 	@Override

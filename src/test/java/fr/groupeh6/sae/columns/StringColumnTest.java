@@ -24,8 +24,8 @@ class StringColumnTest {
 	}
 	
 	@Test
-	void should_doing_nothing_when_receive_new_point_value() {
-		
+	void should_return_not_updatable() {
+		assertFalse(col.isUpdatable());
 	}
 
 }
