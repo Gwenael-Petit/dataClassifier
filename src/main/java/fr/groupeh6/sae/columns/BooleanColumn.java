@@ -1,5 +1,7 @@
 package fr.groupeh6.sae.columns;
 
+import fr.groupeh6.sae.points.IPoint;
+
 public class BooleanColumn extends Column {
 
 	public BooleanColumn(String name) {
@@ -19,6 +21,11 @@ public class BooleanColumn extends Column {
 	@Override
 	public boolean isNormalizable() {
 		return true;
+	}
+
+	@Override
+	public void newPoint(IPoint point) {
+		
 	}
 
 }

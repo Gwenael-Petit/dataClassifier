@@ -1,5 +1,7 @@
 package fr.groupeh6.sae.columns;
 
+import fr.groupeh6.sae.points.IPoint;
+
 public class EnumColumn<T extends Enum<T>> extends Column {
 
 	private Class<T> enumClass;
@@ -38,6 +40,11 @@ public class EnumColumn<T extends Enum<T>> extends Column {
 	@Override
 	public boolean isNormalizable() {
 		return true;
+	}
+
+	@Override
+	public void newPoint(IPoint point) {
+		
 	}
 
 }

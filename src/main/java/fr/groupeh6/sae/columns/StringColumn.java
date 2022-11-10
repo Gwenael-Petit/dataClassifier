@@ -1,5 +1,7 @@
 package fr.groupeh6.sae.columns;
 
+import fr.groupeh6.sae.points.IPoint;
+
 public class StringColumn extends Column {
 
 	public StringColumn(String name) {
@@ -19,6 +21,11 @@ public class StringColumn extends Column {
 	@Override
 	public boolean isNormalizable() {
 		return false;
+	}
+
+	@Override
+	public void newPoint(IPoint point) {
+		
 	}
 
 }

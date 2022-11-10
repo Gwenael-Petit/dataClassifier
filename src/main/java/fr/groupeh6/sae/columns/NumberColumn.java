@@ -1,6 +1,11 @@
 package fr.groupeh6.sae.columns;
 
+import fr.groupeh6.sae.points.IPoint;
+
 public class NumberColumn extends Column {
+	
+	protected double max;
+	protected double min;
 
 	public NumberColumn(String name) {
 		super(name);
@@ -8,17 +13,24 @@ public class NumberColumn extends Column {
 
 	@Override
 	public double normalize(Object value) {
-		return 0;
+		return ((double)value-min)/(max-min);
 	}
 
 	@Override
 	public Object denormalize(double value) {
-		return null;
+		return value*(max-min)+min;
 	}
 
 	@Override
 	public boolean isNormalizable() {
 		return true;
+	}
+
+	@Override
+	public void newPoint(IPoint point) {
+		double value = (double) point.getValue(this);
+		if(value > max) max = value;
+		if(value < min) min = value;
 	}
 
 }

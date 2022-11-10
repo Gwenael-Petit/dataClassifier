@@ -49,5 +49,7 @@ public abstract class Column implements IValueNormalizer {
 	public String toString() {
 		return name;
 	}
+	
+	public abstract void newPoint(IPoint point);
 
 }
