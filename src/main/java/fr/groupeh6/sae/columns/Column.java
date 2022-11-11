@@ -1,7 +1,5 @@
 package fr.groupeh6.sae.columns;
 
-import java.util.Objects;
-
 import fr.groupeh6.sae.dataset.Dataset;
 import fr.groupeh6.sae.points.IPoint;
 
@@ -42,7 +40,7 @@ public abstract class Column implements IValueNormalizer {
 		if (obj == null) return false;
 		if (getClass() != obj.getClass()) return false;
 		Column other = (Column) obj;
-		return Objects.equals(name, other.name);
+		return name.equals(other.name);
 	}
 	
 	@Override
