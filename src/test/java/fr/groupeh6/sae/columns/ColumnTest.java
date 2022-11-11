@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import fr.groupeh6.sae.dataset.Dataset;
 import fr.groupeh6.sae.dataset.IrisDataSet;
 import fr.groupeh6.sae.points.IPoint;
-import fr.groupeh6.sae.points.IrisPoint;
 import fr.groupeh6.sae.points.PokemonPoint;
 
 class ColumnTest {
@@ -20,9 +19,12 @@ class ColumnTest {
 	}
 	
 	@Test
-	void test_equals_if_its_the_same_name() {
-		Column col2 = new BooleanColumn("Test");
-		assertEquals(col, col2);
+	void test_equals() {
+		Column col2 = new StringColumn("Test");
+		assertTrue(col.equals(col2));
+		assertTrue(col.equals(col));
+		assertFalse(col.equals(null));
+		assertFalse(col.equals("Test"));
 	}
 	
 	@Test
