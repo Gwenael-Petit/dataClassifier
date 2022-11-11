@@ -1,11 +1,9 @@
 package fr.groupeh6.sae.columns;
 
-import fr.groupeh6.sae.points.IPoint;
-
 public class NumberColumn extends Column implements Updatable {
 	
-	protected double max;
-	protected double min;
+	protected Number max;
+	protected Number min;
 
 	public NumberColumn(String name) {
 		super(name);
@@ -13,12 +11,13 @@ public class NumberColumn extends Column implements Updatable {
 
 	@Override
 	public double normalize(Object value) {
-		return ((double)value-min)/(max-min);
+		Number val = (Number)value;
+		return (val.doubleValue()-min.doubleValue())/(max.doubleValue()-min.doubleValue());
 	}
 
 	@Override
 	public Object denormalize(double value) {
-		return value*(max-min)+min;
+		return value*(max.doubleValue()-min.doubleValue())+min.doubleValue();
 	}
 
 	@Override
@@ -27,10 +26,10 @@ public class NumberColumn extends Column implements Updatable {
 	}
 
 	@Override
-	public void update(IPoint point) {
-		double value = (double) point.getValue(this);
-		if(value > max) max = value;
-		if(value < min) min = value;
+	public void update(Object value) {
+		double val = ((Number)value).doubleValue();
+		if(val > max.doubleValue()) max = val;
+		if(val < min.doubleValue()) min = val;
 	}
 
 	@Override
