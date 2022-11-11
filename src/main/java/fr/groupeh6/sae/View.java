@@ -14,7 +14,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class View extends Stage implements Observer{
+public class View extends Stage implements Observer {
 	
 	final NumberAxis x = new NumberAxis(0,1,0.1);
 	final NumberAxis y = new NumberAxis(0,1,0.1);

@@ -7,6 +7,8 @@ public class NumberColumn extends Column implements Updatable {
 
 	public NumberColumn(String name) {
 		super(name);
+		max = Double.MAX_VALUE;
+		min = Double.MIN_VALUE;
 	}
 
 	@Override
