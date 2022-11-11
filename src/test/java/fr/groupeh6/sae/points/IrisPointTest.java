@@ -25,19 +25,20 @@ class IrisPointTest {
 
 	@BeforeEach
 	void setUp() {
-		spL.update(3);
+
+		spL.update(1);
 		spL.update(10);
-		
+
 		spW.update(2.8);
 		spW.update(5);
-		
+
 		ptL.update(0.4);
 		ptL.update(6);
-		
+
 		ptW.update(0.2);
 		ptW.update(4.2);
 	}
-	
+
 	@Test
 	void test_toString() {
 		assertEquals("Setosa[5.1,3.5,1.4,0.2]", setosa.toString());
@@ -50,20 +51,17 @@ class IrisPointTest {
 		assertEquals("Virginica", virginica.getValue(var));
 		assertEquals(1.3, versicolor.getValue(ptW));
 	}
-	
+
 	@Test
 	void get_normalized_test() {
-
-		//assertEquals(0.2222, setosa.getNormalizedValue(spL));
-		//assertEquals(0.541666, virginica.getNormalizedValue(spW));
-		//assertEquals(0.5254237288, versicolor.getNormalizedValue(ptL));
-		//assertEquals(0.041666, setosa.getNormalizedValue(ptW));
-		
-		assertEquals(0.3,setosa.getNormalizedValue(spL));
+		assertEquals(0.4555, setosa.getNormalizedValue(spL), 0.0001);
+		assertEquals(0.2272, virginica.getNormalizedValue(spW), 0.0001);
+		assertEquals(0.6607, versicolor.getNormalizedValue(ptL), 0.0001);
+		assertEquals(0, setosa.getNormalizedValue(ptW), 0.0001);
 		assertThrows(NotNormalizableException.class, () -> setosa.getNormalizedValue(var));
 
 	}
-	
+
 	@Test
 	void test_distanceTo() {
 		assertEquals(0.0, setosa.distanceTo(setosa1));
