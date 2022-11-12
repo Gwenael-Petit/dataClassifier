@@ -7,7 +7,7 @@ import fr.groupeh6.sae.points.IPoint;
 
 public interface Classifier {
 	
-	public void classifyPoint(IPoint point, Column columnClass, List<IPoint> points);
+	public void classifyPoint(IPoint point, Column columnClass, List<IPoint> points, List<Column> columns);
 	
 	public void classifyAllPoint(Column columnClass, List<IPoint> points);
 

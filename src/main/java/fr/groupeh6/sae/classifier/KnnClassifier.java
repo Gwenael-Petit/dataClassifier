@@ -34,21 +34,22 @@ public class KnnClassifier implements Classifier {
 	}
 
 	@Override
-	public void classifyPoint(IPoint point, Column columnClass, List<IPoint> points) {
-			Map<Object, Integer> pointClass = new HashMap<>();
-			pointClass.put(points.get(0).getValue(columnClass), 1);
-			for(int i = 1; i < points.size(); i++) {
-				for(int j = 0; j < pointClass.size(); j++) {
-					if(points.get(i).getValue(columnClass).equals(pointClass.keySet().toArray()[j])) {
-						pointClass.merge(pointClass.keySet().toArray()[j], 1, Integer::sum);
-					}else {
-						pointClass.put(points.get(i).getValue(columnClass),1);
-					}
+	public void classifyPoint(IPoint point, Column columnClass, List<IPoint> points, List<Column> columns) {
+		List<IPoint> neighbours = getNeighbours(point, points, columns);
+		Map<Object, Integer> pointClass = new HashMap<>();
+		pointClass.put(points.get(0).getValue(columnClass), 1);
+		for(int i = 1; i < points.size(); i++) {
+			for(int j = 0; j < pointClass.size(); j++) {
+				if(points.get(i).getValue(columnClass).equals(pointClass.keySet().toArray()[j])) {
+					pointClass.merge(pointClass.keySet().toArray()[j], 1, Integer::sum);
+				}else {
+					pointClass.put(points.get(i).getValue(columnClass),1);
 				}
-				
 			}
-			Entry<Object, Integer> entry = pointClass.entrySet().stream().max((e1, e2) -> Integer.compare(e1.getValue(), e2.getValue())).get();
-			point.setValue(columnClass, entry.getKey());
+			
+		}
+		Entry<Object, Integer> entry = pointClass.entrySet().stream().max((e1, e2) -> Integer.compare(e1.getValue(), e2.getValue())).get();
+		point.setValue(columnClass, entry.getKey());
 	}
 
 	@Override
