@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import fr.groupeh6.sae.columns.BooleanColumn;
+import fr.groupeh6.sae.columns.Column;
 import fr.groupeh6.sae.columns.NotNormalizableException;
 import fr.groupeh6.sae.columns.NumberColumn;
 import fr.groupeh6.sae.columns.StringColumn;
@@ -50,6 +52,8 @@ class IrisPointTest {
 		assertEquals(3.5, setosa.getValue(spW));
 		assertEquals("Virginica", virginica.getValue(var));
 		assertEquals(1.3, versicolor.getValue(ptW));
+		Column fake = new BooleanColumn("Fake");
+		assertEquals(null, setosa.getValue(fake));
 	}
 
 	@Test
@@ -59,12 +63,21 @@ class IrisPointTest {
 		assertEquals(0.6607, versicolor.getNormalizedValue(ptL), 0.0001);
 		assertEquals(0, setosa.getNormalizedValue(ptW), 0.0001);
 		assertThrows(NotNormalizableException.class, () -> setosa.getNormalizedValue(var));
-
 	}
 
 	@Test
 	void test_distanceTo() {
 		assertEquals(0.0, setosa.distanceTo(setosa1));
+	}
+	
+	@Test
+	void test_iris_point_for_opencsv() {
+		IrisPoint p = new IrisPoint();
+		assertEquals(0.0, p.getValue(spL));
+		assertEquals(0.0, p.getValue(spW));
+		assertEquals(0.0, p.getValue(ptL));
+		assertEquals(0.0, p.getValue(ptW));
+		assertEquals(null, p.getValue(var));
 	}
 
 }
