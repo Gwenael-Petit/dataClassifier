@@ -8,13 +8,13 @@ import fr.groupeh6.sae.points.IPoint;
 public class RandomClassifier implements Classifier {
 
 	@Override
-	public void classifyPoint(IPoint point, Column columnClass, List<IPoint> points) {
+	public void classifyAllPoint(Column columnClass, List<IPoint> points) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void classifyAllPoint(Column columnClass, List<IPoint> points) {
+	public void classifyPoint(IPoint point, Column columnClass, List<IPoint> points, List<Column> columns) {
 		// TODO Auto-generated method stub
 		
 	}

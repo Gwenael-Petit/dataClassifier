@@ -14,11 +14,11 @@ public class App extends Application {
 		Model model = new Model();
 		Controller controller = new Controller(model);
 		
+		new MainView(model, controller);
+		
 		String sep = System.getProperty("file.separator");
 		String path = System.getProperty("user.dir") + sep + "src" + sep + "main" + sep + "resources" + sep + "fr" + sep + "groupeh6" + sep + "sae" + sep + "iris.csv";
 		model.loadFromFile(path);
-		
-		View view = new View(model, controller);
 		
 	}
 

@@ -1,7 +1,6 @@
 package fr.groupeh6.sae.classifier;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +48,7 @@ public class KnnClassifier implements Classifier {
 			
 		}
 		Entry<Object, Integer> entry = pointClass.entrySet().stream().max((e1, e2) -> Integer.compare(e1.getValue(), e2.getValue())).get();
-		point.setValue(columnClass, entry.getKey());
+		//point.setValue(columnClass, entry.getKey());
 	}
 
 	@Override

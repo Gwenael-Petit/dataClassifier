@@ -47,6 +47,10 @@ public abstract class Dataset implements Iterable<IPoint> {
 		elements.forEach(e -> addLine(e));
 	}
 	
+	public List<Column> getColumns() {
+		return columns;
+	}
+	
 	public List<Column> getNormalizableColumns() {
 		List<Column> res = new ArrayList<>();
 		for(Column column : this.columns) {

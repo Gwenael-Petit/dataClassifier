@@ -9,7 +9,6 @@ public class Controller {
 	public Controller(Model m) {
 		this.model = m;
 	}
-
 	
 	public void setXColumn(Column column) {
 		this.model.setxColumn(column);

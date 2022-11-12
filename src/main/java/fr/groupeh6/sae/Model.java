@@ -17,8 +17,8 @@ public class Model extends Subject {
 	public void loadFromFile(String dataFile) {
 		try {
 			dataset = CSVLoader.load(dataFile);
-			categories.add(dataset);
-			notifyObservers();
+			addCategory(dataset);
+			notifyObservers(dataset);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -29,7 +29,7 @@ public class Model extends Subject {
 	}
 	
 	public void addCategory(Dataset category) {
-		
+		categories.add(category);
 	}
 	
 	public List<Dataset> allCategories() {
@@ -37,7 +37,7 @@ public class Model extends Subject {
 	}
 	
 	public int nbColumns() {
-		return 0;
+		return dataset.getColumns().size();
 	}
 
 	public Dataset getDataset() {
@@ -48,17 +48,21 @@ public class Model extends Subject {
 		return xColumn;
 	}
 
+	public Column getyColumn() {
+		return yColumn;
+	}
+	
 	public void setxColumn(Column xColumn) {
 		this.xColumn = xColumn;
 		notifyObservers();
 	}
 
-	public Column getyColumn() {
-		return yColumn;
-	}
-
 	public void setyColumn(Column yColumn) {
 		this.yColumn = yColumn;
 		notifyObservers();
+	}
+	
+	public boolean haveDatasetLoaded() {
+		return dataset != null;
 	}
 }
