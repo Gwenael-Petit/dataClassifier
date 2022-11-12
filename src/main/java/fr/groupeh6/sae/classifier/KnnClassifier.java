@@ -2,7 +2,11 @@ package fr.groupeh6.sae.classifier;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import fr.groupeh6.sae.columns.Column;
 import fr.groupeh6.sae.distance.Distance;
 import fr.groupeh6.sae.points.IPoint;
@@ -23,25 +27,28 @@ public class KnnClassifier implements Classifier {
 	
 	public List<IPoint> getNeighbours(IPoint point, List<IPoint> points, List<Column> columns){
 		List<IPoint> neighbours = new ArrayList<>();
-		for(int i = 0; i < k; i++) {
-			neighbours.add(points.get(i));
-		}
-		for(IPoint p : points) { 
-			int j =0;
-			while(distance.distance(point, neighbours.get(j), columns) < distance.distance(p, point, columns) && j < neighbours.size()) {
-				j++;
-			}
-			if(distance.distance(point, neighbours.get(j), columns) > distance.distance(p, point, columns)) {
-				neighbours.remove(j); neighbours.add(p);
-			}
-		}
+		for(IPoint p : points) neighbours.add(point);
+		neighbours.sort((p1,p2)->Double.compare(distance.distance(p1, point, columns),distance.distance(p2, point, columns)));
 		
-		return neighbours;
+		return neighbours.subList(0, k);
 	}
 
 	@Override
 	public void classifyPoint(IPoint point, Column columnClass, List<IPoint> points) {
-			
+			Map<Object, Integer> pointClass = new HashMap<>();
+			pointClass.put(points.get(0).getValue(columnClass), 1);
+			for(int i = 1; i < points.size(); i++) {
+				for(int j = 0; j < pointClass.size(); j++) {
+					if(points.get(i).getValue(columnClass).equals(pointClass.keySet().toArray()[j])) {
+						pointClass.merge(pointClass.keySet().toArray()[j], 1, Integer::sum);
+					}else {
+						pointClass.put(points.get(i).getValue(columnClass),1);
+					}
+				}
+				
+			}
+			Entry<Object, Integer> entry = pointClass.entrySet().stream().max((e1, e2) -> Integer.compare(e1.getValue(), e2.getValue())).get();
+			point.setValue(columnClass, entry.getKey());
 	}
 
 	@Override
