@@ -27,16 +27,12 @@ class IrisPointTest {
 
 	@BeforeEach
 	void setUp() {
-
 		spL.update(1);
 		spL.update(10);
-
 		spW.update(2.8);
 		spW.update(5);
-
 		ptL.update(0.4);
 		ptL.update(6);
-
 		ptW.update(0.2);
 		ptW.update(4.2);
 	}
