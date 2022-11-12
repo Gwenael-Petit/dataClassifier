@@ -41,7 +41,7 @@ public class CSVLoader {
 		return firstLine.split(""+delimiter);
 	}
 	
-	private static List<Column> getColumns(String[] columnsName) {
+	public static List<Column> getColumns(String[] columnsName) {
 		List<Column> res = new ArrayList<>();
 		for(String column : columnsName) {
 			res.add(Factory.getInstance().getColumn(column));
@@ -49,7 +49,7 @@ public class CSVLoader {
 		return res;
 	}
 	
-	private static List<IPoint> loadDatas(Reader reader, IPoint type, char delimiter) throws IOException {
+	public static List<IPoint> loadDatas(Reader reader, IPoint type, char delimiter) throws IOException {
 		return new CsvToBeanBuilder<IPoint>(reader)
 				.withSeparator(delimiter)
 				.withType(type.getClass()).
@@ -68,7 +68,7 @@ public class CSVLoader {
 		return dataset;
 	}
 
-	private static Dataset loadFromReader(BufferedReader br) throws IOException, FileNotFoundException {
+	public static Dataset loadFromReader(BufferedReader br) throws IOException, FileNotFoundException {
 		Dataset dataset;
 		br.mark(1);
 		String line = br.readLine().replace("\"", "");
