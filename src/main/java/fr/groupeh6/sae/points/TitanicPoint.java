@@ -10,7 +10,7 @@ public class TitanicPoint implements IPoint {
 	private int passengerId;
 	
 	@CsvBindByName(column = "Survived")
-	private boolean survived;
+	private int survived;
 	
 	@CsvBindByName(column = "Pclass")
 	private int placeClass;
@@ -19,10 +19,10 @@ public class TitanicPoint implements IPoint {
 	private String name;
 	
 	@CsvBindByName(column = "Sex")
-	private boolean sex;
+	private String sex;
 	
 	@CsvBindByName(column = "Age")
-	private double age;
+	private int age;
 	
 	@CsvBindByName(column = "SibSp")
 	private int sibSp;
@@ -42,7 +42,7 @@ public class TitanicPoint implements IPoint {
 	@CsvBindByName(column = "Embarked")
 	private char embarked;
 	
-	public TitanicPoint(int passengerId, boolean survived, int placeClass, String name, boolean sex, double age, int sibSp, int parch, String ticket, double fare, String cabin, char embarked ) {
+	public TitanicPoint(int passengerId, int survived, int placeClass, String name, String sex, int age, int sibSp, int parch, String ticket, double fare, String cabin, char embarked ) {
 		this.passengerId = passengerId;
 		this.survived = survived;
 		this.placeClass = placeClass;
