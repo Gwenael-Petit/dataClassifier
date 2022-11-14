@@ -9,11 +9,11 @@ public class DistanceManhattan implements Distance {
 
 	@Override
 	public double distance(IPoint p1, IPoint p2, List<Column> columns) {
-		int somme = 0;
+		double somme = 0;
 		for(Column column : columns) {
 			somme += Math.abs(p1.getNormalizedValue(column)-p2.getNormalizedValue(column));
 		}
-		return 0;
+		return somme;
 	}
 
 }
