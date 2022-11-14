@@ -58,7 +58,6 @@ class IrisPointTest {
 		assertEquals(0.2272, virginica.getNormalizedValue(spW), 0.0001);
 		assertEquals(0.6607, versicolor.getNormalizedValue(ptL), 0.0001);
 		assertEquals(0, setosa.getNormalizedValue(ptW), 0.0001);
-		assertThrows(NotNormalizableException.class, () -> setosa.getNormalizedValue(var));
 	}
 
 	@Test

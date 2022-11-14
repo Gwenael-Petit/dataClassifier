@@ -3,32 +3,34 @@ package fr.groupeh6.sae.points;
 import com.opencsv.bean.CsvBindByName;
 
 import fr.groupeh6.sae.columns.Column;
+import fr.groupeh6.sae.points.titanic.EnumEmbarked;
+import fr.groupeh6.sae.points.titanic.EnumSex;
 
 public class TitanicPoint implements IPoint {
 
 	@CsvBindByName(column = "PassengerId")
-	private int passengerId;
+	private String passengerId;
 	
 	@CsvBindByName(column = "Survived")
-	private int survived;
+	private double survived;
 	
 	@CsvBindByName(column = "Pclass")
-	private int placeClass;
+	private double placeClass;
 	
 	@CsvBindByName(column = "Name")
 	private String name;
 	
 	@CsvBindByName(column = "Sex")
-	private String sex;
+	private EnumSex sex;
 	
 	@CsvBindByName(column = "Age")
-	private int age;
+	private double age;
 	
 	@CsvBindByName(column = "SibSp")
-	private int sibSp;
+	private double sibSp;
 	
 	@CsvBindByName(column = "Parch")
-	private int parch;
+	private double parch;
 	
 	@CsvBindByName(column = "Ticket")
 	private String ticket;
@@ -40,9 +42,9 @@ public class TitanicPoint implements IPoint {
 	private String cabin;
 	
 	@CsvBindByName(column = "Embarked")
-	private char embarked;
+	private EnumEmbarked embarked;
 	
-	public TitanicPoint(int passengerId, int survived, int placeClass, String name, String sex, int age, int sibSp, int parch, String ticket, double fare, String cabin, char embarked ) {
+	public TitanicPoint(String passengerId, double survived, int placeClass, String name, EnumSex sex, int age, int sibSp, int parch, String ticket, double fare, String cabin, EnumEmbarked embarked ) {
 		this.passengerId = passengerId;
 		this.survived = survived;
 		this.placeClass = placeClass;
