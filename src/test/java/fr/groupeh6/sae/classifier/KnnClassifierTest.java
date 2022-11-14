@@ -11,6 +11,7 @@ import fr.groupeh6.sae.columns.Column;
 import fr.groupeh6.sae.columns.NumberColumn;
 import fr.groupeh6.sae.dataset.IrisDataSet;
 import fr.groupeh6.sae.distance.DistanceEuclidienne;
+import fr.groupeh6.sae.distance.DistanceManhattan;
 import fr.groupeh6.sae.points.IPoint;
 import fr.groupeh6.sae.points.IrisPoint;
 
@@ -33,9 +34,11 @@ class KnnClassifierTest {
 	NumberColumn ptL = new NumberColumn("petal.length");
 	NumberColumn ptW = new NumberColumn("petal.width");
 	Column variety = IrisDataSet.COLUMNS.get(4);
+
 	
-	
-	KnnClassifier classifier = new KnnClassifier(3, new DistanceEuclidienne());
+	KnnClassifier classifier1 = new KnnClassifier(3, new DistanceEuclidienne());
+	KnnClassifier classifier2 = new KnnClassifier(3, new DistanceManhattan());
+	KnnClassifier classifier3 = new KnnClassifier(3);
 	
 	@Test
 	void test() {
@@ -46,10 +49,22 @@ class KnnClassifierTest {
 		points.add(p5);
 		points.add(p6);
 		
-		neighbours = classifier.getNeighbours(p1, points, List.of(spL,spW,ptL,ptW));
+		neighbours = classifier1.getNeighbours(p1, points, List.of(spL,spW,ptL,ptW));
 		System.out.println(neighbours);
 		
-		classifier.classifyPoint(p1, variety, points, List.of(spL,spW,ptL,ptW));
+		classifier1.classifyPoint(p1, variety, points, List.of(spL,spW,ptL,ptW));
+		System.out.println(p1.getValue(variety));
+		
+		neighbours = classifier2.getNeighbours(p1, points, List.of(spL,spW,ptL,ptW));
+		System.out.println(neighbours);
+		
+		classifier2.classifyPoint(p1, variety, points, List.of(spL,spW,ptL,ptW));
+		System.out.println(p1.getValue(variety));
+		
+		neighbours = classifier3.getNeighbours(p1, points, List.of(spL,spW,ptL,ptW));
+		System.out.println(neighbours);
+		
+		classifier3.classifyPoint(p1, variety, points, List.of(spL,spW,ptL,ptW));
 		System.out.println(p1.getValue(variety));
 	}
 
