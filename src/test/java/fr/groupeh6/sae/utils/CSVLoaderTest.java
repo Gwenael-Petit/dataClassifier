@@ -4,10 +4,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -29,7 +27,12 @@ class CSVLoaderTest {
 
 	@Test
 	void test_isValid_should_return_true() {
-		assertEquals(true, CSVLoader.isValid(file));
+		assertTrue(CSVLoader.isValid(file));
+	}
+	
+	@Test
+	void test_file_is_null() {
+		assertFalse(CSVLoader.isValid(null));
 	}
 	
 	@Test
@@ -44,28 +47,22 @@ class CSVLoaderTest {
 		assertFalse(CSVLoader.isValid(wrongExtentionFile));
 	}
 	
-	@Test
+	/*@Test
 	void test_isValid_should_return_false_because_not_file() {
 		File notAFile = new File(System.getProperty("user.dir") + sep + "src" + sep + "main" + sep);
 		assertFalse(CSVLoader.isValid(notAFile));
-	}
+	}*/
 	
 	@Test
 	void test_getDelimiter_should_return_true() throws IOException {
-		BufferedReader br = new BufferedReader(new FileReader(file));
-		String line = br.readLine().replace("\"", "");
-		br.close();
-		char delimiter = CSVLoader.getDelimiter(line);
+		char delimiter = CSVLoader.getDelimiter(",,;,");
 		assertEquals(',', delimiter);
 	}
 	
 	@Test
 	void test_getDelimiter_should_return_false() throws IOException {
-		BufferedReader br = new BufferedReader(new FileReader(file));
-		String line = br.readLine().replace("\"", "");
-		br.close();
-		char delimiter = CSVLoader.getDelimiter(line);
-		assertNotEquals(';', delimiter);
+		char delimiter = CSVLoader.getDelimiter(";;,;");
+		assertEquals(';', delimiter);
 	}
 	
 	@Test
@@ -93,11 +90,12 @@ class CSVLoaderTest {
 	
 	@Test
 	void test_loadDatas_should_return_true() throws IOException {
-		BufferedReader br = new BufferedReader(new FileReader(new File(System.getProperty("user.dir") + sep + "src" + sep + "main" + sep + "resources" + sep + "fr" + sep + "groupeh6" + sep + "sae" + sep + "iris.csv")));
+		BufferedReader br = new BufferedReader(new FileReader(file));
+		br.mark(1);
 		String line = br.readLine().replace("\"", "");
-		br.close();
+		br.reset();
 		List<IPoint> datas =CSVLoader.loadDatas(br, new IrisPoint(), CSVLoader.getDelimiter(line));
-		assertEquals("",datas.toString());
+		assertEquals("[Setosa[3.2,2.3,1.1,0.1], Virginica[7.1,3.3,6.2,2.0]]",datas.toString());
 	}
 	
 	@Test
@@ -110,7 +108,7 @@ class CSVLoaderTest {
 	}
 	
 	@Test
-	void test_load_should_return_true() throws NoSuchElementException, IOException {
+	void test_load_from_file() throws NoSuchElementException, IOException {
 		StringBuilder sb = new StringBuilder();
 		Dataset dataset = CSVLoader.load(file);
 		dataset.iterator().forEachRemaining(e -> sb.append(e));
@@ -118,16 +116,16 @@ class CSVLoaderTest {
 	}
 	
 	@Test
-	void test_load_should_return_false_because_file_not_valid() {
-		File fakeFile = new File(System.getProperty("user.dir") + sep + "src" + sep + "main" + sep + "resources" + sep + "pokemon.csv");
-		Dataset dataset;
-		String s = "";
-		try {
-			dataset = CSVLoader.load(fakeFile);
-		} catch (NoSuchElementException | IOException e1) {
-			s = s + "File is not valid";
-		}
-		assertEquals(s,"File is not valid");
+	void test_load_file_not_exist() {
+		assertThrows(NoSuchElementException.class, () -> CSVLoader.load(""));
+	}
+	
+	@Test
+	void test_load_from_file_name() throws Exception {
+		StringBuilder sb = new StringBuilder();
+		Dataset dataset = CSVLoader.load(path);
+		dataset.iterator().forEachRemaining(e -> sb.append(e));
+		assertEquals("Setosa[3.2,2.3,1.1,0.1]Virginica[7.1,3.3,6.2,2.0]", sb.toString());
 	}
 	
 }

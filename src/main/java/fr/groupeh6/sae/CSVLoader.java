@@ -28,7 +28,7 @@ import fr.groupeh6.sae.points.IrisPoint;
 public class CSVLoader {
 	
 	public static boolean isValid(File file) {
-		return file != null && file.exists() && file.isFile() && file.getName().endsWith(".csv");
+		return file != null && file.exists() && file.getName().endsWith(".csv");
 	}
 	
 	public static char getDelimiter(String firstLine) {
@@ -60,11 +60,9 @@ public class CSVLoader {
 	public static Dataset load(File file) throws NoSuchElementException, IOException {
 		if(!isValid(file)) throw new NoSuchElementException();
 		Dataset dataset;
-		try(BufferedReader br = new BufferedReader(new FileReader(file))) {
-			dataset = loadFromReader(br);
-		} catch(IOException e) {
-			throw e;
-		}
+		BufferedReader br = new BufferedReader(new FileReader(file));
+		dataset = loadFromReader(br);
+		br.close();
 		return dataset;
 	}
 
