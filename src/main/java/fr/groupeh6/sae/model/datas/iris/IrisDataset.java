@@ -8,7 +8,7 @@ import fr.groupeh6.sae.model.columns.Column;
 import fr.groupeh6.sae.model.columns.NumberColumn;
 import fr.groupeh6.sae.model.columns.StringColumn;
 
-public class IrisDataSet extends Dataset {
+public class IrisDataset extends Dataset {
 	
 	private static final String NAME = "Iris";
 	public static final List<Column> COLUMNS = List.of(
@@ -19,7 +19,7 @@ public class IrisDataSet extends Dataset {
 			new StringColumn("variety")
 			);
 	
-	public IrisDataSet() {
+	public IrisDataset() {
 		super(NAME, COLUMNS);
 	}
 

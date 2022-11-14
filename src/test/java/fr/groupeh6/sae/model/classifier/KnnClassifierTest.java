@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import fr.groupeh6.sae.model.IPoint;
 import fr.groupeh6.sae.model.columns.Column;
 import fr.groupeh6.sae.model.columns.NumberColumn;
-import fr.groupeh6.sae.model.datas.iris.IrisDataSet;
+import fr.groupeh6.sae.model.datas.iris.IrisDataset;
 import fr.groupeh6.sae.model.datas.iris.IrisPoint;
 import fr.groupeh6.sae.model.distance.DistanceEuclidienne;
 import fr.groupeh6.sae.model.distance.DistanceManhattan;
@@ -23,7 +23,7 @@ class KnnClassifierTest {
 	IPoint p6 = new IrisPoint(6.5, 3.5, 4.5, 3.9, "Versicolor");
 	
 	
-	List<Column> columns = IrisDataSet.COLUMNS;
+	List<Column> columns = IrisDataset.COLUMNS;
 	List<IPoint> points = new ArrayList<>();
 	List<IPoint> neighbours = new ArrayList<>();
 	
@@ -31,7 +31,7 @@ class KnnClassifierTest {
 	NumberColumn spW = new NumberColumn("sepal.width");
 	NumberColumn ptL = new NumberColumn("petal.length");
 	NumberColumn ptW = new NumberColumn("petal.width");
-	Column variety = IrisDataSet.COLUMNS.get(4);
+	Column variety = IrisDataset.COLUMNS.get(4);
 
 	
 	KnnClassifier classifier1 = new KnnClassifier(3, new DistanceEuclidienne());

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import fr.groupeh6.sae.model.Dataset;
 import fr.groupeh6.sae.model.IPoint;
-import fr.groupeh6.sae.model.datas.iris.IrisDataSet;
+import fr.groupeh6.sae.model.datas.iris.IrisDataset;
 import fr.groupeh6.sae.model.datas.pokemon.PokemonPoint;
 
 class ColumnTest {
@@ -37,7 +37,7 @@ class ColumnTest {
 	@Test
 	void test_link_to_a_dataset() {
 		assertFalse(col.isLinkedToADataset());
-		Dataset ds = new IrisDataSet();
+		Dataset ds = new IrisDataset();
 		col.setDataset(ds);
 		assertTrue(col.isLinkedToADataset());
 	}
