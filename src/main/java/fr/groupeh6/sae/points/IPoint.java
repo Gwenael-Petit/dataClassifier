@@ -22,4 +22,10 @@ public interface IPoint extends Distanciable {
 	 * colonne n'est pas normalisable, le comportement n'est pas defini.
 	 */
 	public double getNormalizedValue(Column xcol);
+	
+	/**
+	 * Modifie la valeur du point pour la colonne en parametre
+	 */
+	
+	public void setValue(Column col, Object o);
 }

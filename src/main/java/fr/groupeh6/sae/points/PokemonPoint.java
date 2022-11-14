@@ -94,4 +94,10 @@ public class PokemonPoint implements IPoint{
 		return 0;
 	}
 
+	@Override
+	public void setValue(Column col, Object o) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
