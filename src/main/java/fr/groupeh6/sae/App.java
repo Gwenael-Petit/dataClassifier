@@ -1,5 +1,8 @@
 package fr.groupeh6.sae;
 
+import fr.groupeh6.sae.controllers.Controller;
+import fr.groupeh6.sae.model.Model;
+import fr.groupeh6.sae.views.MainView;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
