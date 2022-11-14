@@ -59,7 +59,7 @@ public class IrisPoint implements IPoint {
 
 	@Override
 	public void setValue(Column col, Object o) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

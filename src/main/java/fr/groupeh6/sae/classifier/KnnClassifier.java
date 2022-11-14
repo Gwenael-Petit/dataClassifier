@@ -25,8 +25,9 @@ public class KnnClassifier implements Classifier {
 	}
 	
 	public List<IPoint> getNeighbours(IPoint point, List<IPoint> points, List<Column> columns){
+		points.remove(point);
 		List<IPoint> neighbours = new ArrayList<>();
-		for(IPoint p : points) neighbours.add(point);
+		for(IPoint p : points) neighbours.add(p);
 		if(distance != null) neighbours.sort((p1,p2)->Double.compare(distance.distance(p1, point, columns),distance.distance(p2, point, columns)));
 		else neighbours.sort((p1,p2)->Double.compare(p1.distanceTo(point),p2.distanceTo(point)));
 		
