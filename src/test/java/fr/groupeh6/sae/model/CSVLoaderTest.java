@@ -24,11 +24,6 @@ class CSVLoaderTest {
 	protected String sep = System.getProperty("file.separator");
 	protected String path = System.getProperty("user.dir") + sep + "src" + sep + "main" + sep + "resources" + sep + "fr" + sep + "groupeh6" + sep + "sae" + sep + "DataForTest.csv";
 	protected File file = new File(path);
-
-	@Test
-	void test_isValid_should_return_true() {
-		assertTrue(CSVLoader.isValid(file));
-	}
 	
 	@Test
 	void test_file_is_null() {
@@ -43,15 +38,14 @@ class CSVLoaderTest {
 	
 	@Test
 	void test_isValid_should_return_false_because_not_csv() {
-		File wrongExtentionFile = new File((System.getProperty("user.dir") + sep + "src" + sep + "main" + sep + "java" + sep + "fr.groupeh6.sae" + sep + "utils" + sep + "Observer.java"));
+		File wrongExtentionFile = new File((System.getProperty("user.dir") + sep + "src" + sep + "main" + sep + "java" + sep + "fr" + sep + "groupeh6" + sep + "sae" + sep + "model" + sep + "utils" + sep + "Observer.java"));
 		assertFalse(CSVLoader.isValid(wrongExtentionFile));
 	}
 	
-	/*@Test
-	void test_isValid_should_return_false_because_not_file() {
-		File notAFile = new File(System.getProperty("user.dir") + sep + "src" + sep + "main" + sep);
-		assertFalse(CSVLoader.isValid(notAFile));
-	}*/
+	@Test
+	void test_isValid_should_return_true() {
+		assertTrue(CSVLoader.isValid(file));
+	}
 	
 	@Test
 	void test_getDelimiter_should_return_true() throws IOException {

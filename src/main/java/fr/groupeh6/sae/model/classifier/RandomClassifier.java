@@ -14,9 +14,9 @@ public class RandomClassifier implements Classifier {
 	}
 
 	@Override
-	public void classifyPoint(IPoint point, Column columnClass, List<IPoint> points, List<Column> columns) {
+	public Object classifyPoint(IPoint point, Column columnClass, List<IPoint> points, List<Column> columns) {
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 }

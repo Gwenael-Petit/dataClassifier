@@ -18,6 +18,8 @@ import fr.groupeh6.sae.model.columns.Column;
 
 public class CSVLoader {
 	
+	private CSVLoader() {}
+	
 	public static boolean isValid(File file) {
 		return file != null && file.exists() && file.getName().endsWith(".csv");
 	}

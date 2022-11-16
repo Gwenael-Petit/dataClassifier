@@ -35,7 +35,7 @@ public class KnnClassifier implements Classifier {
 	}
 
 	@Override
-	public void classifyPoint(IPoint point, Column columnClass, List<IPoint> points, List<Column> columns) {
+	public Object classifyPoint(IPoint point, Column columnClass, List<IPoint> points, List<Column> columns) {
 		points.remove(point);
 		List<IPoint> neighbours = getNeighbours(point, points, columns);
 		Map<Object, Integer> valueCount = new HashMap<>();
@@ -48,20 +48,8 @@ public class KnnClassifier implements Classifier {
 			}
 		}
 		Entry<Object, Integer> entry = valueCount.entrySet().stream().max((e1, e2) -> Integer.compare(e1.getValue(), e2.getValue())).get();
-		point.setValue(columnClass, entry.getKey());
-		/*pointClass.put(neighbours.get(0).getValue(columnClass), 1);
-		for(int i = 1; i < neighbours.size(); i++) {
-			for(int j = 0; j < pointClass.size(); j++) {
-				if(neighbours.get(i).getValue(columnClass).equals(pointClass.keySet().toArray()[j])) {
-					pointClass.merge(pointClass.keySet().toArray()[j], 1, Integer::sum);
-				}else {
-					pointClass.put(points.get(i).getValue(columnClass),1);
-				}
-			}
-			
-		}
-		Entry<Object, Integer> entry = pointClass.entrySet().stream().max((e1, e2) -> Integer.compare(e1.getValue(), e2.getValue())).get();
-		point.setValue(columnClass, entry.getKey());*/
+		//point.setValue(columnClass, entry.getKey());
+		return entry.getKey();
 	}
 
 	@Override
