@@ -33,11 +33,9 @@ public class MainView extends Stage implements Observer {
 	final NumberAxis y = new NumberAxis(0,1,0.1);
 	
 	@FXML
-	ScatterChart<Number,Number> sc = new ScatterChart<>(x,y);
+	ScatterChart<Number,Number> sc;
 	@FXML
-	ComboBox<Column> xColumn = new ComboBox<Column>();
-	@FXML
-	ComboBox<Column> yColumn = new ComboBox<Column>();
+	ComboBox<Column> xColumn, yColumn;
 	@FXML
 	Button bCategorisation, bRobustesse, bNewPoint, bLoadCSV;
 	
@@ -49,20 +47,21 @@ public class MainView extends Stage implements Observer {
 		this.model = model;
 		this.controller = controller;
 		model.attach(this);
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("mainview.fxml"));
+		loader.setController(this);
+		Parent root = loader.load();
 		
-		Parent root = FXMLLoader.load(getClass().getResource("mainview.fxml"));
-		
-		xColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setXColumn(newV));
-		yColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setYColumn(newV));
-		
-		/*HBox hb = new HBox();
-		hb.getChildren().addAll(xColumn, yColumn);
-		VBox vb = new VBox();
-		vb.getChildren().addAll(sc,hb);*/
 		Scene scene = new Scene(root);
 		this.setTitle("Sae");
 		this.setScene(scene);
 		this.show();
+		
+		xColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setXColumn(newV));
+		yColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setYColumn(newV));
+		
+		ScatterChart<Number,Number> sc2 = new ScatterChart<>(x,y);
+		System.out.println(sc2.getXAxis());
 	}
 	
 	@Override
@@ -93,7 +92,6 @@ public class MainView extends Stage implements Observer {
 				}
 				setEventSCPoints();
 			}
-			
 		}
 	}
 	
