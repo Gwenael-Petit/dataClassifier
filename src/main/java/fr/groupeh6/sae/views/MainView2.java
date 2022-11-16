@@ -1,6 +1,5 @@
 package fr.groupeh6.sae.views;
 
-import java.io.IOException;
 import java.util.List;
 
 import fr.groupeh6.sae.controllers.Controller;
@@ -10,59 +9,55 @@ import fr.groupeh6.sae.model.Model;
 import fr.groupeh6.sae.model.columns.Column;
 import fr.groupeh6.sae.model.utils.Observer;
 import fr.groupeh6.sae.model.utils.Subject;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
+import javafx.scene.chart.XYChart.Data;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 
-public class MainView extends Stage implements Observer {
+public class MainView2 extends Stage implements Observer {
 	
 	Model model;
 	Controller controller;
 	
 	final NumberAxis x = new NumberAxis(0,1,0.1);
 	final NumberAxis y = new NumberAxis(0,1,0.1);
-	
-	@FXML
 	ScatterChart<Number,Number> sc = new ScatterChart<>(x,y);
-	@FXML
 	ComboBox<Column> xColumn = new ComboBox<Column>();
-	@FXML
 	ComboBox<Column> yColumn = new ComboBox<Column>();
-	@FXML
-	Button bCategorisation, bRobustesse, bNewPoint, bLoadCSV;
 	
 	Popup pointPopup;
 	
-	public MainView() {}
-	
-	public MainView(Model model, Controller controller) throws IOException {
+	public MainView2(Model model, Controller controller) {
 		this.model = model;
 		this.controller = controller;
 		model.attach(this);
 		
-		Parent root = FXMLLoader.load(getClass().getResource("mainview.fxml"));
-		
 		xColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setXColumn(newV));
 		yColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setYColumn(newV));
 		
-		/*HBox hb = new HBox();
+		HBox hb = new HBox();
 		hb.getChildren().addAll(xColumn, yColumn);
 		VBox vb = new VBox();
-		vb.getChildren().addAll(sc,hb);*/
-		Scene scene = new Scene(root);
-		this.setTitle("Sae");
+		vb.getChildren().addAll(sc,hb);
+		Scene scene = new Scene(vb);
 		this.setScene(scene);
 		this.show();
+	}
+	
+	public boolean isOnPoint(Data<Number, Number> data, double clicX, double clicY) {
+		Scene dataScene = data.getNode().getScene();
+		System.out.println(dataScene.getX() + " " + dataScene.getWidth() + " " + dataScene.getY() + " " + dataScene.getHeight());
+		boolean inX = clicX >= dataScene.getX() && clicX <= dataScene.getX()+dataScene.getWidth();
+		boolean inY = clicY >= dataScene.getY() && clicY <= dataScene.getY()+dataScene.getHeight();
+		return inX && inY;
 	}
 	
 	@Override
