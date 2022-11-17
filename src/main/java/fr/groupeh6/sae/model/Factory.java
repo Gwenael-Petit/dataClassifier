@@ -3,8 +3,11 @@ package fr.groupeh6.sae.model;
 import java.util.List;
 
 import fr.groupeh6.sae.model.classifier.Classifier;
+import fr.groupeh6.sae.model.classifier.KnnClassifier;
+import fr.groupeh6.sae.model.classifier.RandomClassifier;
 import fr.groupeh6.sae.model.columns.Column;
 import fr.groupeh6.sae.model.datas.StoredDatas;
+import fr.groupeh6.sae.model.distance.Distance;
 
 public class Factory {
 	
@@ -16,7 +19,6 @@ public class Factory {
 		for(StoredDatas data : StoredDatas.values()) {
 			if(data.dataset().getColumns().equals(columns)) return data.dataset();
 		}
-		//if(IrisDataset.COLUMNS.equals(columns)) return new IrisDataset();
 		return null;
 	}
 	
@@ -26,14 +28,15 @@ public class Factory {
 				if(column.getName().equals(columnName)) return column;
 			}
 		}
-		/*for(Column column : IrisDataset.COLUMNS) {
-			if(column.getName().equals(columnName)) return column;
-		}*/
 		return null;
 	}
 	
-	public Classifier getClassifier(String classifier) {
-		return null;
+	public Classifier knnClassifier(int k, Distance distance) {
+		return new KnnClassifier(k, distance);
+	}
+	
+	public Classifier randomClassifier() {
+		return new RandomClassifier();
 	}
 	
 	public static Factory getInstance() {
