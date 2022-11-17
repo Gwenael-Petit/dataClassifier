@@ -12,6 +12,7 @@ import fr.groupeh6.sae.model.columns.EnumColumn;
 import fr.groupeh6.sae.model.columns.NotNormalizableException;
 import fr.groupeh6.sae.model.columns.NumberColumn;
 import fr.groupeh6.sae.model.columns.StringColumn;
+import fr.groupeh6.sae.model.datas.iris.IrisPoint;
 import fr.groupeh6.sae.model.datas.titanic.EnumEmbarked;
 import fr.groupeh6.sae.model.datas.titanic.EnumSex;
 import fr.groupeh6.sae.model.datas.titanic.TitanicPoint;
@@ -90,6 +91,24 @@ class TitanicPointTest {
 		assertEquals(0.0421,pers3.getNormalizedValue(fare),0.0001);
 		assertThrows(NotNormalizableException.class, () -> pers5.getNormalizedValue(cabin));
 		assertEquals(0.5,pers4.getNormalizedValue(embarked));
+	}
+	
+	
+	@Test
+	void test_titanic_point_for_opencsv() {
+		TitanicPoint p = new TitanicPoint();
+		assertEquals(null, p.getValue(passId));
+		assertEquals(0.0, p.getValue(survived));
+		assertEquals(0.0, p.getValue(pClass));
+		assertEquals(null, p.getValue(name));
+		assertEquals(null, p.getValue(sex));
+		assertEquals(0.0, p.getValue(age));
+		assertEquals(0.0, p.getValue(sibSp));
+		assertEquals(0.0, p.getValue(parch));
+		assertEquals(null, p.getValue(ticket));
+		assertEquals(0.0, p.getValue(fare));
+		assertEquals(null, p.getValue(cabin));
+		assertEquals(null, p.getValue(embarked));
 	}
 
 }

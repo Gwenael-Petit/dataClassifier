@@ -1,9 +1,14 @@
 package fr.groupeh6.sae.model.datas.titanic;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.opencsv.bean.CsvBindByName;
 
+import fr.groupeh6.sae.model.Factory;
 import fr.groupeh6.sae.model.IPoint;
 import fr.groupeh6.sae.model.columns.Column;
+import fr.groupeh6.sae.model.distance.DistanceEuclidienne;
 
 public class TitanicPoint implements IPoint {
 
@@ -91,13 +96,28 @@ public class TitanicPoint implements IPoint {
 
 	@Override
 	public double distanceTo(IPoint other) {
-		// TODO Auto-generated method stub
-		return 0;
+		List<Column> toDist = new ArrayList<>();
+		String[] cols = new String[] {"Survived","Pclass","Sex","Age"};
+		for(String c : cols) toDist.add(Factory.getInstance().getColumn(c));
+		return new DistanceEuclidienne().distance(this,other,toDist);
 	}
 
 	@Override
 	public void setValue(Column col, Object o) {
-		// TODO Auto-generated method stub
+		switch(col.getName()) {
+		case "PassengerId" : this.passengerId = (String) o ;
+		case "Survived" : this.survived = (double) o;
+		case "Pclass" : this.placeClass = (double) o;
+		case "Name" : this.name = (String) o;
+		case "Sex" : this.sex = (EnumSex) o;
+		case "Age" : this.age = (double) o;
+		case "SibSp" : this.sibSp = (double) o;
+		case "Parch" : this.parch = (double) o;
+		case "Ticket" : this.ticket = (String) o;
+		case "Fare" : this.fare = (double) o;
+		case "Cabin" : this.cabin = (String) o;
+		case "Embarked" : this.embarked = (EnumEmbarked) o;
+		}
 		
 	}
 
