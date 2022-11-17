@@ -29,9 +29,8 @@ public class MainView extends Stage implements Observer {
 	Model model;
 	Controller controller;
 	
-	final NumberAxis x = new NumberAxis(0,1,0.1);
-	final NumberAxis y = new NumberAxis(0,1,0.1);
-	
+	@FXML
+	NumberAxis xAxis, yAxis;
 	@FXML
 	ScatterChart<Number,Number> sc;
 	@FXML
@@ -59,9 +58,6 @@ public class MainView extends Stage implements Observer {
 		
 		xColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setXColumn(newV));
 		yColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setYColumn(newV));
-		
-		ScatterChart<Number,Number> sc2 = new ScatterChart<>(x,y);
-		System.out.println(sc2.getXAxis());
 	}
 	
 	@Override
