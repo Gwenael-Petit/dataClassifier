@@ -3,6 +3,7 @@ package fr.groupeh6.sae.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.groupeh6.sae.model.classifier.Classifier;
 import fr.groupeh6.sae.model.columns.Column;
 import fr.groupeh6.sae.model.utils.Subject;
 
@@ -24,6 +25,10 @@ public class Model extends Subject {
 	}
 	
 	public void loadFromString(String data) {
+		
+	}
+	
+	public void classify(Classifier classifier) {
 		
 	}
 	

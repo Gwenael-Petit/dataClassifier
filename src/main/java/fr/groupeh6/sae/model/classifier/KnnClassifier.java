@@ -43,7 +43,7 @@ public class KnnClassifier implements Classifier {
 			Object value = p.getValue(columnClass);
 			if(valueCount.containsKey(value)) {
 				valueCount.put(value, valueCount.get(value)+1);
-			}else {
+			} else {
 				valueCount.put(value, 1);
 			}
 		}
