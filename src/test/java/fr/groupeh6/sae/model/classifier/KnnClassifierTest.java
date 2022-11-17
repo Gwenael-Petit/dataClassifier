@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import fr.groupeh6.sae.model.IPoint;
@@ -40,25 +41,34 @@ class KnnClassifierTest {
 	KnnClassifier classifier2 = new KnnClassifier(3, new DistanceManhattan());
 	KnnClassifier classifier3 = new KnnClassifier(3);
 	
-	@Test
-	void test() {
+	@BeforeEach
+	void setUp() {
 		points.add(p1);
 		points.add(p2);
 		points.add(p3);
 		points.add(p4);
 		points.add(p5);
 		points.add(p6);
-		
-		
+	}
+	
+	@Test
+	void test_Classify_With_Euclidienne() {
 		assertEquals(List.of(p2, p3, p4), classifier1.getNeighbours(p1, points, List.of(spL,spW,ptL,ptW)));
 		classifier1.classifyPoint(p1, variety, points, List.of(spL,spW,ptL,ptW));
 		assertEquals("Virginica", p1.getValue(variety));
+	}
+	
+	@Test
+	void test_Classify_With_Manhattan() {
 		assertEquals(List.of(p2,p3,p4), classifier2.getNeighbours(p1, points, List.of(spL,spW,ptL,ptW)));
 		classifier2.classifyPoint(p1, variety, points, List.of(spL,spW,ptL,ptW));
 		assertEquals("Virginica", p1.getValue(variety));
+	}
+	
+	@Test
+	void test_Classify_Default() {
 		assertEquals(List.of(p2,p3,p4), classifier3.getNeighbours(p1, points, List.of(spL,spW,ptL,ptW)));
 		classifier3.classifyPoint(p1, variety, points, List.of(spL,spW,ptL,ptW));
 		assertEquals("Virginica", p1.getValue(variety));
 	}
-
 }
