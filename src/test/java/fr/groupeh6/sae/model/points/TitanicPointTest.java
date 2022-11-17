@@ -6,13 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import fr.groupeh6.sae.model.Factory;
 import fr.groupeh6.sae.model.columns.BooleanColumn;
 import fr.groupeh6.sae.model.columns.Column;
 import fr.groupeh6.sae.model.columns.EnumColumn;
 import fr.groupeh6.sae.model.columns.NotNormalizableException;
 import fr.groupeh6.sae.model.columns.NumberColumn;
 import fr.groupeh6.sae.model.columns.StringColumn;
-import fr.groupeh6.sae.model.datas.iris.IrisPoint;
 import fr.groupeh6.sae.model.datas.titanic.EnumEmbarked;
 import fr.groupeh6.sae.model.datas.titanic.EnumSex;
 import fr.groupeh6.sae.model.datas.titanic.TitanicPoint;
@@ -25,18 +25,18 @@ class TitanicPointTest {
 	TitanicPoint pers4 = new TitanicPoint("78", 1.0, 3, "Johnson", EnumSex.MALE, 14, 5, 0, "D446G2", 29.34, "", EnumEmbarked.C);
 	TitanicPoint pers5 = new TitanicPoint("100", 0, 1, "Anderson", EnumSex.MALE, 59, 0, 0, "364234", 16.7, "", EnumEmbarked.Q);
 
-	StringColumn passId = new StringColumn("PassengerId");
-	NumberColumn survived = new NumberColumn("Survived");
-	NumberColumn pClass = new NumberColumn("Pclass");
-	StringColumn name = new StringColumn("Name");
-	EnumColumn<EnumSex> sex = new EnumColumn<EnumSex>("Sex", EnumSex.class);
-	NumberColumn age = new NumberColumn("Age");
-	NumberColumn sibSp = new NumberColumn("SibSp");
-	NumberColumn parch = new NumberColumn("Parch");
-	StringColumn ticket = new StringColumn("Ticket");
-	NumberColumn fare = new NumberColumn("Fare");
-	StringColumn cabin = new StringColumn("Cabin");
-	EnumColumn<EnumEmbarked> embarked = new EnumColumn<EnumEmbarked>("Embarked",EnumEmbarked.class);
+	StringColumn passId = (StringColumn) Factory.getInstance().getColumn("PassengerId");
+	NumberColumn survived = (NumberColumn) Factory.getInstance().getColumn("Survived");
+	NumberColumn pClass = (NumberColumn) Factory.getInstance().getColumn("Pclass");
+	StringColumn name = (StringColumn) Factory.getInstance().getColumn("Name");
+	EnumColumn<EnumSex> sex = (EnumColumn<EnumSex>) Factory.getInstance().getColumn("Sex");
+	NumberColumn age = (NumberColumn) Factory.getInstance().getColumn("Age");
+	NumberColumn sibSp = (NumberColumn) Factory.getInstance().getColumn("SibSp");
+	NumberColumn parch = (NumberColumn) Factory.getInstance().getColumn("Parch");
+	StringColumn ticket = (StringColumn) Factory.getInstance().getColumn("Ticket");
+	NumberColumn fare = (NumberColumn) Factory.getInstance().getColumn("Fare");
+	StringColumn cabin = (StringColumn) Factory.getInstance().getColumn("Cabin");
+	EnumColumn<EnumEmbarked> embarked = (EnumColumn<EnumEmbarked>) Factory.getInstance().getColumn("Embarked");
 	
 	@BeforeEach
 	void setUp (){
@@ -109,6 +109,12 @@ class TitanicPointTest {
 		assertEquals(0.0, p.getValue(fare));
 		assertEquals(null, p.getValue(cabin));
 		assertEquals(null, p.getValue(embarked));
+	}
+	
+	@Test
+	void distanceTo() {
+		assertEquals(1.421,pers1.distanceTo(pers2),0.001);
+		assertEquals(1.130,pers2.distanceTo(pers5),0.001);
 	}
 
 }

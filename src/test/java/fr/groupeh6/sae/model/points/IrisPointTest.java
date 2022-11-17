@@ -61,7 +61,7 @@ class IrisPointTest {
 
 	@Test
 	void test_distanceTo() {
-		assertEquals(0.0, setosa.distanceTo(setosa1));
+		assertEquals(0.0, setosa.distanceTo(virginica));
 	}
 	
 	@Test
