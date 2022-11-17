@@ -1,5 +1,7 @@
 package fr.groupeh6.sae.model.classifier;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,23 +49,16 @@ class KnnClassifierTest {
 		points.add(p5);
 		points.add(p6);
 		
-		neighbours = classifier1.getNeighbours(p1, points, List.of(spL,spW,ptL,ptW));
-		System.out.println(neighbours);
 		
+		assertEquals(List.of(p2, p3, p4), classifier1.getNeighbours(p1, points, List.of(spL,spW,ptL,ptW)));
 		classifier1.classifyPoint(p1, variety, points, List.of(spL,spW,ptL,ptW));
-		System.out.println(p1.getValue(variety));
-		
-		neighbours = classifier2.getNeighbours(p1, points, List.of(spL,spW,ptL,ptW));
-		System.out.println(neighbours);
-		
+		assertEquals("Virginica", p1.getValue(variety));
+		assertEquals(List.of(p2,p3,p4), classifier2.getNeighbours(p1, points, List.of(spL,spW,ptL,ptW)));
 		classifier2.classifyPoint(p1, variety, points, List.of(spL,spW,ptL,ptW));
-		System.out.println(p1.getValue(variety));
-		
-		neighbours = classifier3.getNeighbours(p1, points, List.of(spL,spW,ptL,ptW));
-		System.out.println(neighbours);
-		
+		assertEquals("Virginica", p1.getValue(variety));
+		assertEquals(List.of(p2,p3,p4), classifier3.getNeighbours(p1, points, List.of(spL,spW,ptL,ptW)));
 		classifier3.classifyPoint(p1, variety, points, List.of(spL,spW,ptL,ptW));
-		System.out.println(p1.getValue(variety));
+		assertEquals("Virginica", p1.getValue(variety));
 	}
 
 }
