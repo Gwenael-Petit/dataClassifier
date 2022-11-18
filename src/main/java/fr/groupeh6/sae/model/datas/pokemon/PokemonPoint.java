@@ -1,9 +1,14 @@
 package fr.groupeh6.sae.model.datas.pokemon;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.opencsv.bean.CsvBindByName;
 
+import fr.groupeh6.sae.model.Factory;
 import fr.groupeh6.sae.model.IPoint;
 import fr.groupeh6.sae.model.columns.Column;
+import fr.groupeh6.sae.model.distance.DistanceEuclidienne;
 
 public class PokemonPoint implements IPoint{
 	
@@ -85,14 +90,15 @@ public class PokemonPoint implements IPoint{
 
 	@Override
 	public double getNormalizedValue(Column col) {
-		// TODO Auto-generated method stub
 		return col.getNormalizedValue(this);
 	}
 	
 	@Override
 	public double distanceTo(IPoint other) {
-		// TODO Auto-generated method stub
-		return 0;
+		List<Column> toDist = new ArrayList<>();
+		String[] cols = new String[] {"Survived","Pclass","Sex","Age"};
+		for(String c : cols) toDist.add(Factory.getInstance().getColumn(c));
+		return new DistanceEuclidienne().distance(this,other,toDist);
 	}
 
 	@Override

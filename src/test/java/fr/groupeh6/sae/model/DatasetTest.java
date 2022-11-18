@@ -14,14 +14,15 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import fr.groupeh6.sae.model.classifier.KnnClassifier;
+import fr.groupeh6.sae.model.datas.iris.EnumVariety;
 import fr.groupeh6.sae.model.datas.iris.IrisDataset;
 import fr.groupeh6.sae.model.datas.iris.IrisPoint;
 
 class DatasetTest {
 
 	Dataset irisDataset = new IrisDataset();
-	IrisPoint setosa = new IrisPoint(2.1, 4.1, 3.0, 1.1, "Setosa");
-	IrisPoint virginica = new IrisPoint(3.1, 4.1, 2.1, 4.2, "Virgnica");
+	IrisPoint setosa = new IrisPoint(2.1, 4.1, 3.0, 1.1, EnumVariety.SETOSA);
+	IrisPoint virginica = new IrisPoint(3.1, 4.1, 2.1, 4.2, EnumVariety.VIRGINICA);
 	
 	@Test
 	void test_getName() {
