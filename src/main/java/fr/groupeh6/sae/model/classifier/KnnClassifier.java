@@ -50,10 +50,4 @@ public class KnnClassifier implements Classifier {
 		Entry<Object, Integer> entry = valueCount.entrySet().stream().max((e1, e2) -> Integer.compare(e1.getValue(), e2.getValue())).get();
 		return entry.getKey();
 	}
-
-	@Override
-	public void classifyAllPoint(Column columnClass, List<IPoint> points) {
-		// TODO Auto-generated method stub
-	}
-
 }
