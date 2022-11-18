@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import fr.groupeh6.sae.model.Dataset;
 import fr.groupeh6.sae.model.IPoint;
 import fr.groupeh6.sae.model.datas.iris.IrisDataset;
+import fr.groupeh6.sae.model.datas.pokemon.EnumType;
 import fr.groupeh6.sae.model.datas.pokemon.PokemonPoint;
 
 class ColumnTest {
@@ -45,7 +46,7 @@ class ColumnTest {
 	@Test
 	void should_return_the_value_normalized_by_the_implementation_of_column() {
 		Column col2 = new BooleanColumn("is_legendary");
-		IPoint p = new PokemonPoint("carapuce", 0, 0, 0, 0, 0, 0, 0, 0, "Eau", "", 0, false);
+		IPoint p = new PokemonPoint("carapuce", 0, 0, 0, 0, 0, 0, 0, 0, EnumType.WATER, EnumType.FLYING, 0, false);
 		assertEquals(0.0, col2.getNormalizedValue(p));
 	}
 	
