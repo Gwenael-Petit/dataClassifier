@@ -55,21 +55,18 @@ class KnnClassifierTest {
 	@Test
 	void test_Classify_With_Euclidienne() {
 		assertEquals(List.of(p2, p3, p4), classifier1.getNeighbours(p1, points, List.of(spL,spW,ptL,ptW)));
-		classifier1.classifyPoint(p1, variety, points, List.of(spL,spW,ptL,ptW));
-		assertEquals(EnumVariety.VIRGINICA, p1.getValue(variety));
+		assertEquals(EnumVariety.VIRGINICA, classifier1.classifyPoint(p1, variety, points, List.of(spL,spW,ptL,ptW)));
 	}
 	
 	@Test
 	void test_Classify_With_Manhattan() {
 		assertEquals(List.of(p2,p3,p4), classifier2.getNeighbours(p1, points, List.of(spL,spW,ptL,ptW)));
-		classifier2.classifyPoint(p1, variety, points, List.of(spL,spW,ptL,ptW));
-		assertEquals(EnumVariety.VIRGINICA, p1.getValue(variety));
+		assertEquals(EnumVariety.VIRGINICA, classifier2.classifyPoint(p1, variety, points, List.of(spL,spW,ptL,ptW)));
 	}
 	
 	@Test
 	void test_Classify_Default() {
 		assertEquals(List.of(p2,p3,p4), classifier3.getNeighbours(p1, points, List.of(spL,spW,ptL,ptW)));
-		classifier3.classifyPoint(p1, variety, points, List.of(spL,spW,ptL,ptW));
-		assertEquals(EnumVariety.VIRGINICA, p1.getValue(variety));
+		assertEquals(EnumVariety.VIRGINICA, classifier3.classifyPoint(p1, variety, points, List.of(spL,spW,ptL,ptW)));
 	}
 }
