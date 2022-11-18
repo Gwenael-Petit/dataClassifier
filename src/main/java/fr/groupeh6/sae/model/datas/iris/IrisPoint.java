@@ -1,7 +1,5 @@
 package fr.groupeh6.sae.model.datas.iris;
 
-import java.util.List;
-
 import com.opencsv.bean.CsvBindByName;
 
 import fr.groupeh6.sae.model.IPoint;
@@ -23,10 +21,10 @@ public class IrisPoint implements IPoint {
 	private double petalWidth;
 	
 	@CsvBindByName(column = "variety")
-	private String variety;
+	private EnumVariety variety;
 	
 	
-	public IrisPoint(double sepalLength, double sepalWidth, double petalLength, double petalWidth, String variety) {
+	public IrisPoint(double sepalLength, double sepalWidth, double petalLength, double petalWidth, EnumVariety variety) {
 		this.sepalLength = sepalLength;
 		this.sepalWidth = sepalWidth;
 		this.petalLength = petalLength;
@@ -68,7 +66,7 @@ public class IrisPoint implements IPoint {
 		case "sepal.width" : this.sepalWidth = (double) o;
 		case "petal.length" : this.petalLength = (double) o;
 		case "petal.width" : this.petalWidth = (double) o;
-		case "variety" : this.variety = (String) o;	
+		case "variety" : this.variety = (EnumVariety) o;	
 		}
 	}
 

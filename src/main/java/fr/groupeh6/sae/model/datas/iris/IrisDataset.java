@@ -5,8 +5,8 @@ import java.util.List;
 import fr.groupeh6.sae.model.Dataset;
 import fr.groupeh6.sae.model.IPoint;
 import fr.groupeh6.sae.model.columns.Column;
+import fr.groupeh6.sae.model.columns.EnumColumn;
 import fr.groupeh6.sae.model.columns.NumberColumn;
-import fr.groupeh6.sae.model.columns.StringColumn;
 
 public class IrisDataset extends Dataset {
 	
@@ -16,7 +16,7 @@ public class IrisDataset extends Dataset {
 			new NumberColumn("sepal.width"),
 			new NumberColumn("petal.length"),
 			new NumberColumn("petal.width"),
-			new StringColumn("variety")
+			new EnumColumn<EnumVariety>("variety", EnumVariety.class)
 			);
 	
 	public IrisDataset() {

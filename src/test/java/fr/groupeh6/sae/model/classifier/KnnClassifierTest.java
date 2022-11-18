@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import fr.groupeh6.sae.model.IPoint;
 import fr.groupeh6.sae.model.columns.Column;
 import fr.groupeh6.sae.model.columns.NumberColumn;
+import fr.groupeh6.sae.model.datas.iris.EnumVariety;
 import fr.groupeh6.sae.model.datas.iris.IrisDataset;
 import fr.groupeh6.sae.model.datas.iris.IrisPoint;
 import fr.groupeh6.sae.model.distance.DistanceEuclidienne;
@@ -18,12 +19,12 @@ import fr.groupeh6.sae.model.distance.DistanceManhattan;
 
 class KnnClassifierTest {
 
-	IPoint p1 = new IrisPoint(5.2, 2.3, 1.4, 3.2, "Setosa");
-	IPoint p2 = new IrisPoint(2.2, 1.1, 3.3, 4.4, "Setosa");
-	IPoint p3 = new IrisPoint(1.7, 5.6, 3.2, 1.8, "Virginica");
-	IPoint p4 = new IrisPoint(2.5, 3.6, 4.1, 2.3, "Virginica");
-	IPoint p5 = new IrisPoint(7.1, 6.5, 2.3, 2.6, "Virginica");
-	IPoint p6 = new IrisPoint(6.5, 3.5, 4.5, 3.9, "Versicolor");
+	IPoint p1 = new IrisPoint(5.2, 2.3, 1.4, 3.2, EnumVariety.SETOSA);
+	IPoint p2 = new IrisPoint(2.2, 1.1, 3.3, 4.4, EnumVariety.SETOSA);
+	IPoint p3 = new IrisPoint(1.7, 5.6, 3.2, 1.8, EnumVariety.VIRGINICA);
+	IPoint p4 = new IrisPoint(2.5, 3.6, 4.1, 2.3, EnumVariety.VIRGINICA);
+	IPoint p5 = new IrisPoint(7.1, 6.5, 2.3, 2.6, EnumVariety.VIRGINICA);
+	IPoint p6 = new IrisPoint(6.5, 3.5, 4.5, 3.9, EnumVariety.VERSICOLOR);
 	
 	
 	List<Column> columns = IrisDataset.COLUMNS;
@@ -55,20 +56,20 @@ class KnnClassifierTest {
 	void test_Classify_With_Euclidienne() {
 		assertEquals(List.of(p2, p3, p4), classifier1.getNeighbours(p1, points, List.of(spL,spW,ptL,ptW)));
 		classifier1.classifyPoint(p1, variety, points, List.of(spL,spW,ptL,ptW));
-		assertEquals("Virginica", p1.getValue(variety));
+		assertEquals(EnumVariety.VIRGINICA, p1.getValue(variety));
 	}
 	
 	@Test
 	void test_Classify_With_Manhattan() {
 		assertEquals(List.of(p2,p3,p4), classifier2.getNeighbours(p1, points, List.of(spL,spW,ptL,ptW)));
 		classifier2.classifyPoint(p1, variety, points, List.of(spL,spW,ptL,ptW));
-		assertEquals("Virginica", p1.getValue(variety));
+		assertEquals(EnumVariety.VIRGINICA, p1.getValue(variety));
 	}
 	
 	@Test
 	void test_Classify_Default() {
 		assertEquals(List.of(p2,p3,p4), classifier3.getNeighbours(p1, points, List.of(spL,spW,ptL,ptW)));
 		classifier3.classifyPoint(p1, variety, points, List.of(spL,spW,ptL,ptW));
-		assertEquals("Virginica", p1.getValue(variety));
+		assertEquals(EnumVariety.VIRGINICA, p1.getValue(variety));
 	}
 }

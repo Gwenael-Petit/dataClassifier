@@ -9,15 +9,16 @@ import org.junit.jupiter.api.Test;
 
 import fr.groupeh6.sae.model.IPoint;
 import fr.groupeh6.sae.model.columns.NumberColumn;
+import fr.groupeh6.sae.model.datas.iris.EnumVariety;
 import fr.groupeh6.sae.model.datas.iris.IrisPoint;
 
 class DistanceEuclidienneTest {
 	
 	Distance dist = new DistanceEuclidienne();
 	
-	IPoint p1 = new IrisPoint(5.1, 3.5, 1.4, 0.2, "Setosa");
-	IPoint p2 = new IrisPoint(6.3, 3.3, 6, 2.5, "Virginica");
-	IPoint p3 = new IrisPoint(3.2, 4.2, 4, 1.6, "Virginica");
+	IPoint p1 = new IrisPoint(5.1, 3.5, 1.4, 0.2, EnumVariety.SETOSA);
+	IPoint p2 = new IrisPoint(6.3, 3.3, 6, 2.5, EnumVariety.VIRGINICA);
+	IPoint p3 = new IrisPoint(3.2, 4.2, 4, 1.6, EnumVariety.VIRGINICA);
 	
 	NumberColumn spL = new NumberColumn("sepal.length");
 	NumberColumn spW = new NumberColumn("sepal.width");
