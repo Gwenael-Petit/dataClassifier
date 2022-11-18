@@ -4,10 +4,10 @@ import fr.groupeh6.sae.model.Model;
 import fr.groupeh6.sae.model.columns.Column;
 
 
-public class Controller {
+public class MainController {
 	Model model;
 	
-	public Controller(Model m) {
+	public MainController(Model m) {
 		this.model = m;
 	}
 	
@@ -17,5 +17,9 @@ public class Controller {
 
 	public void setYColumn(Column column) {
 		this.model.setyColumn(column);
+	}
+	
+	public void loadCSV(String filePath, char delimiter) {
+		this.model.loadFromFile(filePath, delimiter);
 	}
 }

@@ -14,13 +14,15 @@ public class Model extends Subject {
 	private Column xColumn;
 	private Column yColumn;
 	
-	public void loadFromFile(String dataFile) {
-		try {
-			dataset = CSVLoader.load(dataFile);
-			addCategory(dataset);
-			notifyObservers(dataset);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+	public void loadFromFile(String dataFile, char delimiter) {
+		if(!haveDatasetLoaded()) {
+			try {
+				dataset = CSVLoader.load(dataFile, delimiter);
+				addCategory(dataset);
+				notifyObservers(dataset);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
 		}
 	}
 	

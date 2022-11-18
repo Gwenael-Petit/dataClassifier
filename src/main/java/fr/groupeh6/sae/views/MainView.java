@@ -3,8 +3,10 @@ package fr.groupeh6.sae.views;
 import java.io.IOException;
 import java.util.List;
 
-import fr.groupeh6.sae.controllers.Controller;
+import fr.groupeh6.sae.controllers.MainController;
+import fr.groupeh6.sae.controllers.FileChooserController;
 import fr.groupeh6.sae.model.Dataset;
+import fr.groupeh6.sae.model.FileChooserModel;
 import fr.groupeh6.sae.model.IPoint;
 import fr.groupeh6.sae.model.Model;
 import fr.groupeh6.sae.model.columns.Column;
@@ -27,7 +29,7 @@ import javafx.stage.Stage;
 public class MainView extends Stage implements Observer {
 	
 	Model model;
-	Controller controller;
+	MainController controller;
 	
 	@FXML
 	NumberAxis xAxis, yAxis;
@@ -42,7 +44,7 @@ public class MainView extends Stage implements Observer {
 	
 	public MainView() {}
 	
-	public MainView(Model model, Controller controller) throws IOException {
+	public MainView(Model model, MainController controller) throws IOException {
 		this.model = model;
 		this.controller = controller;
 		model.attach(this);
@@ -56,6 +58,25 @@ public class MainView extends Stage implements Observer {
 		this.setScene(scene);
 		this.show();
 		
+		init();
+	}
+	
+	public void init() {
+		bCategorisation.setDisable(true);
+		bRobustesse.setDisable(true);
+		bNewPoint.setDisable(true);
+		xColumn.setDisable(true);
+		yColumn.setDisable(true);
+		
+		bLoadCSV.setOnAction(e -> {
+			try {
+				FileChooserModel fileChooserModel = new FileChooserModel();
+				FileChooserController fileChooserController = new FileChooserController(fileChooserModel);
+				new FileChooserView(this, fileChooserModel, fileChooserController, controller);
+			} catch (IOException e1) {
+				System.out.println(e1.getMessage());
+			}
+		});
 		xColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setXColumn(newV));
 		yColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setYColumn(newV));
 	}
@@ -70,6 +91,11 @@ public class MainView extends Stage implements Observer {
 		List<Column> columns = model.getDataset().getNormalizableColumns();
 		xColumn.getItems().addAll(columns);
 		yColumn.getItems().addAll(columns);
+		bCategorisation.setDisable(false);
+		bRobustesse.setDisable(false);
+		bNewPoint.setDisable(false);
+		xColumn.setDisable(false);
+		yColumn.setDisable(false);
 	}
 	
 	public void updateScatterChart() {
