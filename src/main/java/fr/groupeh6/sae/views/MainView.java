@@ -6,10 +6,13 @@ import java.util.List;
 import fr.groupeh6.sae.controllers.MainController;
 import fr.groupeh6.sae.controllers.FileChooserController;
 import fr.groupeh6.sae.model.Dataset;
+import fr.groupeh6.sae.model.Factory;
 import fr.groupeh6.sae.model.FileChooserModel;
 import fr.groupeh6.sae.model.IPoint;
 import fr.groupeh6.sae.model.Model;
+import fr.groupeh6.sae.model.classifier.Classifier;
 import fr.groupeh6.sae.model.columns.Column;
+import fr.groupeh6.sae.model.distance.DistanceEuclidienne;
 import fr.groupeh6.sae.model.utils.Observer;
 import fr.groupeh6.sae.model.utils.Subject;
 import javafx.fxml.FXML;
@@ -23,6 +26,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 
@@ -36,9 +40,11 @@ public class MainView extends Stage implements Observer {
 	@FXML
 	ScatterChart<Number,Number> sc;
 	@FXML
-	ComboBox<Column> xColumn, yColumn;
+	ComboBox<Column> xColumn, yColumn, column;
 	@FXML
 	Button bCategorisation, bRobustesse, bNewPoint, bLoadCSV;
+	@FXML
+	TextField k;
 	
 	Popup pointPopup;
 	
@@ -79,6 +85,14 @@ public class MainView extends Stage implements Observer {
 		});
 		xColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setXColumn(newV));
 		yColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setYColumn(newV));
+		
+		bCategorisation.setOnAction(e -> {
+			int kval = Integer.valueOf(this.k.getText());
+			Column clazz = this.column.getValue();
+			model.clazz = clazz;
+			Classifier c = Factory.getInstance().knnClassifier(kval, new DistanceEuclidienne());
+			model.classify(c);
+		});
 	}
 	
 	@Override
@@ -96,6 +110,8 @@ public class MainView extends Stage implements Observer {
 		bNewPoint.setDisable(false);
 		xColumn.setDisable(false);
 		yColumn.setDisable(false);
+		
+		column.getItems().addAll(columns);
 	}
 	
 	public void updateScatterChart() {

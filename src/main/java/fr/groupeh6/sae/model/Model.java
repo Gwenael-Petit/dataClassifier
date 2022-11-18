@@ -14,6 +14,8 @@ public class Model extends Subject {
 	private Column xColumn;
 	private Column yColumn;
 	
+	public Column clazz;
+	
 	public void loadFromFile(String dataFile, char delimiter) {
 		if(!haveDatasetLoaded()) {
 			try {
@@ -32,6 +34,10 @@ public class Model extends Subject {
 	
 	public void classify(Classifier classifier) {
 		
+	}
+	
+	public void addPoint(IPoint point) {
+		this.dataset.addLine(point);
 	}
 	
 	public void addCategory(Dataset category) {
