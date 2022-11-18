@@ -1,10 +1,12 @@
 package fr.groupeh6.sae.model.points;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
 import fr.groupeh6.sae.model.Factory;
+import fr.groupeh6.sae.model.columns.BooleanColumn;
 import fr.groupeh6.sae.model.columns.EnumColumn;
 import fr.groupeh6.sae.model.columns.NumberColumn;
 import fr.groupeh6.sae.model.columns.StringColumn;
@@ -29,8 +31,7 @@ class PokemonPointTest {
 	EnumColumn<EnumType> type1 = (EnumColumn<EnumType>) Factory.getInstance().getColumn("type1");
 	EnumColumn<EnumType> type2 = (EnumColumn<EnumType>) Factory.getInstance().getColumn("type2");
 	NumberColumn speed = (NumberColumn) Factory.getInstance().getColumn("speed");
-	//BooleanColumn lengendary = 
-	//attack	base_egg_steps	capture_rate	defense	experience_growth	hp	sp_attack	sp_defense	type1	type2	speed	is_legendary
+	BooleanColumn lengendary = (BooleanColumn) Factory.getInstance().getColumn("is_legendary");
 
 	
 	@Test
@@ -38,5 +39,35 @@ class PokemonPointTest {
 		fail("Not yet implemented");
 		
 	}
+
+
+	@Override
+	public String toString() {
+		return "PokemonPointTest [poke1=" + poke1 + ", poke2=" + poke2 + ", poke3=" + poke3 + ", name=" + name
+				+ ", attack=" + attack + ", baseEggSteps=" + baseEggSteps + ", captureRate=" + captureRate
+				+ ", defense=" + defense + ", expGrowth=" + expGrowth + ", hp=" + hp + ", spAttack=" + spAttack
+				+ ", spDefense=" + spDefense + ", type1=" + type1 + ", type2=" + type2 + ", speed=" + speed
+				+ ", lengendary=" + lengendary + "]";
+	}
+	
+	@Test
+	void test_getValue() {
+		assertEquals("Swablu",poke1.getValue(name));
+		assertEquals(125,poke2.getValue(attack));
+		assertEquals(5120,poke3.getValue(baseEggSteps));
+		assertEquals(255.0,poke1.getValue(captureRate));
+		assertEquals(70,poke2.getValue(defense));
+		assertEquals(1250000,poke3.getValue(expGrowth));
+		assertEquals(45,poke1.getValue(hp));
+		assertEquals(70,poke2.getValue(spAttack));
+		assertEquals(110,poke3.getValue(spDefense));
+		assertEquals("Swablu",poke1.getValue(name));
+		assertEquals(EnumType.NORMAL,poke1.getValue(type1));
+		assertEquals(null,poke2.getValue(type2));
+		assertEquals(52,poke3.getValue(speed));
+		assertEquals(false,poke1.getValue(lengendary));
+	}
+	
+	
 
 }
