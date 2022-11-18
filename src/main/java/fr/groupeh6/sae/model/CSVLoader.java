@@ -24,12 +24,6 @@ public class CSVLoader {
 		return file != null && file.exists() && file.getName().endsWith(".csv");
 	}
 	
-	public static char getDelimiter(String firstLine) {
-		int c1 = StringUtils.countMatches(firstLine, ',');
-		int c2 = StringUtils.countMatches(firstLine, ';');
-		return c1 > c2 ? ',' : ';';
-	}
-	
 	public static String[] getColumnsName(String firstLine, char delimiter) {
 		return firstLine.split(""+delimiter);
 	}
@@ -50,20 +44,19 @@ public class CSVLoader {
 				parse();
 	}
 	
-	public static Dataset load(File file) throws NoSuchElementException, IOException {
+	public static Dataset load(File file, char delimiter) throws NoSuchElementException, IOException {
 		if(!isValid(file)) throw new NoSuchElementException();
 		Dataset dataset;
 		BufferedReader br = new BufferedReader(new FileReader(file));
-		dataset = loadFromReader(br);
+		dataset = loadFromReader(br, delimiter);
 		br.close();
 		return dataset;
 	}
 
-	public static Dataset loadFromReader(BufferedReader br) throws IOException, FileNotFoundException {
+	public static Dataset loadFromReader(BufferedReader br, char delimiter) throws IOException, FileNotFoundException {
 		Dataset dataset;
 		br.mark(1);
 		String line = br.readLine().replace("\"", "");
-		char delimiter = getDelimiter(line);
 		String[] columns = getColumnsName(line, delimiter);
 		dataset = Factory.getInstance().getDataset(getColumns(columns));
 		IPoint dataType = dataset.getType();
@@ -72,15 +65,15 @@ public class CSVLoader {
 		return dataset;
 	}
 	
-	public static Dataset load(String fileName) throws Exception {
-		return load(new File(fileName));
+	public static Dataset load(String fileName, char delimiter) throws Exception {
+		return load(new File(fileName), delimiter);
 	}
 	
 	public static void main(String[] args) {
 		String sep = System.getProperty("file.separator");
 		String path = System.getProperty("user.dir") + sep + "src" + sep + "main" + sep + "resources" + sep + "fr" + sep + "groupeh6" + sep + "sae" + sep + "iris.csv";
 		try {
-			Dataset dataset = CSVLoader.load(path);
+			Dataset dataset = CSVLoader.load(path, ',');
 			dataset.iterator().forEachRemaining(e -> System.out.println(e));
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -48,18 +48,6 @@ class CSVLoaderTest {
 	}
 	
 	@Test
-	void test_getDelimiter_should_return_true() throws IOException {
-		char delimiter = CSVLoader.getDelimiter(",,;,");
-		assertEquals(',', delimiter);
-	}
-	
-	@Test
-	void test_getDelimiter_should_return_false() throws IOException {
-		char delimiter = CSVLoader.getDelimiter(";;,;");
-		assertEquals(';', delimiter);
-	}
-	
-	@Test
 	void test_getColumnsName_should_return_true() throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String line = br.readLine().replace("\"", "");
@@ -88,38 +76,38 @@ class CSVLoaderTest {
 		br.mark(1);
 		String line = br.readLine().replace("\"", "");
 		br.reset();
-		List<IPoint> datas =CSVLoader.loadDatas(br, new IrisPoint(), CSVLoader.getDelimiter(line));
-		assertEquals("[Setosa[3.2,2.3,1.1,0.1], Virginica[7.1,3.3,6.2,2.0]]",datas.toString());
+		List<IPoint> datas =CSVLoader.loadDatas(br, new IrisPoint(), ',');
+		assertEquals("[SETOSA[3.2,2.3,1.1,0.1], VIRGINICA[7.1,3.3,6.2,2.0]]",datas.toString());
 	}
 	
 	@Test
 	void test_loadFromReader_should_return_true() throws Exception {	
 		StringBuilder sb = new StringBuilder();
 		BufferedReader br = new BufferedReader(new FileReader(file));
-		Dataset dataset = CSVLoader.loadFromReader(br);
+		Dataset dataset = CSVLoader.loadFromReader(br, ',');
 		dataset.iterator().forEachRemaining(e -> sb.append(e));
-		assertEquals("Setosa[3.2,2.3,1.1,0.1]Virginica[7.1,3.3,6.2,2.0]", sb.toString());
+		assertEquals("SETOSA[3.2,2.3,1.1,0.1]VIRGINICA[7.1,3.3,6.2,2.0]", sb.toString());
 	}
 	
 	@Test
 	void test_load_from_file() throws NoSuchElementException, IOException {
 		StringBuilder sb = new StringBuilder();
-		Dataset dataset = CSVLoader.load(file);
+		Dataset dataset = CSVLoader.load(file, ',');
 		dataset.iterator().forEachRemaining(e -> sb.append(e));
-		assertEquals("Setosa[3.2,2.3,1.1,0.1]Virginica[7.1,3.3,6.2,2.0]", sb.toString());
+		assertEquals("SETOSA[3.2,2.3,1.1,0.1]VIRGINICA[7.1,3.3,6.2,2.0]", sb.toString());
 	}
 	
 	@Test
 	void test_load_file_not_exist() {
-		assertThrows(NoSuchElementException.class, () -> CSVLoader.load(""));
+		assertThrows(NoSuchElementException.class, () -> CSVLoader.load("", ','));
 	}
 	
 	@Test
 	void test_load_from_file_name() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		Dataset dataset = CSVLoader.load(path);
+		Dataset dataset = CSVLoader.load(path, ',');
 		dataset.iterator().forEachRemaining(e -> sb.append(e));
-		assertEquals("Setosa[3.2,2.3,1.1,0.1]Virginica[7.1,3.3,6.2,2.0]", sb.toString());
+		assertEquals("SETOSA[3.2,2.3,1.1,0.1]VIRGINICA[7.1,3.3,6.2,2.0]", sb.toString());
 	}
 	
 }
