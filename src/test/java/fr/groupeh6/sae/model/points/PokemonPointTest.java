@@ -34,11 +34,6 @@ class PokemonPointTest {
 	BooleanColumn lengendary = (BooleanColumn) Factory.getInstance().getColumn("is_legendary");
 
 	
-	@Test
-	void test() {
-		fail("Not yet implemented");
-		
-	}
 
 
 	@Override
@@ -53,18 +48,18 @@ class PokemonPointTest {
 	@Test
 	void test_getValue() {
 		assertEquals("Swablu",poke1.getValue(name));
-		assertEquals(125,poke2.getValue(attack));
-		assertEquals(5120,poke3.getValue(baseEggSteps));
+		assertEquals(125.0,poke2.getValue(attack));
+		assertEquals(5120.0,poke3.getValue(baseEggSteps));
 		assertEquals(255.0,poke1.getValue(captureRate));
-		assertEquals(70,poke2.getValue(defense));
-		assertEquals(1250000,poke3.getValue(expGrowth));
-		assertEquals(45,poke1.getValue(hp));
-		assertEquals(70,poke2.getValue(spAttack));
-		assertEquals(110,poke3.getValue(spDefense));
+		assertEquals(70.0,poke2.getValue(defense));
+		assertEquals(1250000.0,poke3.getValue(expGrowth));
+		assertEquals(45.0,poke1.getValue(hp));
+		assertEquals(70.0,poke2.getValue(spAttack));
+		assertEquals(110.0,poke3.getValue(spDefense));
 		assertEquals("Swablu",poke1.getValue(name));
 		assertEquals(EnumType.NORMAL,poke1.getValue(type1));
 		assertEquals(null,poke2.getValue(type2));
-		assertEquals(52,poke3.getValue(speed));
+		assertEquals(52.0,poke3.getValue(speed));
 		assertEquals(false,poke1.getValue(lengendary));
 	}
 	

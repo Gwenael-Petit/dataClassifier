@@ -26,7 +26,7 @@ public class PokemonDataset extends Dataset {
 			new NumberColumn("sp_defense"),
 			new EnumColumn<EnumType>("type1", EnumType.class),
 			new EnumColumn<EnumType>("type2", EnumType.class),
-			new NumberColumn("capture_rate"),
+			new NumberColumn("speed"),
 			new BooleanColumn("is_legendary")
 			);
 
