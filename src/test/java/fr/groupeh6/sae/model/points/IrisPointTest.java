@@ -48,6 +48,7 @@ class IrisPointTest {
 		assertEquals(5.1, setosa.getValue(spL));
 		assertEquals(3.5, setosa.getValue(spW));
 		assertEquals(EnumVariety.VIRGINICA, virginica.getValue(var));
+		assertEquals(1.4, setosa.getValue(ptL));
 		assertEquals(1.3, versicolor.getValue(ptW));
 		Column fake = new BooleanColumn("Fake");
 		assertEquals(null, setosa.getValue(fake));
@@ -77,6 +78,29 @@ class IrisPointTest {
 		assertEquals(0.0, p.getValue(ptL));
 		assertEquals(0.0, p.getValue(ptW));
 		assertEquals(null, p.getValue(var));
+	}
+	
+	@Test
+	void test_setValue() {
+		assertEquals(5.1, setosa.getValue(spL));
+		setosa.setValue(spL, 5.5);
+		assertEquals(5.5, setosa.getValue(spL));
+		
+		assertEquals(3.5, setosa.getValue(spW));
+		setosa.setValue(spW, 3.0);
+		assertEquals(3.0, setosa.getValue(spW));
+		
+		assertEquals(EnumVariety.SETOSA, setosa.getValue(var));
+		setosa.setValue(var, EnumVariety.VIRGINICA);
+		assertEquals(EnumVariety.VIRGINICA, setosa.getValue(var));
+		
+		assertEquals(1.4, setosa.getValue(ptL));
+		setosa.setValue(ptL, 1.2);
+		assertEquals(1.2, setosa.getValue(ptL));
+		
+		assertEquals(0.2, setosa.getValue(ptW));
+		setosa.setValue(ptW, 0.4);
+		assertEquals(0.4, setosa.getValue(ptW));
 	}
 
 }

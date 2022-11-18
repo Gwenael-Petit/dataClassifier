@@ -120,19 +120,19 @@ public class PokemonPoint implements IPoint{
 	@Override
 	public void setValue(Column col, Object o) {
 	switch(col.getName()) {
-	case "name" : this.name = (String) o ;
-	case "attack" : this.attack = (double) o;
-	case "base_egg_steps" : this.baseEggSteps = (double) o;
-	case "capture_rate" : this.captureRate = (double) o;
-	case "defense" : this.defense = (double) o;
-	case "experience_growth" : this.experienceGrowth = (double) o;
-	case "hp" : this.hp = (double) o;
-	case "sp_attack" : this.spAttack = (double) o;
-	case "sp_defense" : this.spDefense = (double) o;
-	case "type1" : this.type1 = (EnumType) o;
-	case "type2" : this.type2 = (EnumType) o;
-	case "speed" : this.speed = (double) o;
-	case "is_legendary" : this.legendary = (boolean) o;
+	case "name" -> this.name = (String) o ;
+	case "attack" -> this.attack = (double) o;
+	case "base_egg_steps" -> this.baseEggSteps = (double) o;
+	case "capture_rate" -> this.captureRate = (double) o;
+	case "defense" -> this.defense = (double) o;
+	case "experience_growth" -> this.experienceGrowth = (double) o;
+	case "hp" -> this.hp = (double) o;
+	case "sp_attack" -> this.spAttack = (double) o;
+	case "sp_defense" -> this.spDefense = (double) o;
+	case "type1" -> this.type1 = (EnumType) o;
+	case "type2" -> this.type2 = (EnumType) o;
+	case "speed" -> this.speed = (double) o;
+	case "is_legendary" -> this.legendary = (boolean) o;
 		}
 	}
 }
