@@ -62,11 +62,11 @@ public class IrisPoint implements IPoint {
 	@Override
 	public void setValue(Column col, Object o) {
 		switch(col.getName()) {
-		case "sepal.length" : this.sepalLength = (double) o;
-		case "sepal.width" : this.sepalWidth = (double) o;
-		case "petal.length" : this.petalLength = (double) o;
-		case "petal.width" : this.petalWidth = (double) o;
-		case "variety" : this.variety = (EnumVariety) o;	
+		case "sepal.length" -> this.sepalLength = (double) o;
+		case "sepal.width" -> this.sepalWidth = (double) o;
+		case "petal.length" -> this.petalLength = (double) o;
+		case "petal.width" -> this.petalWidth = (double) o;
+		case "variety" -> this.variety = (EnumVariety) o;	
 		}
 	}
 

@@ -66,6 +66,7 @@ class TitanicPointTest {
 		assertEquals(0.0,pers3.getValue(survived));
 		assertEquals(3.0,pers4.getValue(pClass));
 		assertEquals("Braun",pers1.getValue(name));
+		assertEquals(EnumSex.MALE, pers1.getValue(sex));
 		assertEquals(30.0,pers2.getValue(age));
 		assertEquals(5.0,pers4.getValue(sibSp));
 		assertEquals(0.0,pers1.getValue(parch));
@@ -135,6 +136,10 @@ class TitanicPointTest {
 		assertEquals("Braun",pers1.getValue(name));
 		pers1.setValue(name, "Reiner");
 		assertEquals("Reiner",pers1.getValue(name));
+		
+		assertEquals(EnumSex.MALE, pers1.getValue(sex));
+		pers1.setValue(sex, EnumSex.FEMALE);
+		assertEquals(EnumSex.FEMALE, pers1.getValue(sex));
 		
 		assertEquals(22.0,pers1.getValue(age));
 		pers1.setValue(age, 18.0);
