@@ -116,5 +116,52 @@ class TitanicPointTest {
 		assertEquals(1.421,pers1.distanceTo(pers2),0.001);
 		assertEquals(1.130,pers2.distanceTo(pers5),0.001);
 	}
+	
+	@Test
+	void test_setValue() {
+		/*assertEquals("3",pers1.getValue(passId));
+		pers1.setValue(passId,"1.0");
+		assertEquals("1.0",pers1.getValue(passId));*/
+		
+		assertEquals(0.0,pers1.getValue(survived));
+		pers1.setValue(survived, 1.0);
+		assertEquals(1.0,pers1.getValue(survived));
+		
+		assertEquals(3.0,pers1.getValue(pClass));
+		pers1.setValue(pClass, 1.0);
+		assertEquals(1.0,pers1.getValue(pClass));
+		
+		assertEquals("Braun",pers1.getValue(name));
+		pers1.setValue(name, "Reiner");
+		assertEquals("Reiner",pers1.getValue(name));
+		
+		assertEquals(22.0,pers1.getValue(age));
+		pers1.setValue(age, 18.0);
+		assertEquals(18.0,pers1.getValue(age));
+		
+		assertEquals(1.0,pers1.getValue(sibSp));
+		pers1.setValue(sibSp, 0.0);
+		assertEquals(0.0,pers1.getValue(sibSp));
+		
+		assertEquals(0.0,pers1.getValue(parch));
+		pers1.setValue(parch, 1.0);
+		assertEquals(1.0,pers1.getValue(parch));
+		
+		assertEquals("4563221",pers1.getValue(ticket));
+		pers1.setValue(ticket, "4655555");
+		assertEquals("4655555",pers1.getValue(ticket));
+		
+		assertEquals(5.3,pers1.getValue(fare));
+		pers1.setValue(fare, 2.1);
+		assertEquals(2.1,pers1.getValue(fare));
+		
+		assertEquals("C54",pers1.getValue(cabin));
+		pers1.setValue(cabin, "C66");
+		assertEquals("C66",pers1.getValue(cabin));
+		
+		assertEquals(EnumEmbarked.S,pers1.getValue(embarked));
+		pers1.setValue(embarked, EnumEmbarked.Q);
+		assertEquals(EnumEmbarked.Q,pers1.getValue(embarked));
+	}
 
 }
