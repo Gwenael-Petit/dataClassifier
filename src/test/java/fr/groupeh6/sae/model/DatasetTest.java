@@ -65,7 +65,7 @@ class DatasetTest {
 	
 	@Test 
 	void test_getNormalizableColumn() {
-		assertEquals("[sepal.length, sepal.width, petal.length, petal.width]", irisDataset.getNormalizableColumns().toString());
+		assertEquals("[sepal.length, sepal.width, petal.length, petal.width, variety]", irisDataset.getNormalizableColumns().toString());
 	}
 	
 	@Test 

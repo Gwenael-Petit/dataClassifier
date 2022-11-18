@@ -15,32 +15,32 @@ public class PokemonPoint implements IPoint{
 	@CsvBindByName(column = "name")
 	private String name;
 	@CsvBindByName(column = "attack")
-	private int attack;
+	private double attack;
 	@CsvBindByName(column = "base_egg_steps")
-	private int baseEggSteps;
+	private double baseEggSteps;
 	@CsvBindByName(column = "capture_rate")
 	private double captureRate;
 	@CsvBindByName(column = "defense")
-	private int defense;
+	private double defense;
 	@CsvBindByName(column = "experience_growth")
-	private int experienceGrowth;
+	private double experienceGrowth;
 	@CsvBindByName(column = "hp")
-	private int hp;
+	private double hp;
 	@CsvBindByName(column = "sp_attack")
-	private int spAttack;
+	private double spAttack;
 	@CsvBindByName(column = "sp_defense")
-	private int spDefense;
+	private double spDefense;
 	@CsvBindByName(column = "type1")
-	private String type1;
+	private EnumType type1;
 	@CsvBindByName(column = "type2")
-	private String type2;
+	private EnumType type2;
 	@CsvBindByName(column = "speed")
 	private double speed;
 	@CsvBindByName(column = "is_legendary")
 	private boolean legendary;
 
 	public PokemonPoint(String name, int attack, int baseEggSteps, double captureRate, int defense, int experienceGrowth,
-			int hp, int spAttack, int spDefense, String type1, String type2, double speed, boolean legendary) {
+			int hp, int spAttack, int spDefense, EnumType type1, EnumType type2, double speed, boolean legendary) {
 		this.name = name;
 		this.attack = attack;
 		this.baseEggSteps = baseEggSteps;
@@ -52,6 +52,22 @@ public class PokemonPoint implements IPoint{
 		this.spDefense = spDefense;
 		this.type1 = type1;
 		this.type2 = type2;
+		this.speed = speed;
+		this.legendary = legendary;
+	}
+	public PokemonPoint(String name, int attack, int baseEggSteps, double captureRate, int defense, int experienceGrowth,
+			int hp, int spAttack, int spDefense, EnumType type1, double speed, boolean legendary) {
+		this.name = name;
+		this.attack = attack;
+		this.baseEggSteps = baseEggSteps;
+		this.captureRate = captureRate;
+		this.defense = defense;
+		this.experienceGrowth = experienceGrowth;
+		this.hp = hp;
+		this.spAttack = spAttack;
+		this.spDefense = spDefense;
+		this.type1 = type1;
+		this.type2 = null;
 		this.speed = speed;
 		this.legendary = legendary;
 	}
@@ -96,15 +112,27 @@ public class PokemonPoint implements IPoint{
 	@Override
 	public double distanceTo(IPoint other) {
 		List<Column> toDist = new ArrayList<>();
-		String[] cols = new String[] {"Survived","Pclass","Sex","Age"};
+		String[] cols = new String[] {"type2","type1","experience_growth","capture_rate","base_egg_steps"};
 		for(String c : cols) toDist.add(Factory.getInstance().getColumn(c));
 		return new DistanceEuclidienne().distance(this,other,toDist);
 	}
 
 	@Override
 	public void setValue(Column col, Object o) {
-		// TODO Auto-generated method stub
-		
+	switch(col.getName()) {
+	case "name" : this.name = (String) o ;
+	case "attack" : this.attack = (double) o;
+	case "base_egg_steps" : this.baseEggSteps = (double) o;
+	case "capture_rate" : this.captureRate = (double) o;
+	case "defense" : this.defense = (double) o;
+	case "experience_growth" : this.experienceGrowth = (double) o;
+	case "hp" : this.hp = (double) o;
+	case "sp_attack" : this.spAttack = (double) o;
+	case "sp_defense" : this.spDefense = (double) o;
+	case "type1" : this.type1 = (EnumType) o;
+	case "type2" : this.type2 = (EnumType) o;
+	case "speed" : this.speed = (double) o;
+	case "is_legendary" : this.legendary = (boolean) o;
+		}
 	}
-
 }
