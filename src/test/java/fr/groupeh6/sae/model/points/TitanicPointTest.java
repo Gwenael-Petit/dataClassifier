@@ -119,9 +119,10 @@ class TitanicPointTest {
 	
 	@Test
 	void test_setValue() {
-		/*assertEquals("3",pers1.getValue(passId));
+		assertEquals("3",pers1.getValue(passId));
+
 		pers1.setValue(passId,"1.0");
-		assertEquals("1.0",pers1.getValue(passId));*/
+		assertEquals("1.0",pers1.getValue(passId));
 		
 		assertEquals(0.0,pers1.getValue(survived));
 		pers1.setValue(survived, 1.0);

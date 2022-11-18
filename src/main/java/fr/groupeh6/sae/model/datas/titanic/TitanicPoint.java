@@ -105,18 +105,18 @@ public class TitanicPoint implements IPoint {
 	@Override
 	public void setValue(Column col, Object o) {
 		switch(col.getName()) {
-		case "PassengerId" : this.passengerId = (String) o ;
-		case "Survived" : this.survived = (double) o;
-		case "Pclass" : this.placeClass = (double) o;
-		case "Name" : this.name = (String) o;
-		case "Sex" : this.sex = (EnumSex) o;
-		case "Age" : this.age = (double) o;
-		case "SibSp" : this.sibSp = (double) o;
-		case "Parch" : this.parch = (double) o;
-		case "Ticket" : this.ticket = (String) o;
-		case "Fare" : this.fare = (double) o;
-		case "Cabin" : this.cabin = (String) o;
-		case "Embarked" : this.embarked = (EnumEmbarked) o;
+			case "PassengerId" -> this.passengerId = (String) o;
+			case "Survived" -> this.survived = (double) o;
+			case "Pclass" -> this.placeClass = (double) o;
+			case "Name" -> this.name = (String) o;
+			case "Sex" -> this.sex = (EnumSex) o;
+			case "Age" -> this.age = (double) o;
+			case "SibSp" -> this.sibSp = (double) o;
+			case "Parch" -> this.parch = (double) o;
+			case "Ticket" -> this.ticket = (String) o;
+			case "Fare" -> this.fare = (double) o;
+			case "Cabin" -> this.cabin = (String) o;
+			case "Embarked" -> this.embarked = (EnumEmbarked) o;
 		}
 		
 	}
