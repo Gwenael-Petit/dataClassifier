@@ -14,11 +14,11 @@ public class RandomClassifier implements Classifier {
 	}
 
 	@Override
-	public void classifyPoint(IPoint point, Column columnClass, List<IPoint> points, List<Column> columns) {
+	public Object classifyPoint(IPoint point, Column columnClass, List<IPoint> points, List<Column> columns) {
 		points.remove(point);
 		int r = new Random().nextInt(points.size());
 		Object value = points.get(r).getValue(columnClass);
-		point.setValue(columnClass, value);
+		return value;
 	}
 
 }

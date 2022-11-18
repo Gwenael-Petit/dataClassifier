@@ -35,7 +35,7 @@ public class KnnClassifier implements Classifier {
 	}
 
 	@Override
-	public void classifyPoint(IPoint point, Column columnClass, List<IPoint> points, List<Column> columns) {
+	public Object classifyPoint(IPoint point, Column columnClass, List<IPoint> points, List<Column> columns) {
 		points.remove(point);
 		List<IPoint> neighbours = getNeighbours(point, points, columns);
 		Map<Object, Integer> valueCount = new HashMap<>();
@@ -48,7 +48,7 @@ public class KnnClassifier implements Classifier {
 			}
 		}
 		Entry<Object, Integer> entry = valueCount.entrySet().stream().max((e1, e2) -> Integer.compare(e1.getValue(), e2.getValue())).get();
-		point.setValue(columnClass, entry.getKey());
+		return entry.getKey();
 	}
 
 	@Override
