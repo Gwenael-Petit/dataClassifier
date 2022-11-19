@@ -23,7 +23,9 @@ public class MainController {
 		try {
 			this.model.loadFromFile(filePath, delimiter);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
+	
+	
 }

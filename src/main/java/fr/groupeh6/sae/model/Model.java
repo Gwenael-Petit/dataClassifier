@@ -20,25 +20,40 @@ public class Model extends Subject {
 	public void loadFromFile(String dataFile, char delimiter) throws Exception {
 		if(!haveTrainDatasLoaded()) {
 			train = CSVLoader.load(dataFile, delimiter);
-			notifyObservers();
+			createCategories();
+			notifyObservers(train);
 		} else {
-			CSVLoader.load(dataFile, delimiter).getLines();
+			CSVLoader.load(dataFile, delimiter).getLines().forEach(l -> addPoint(l));
+			notifyObservers();
 		}
 	}
 	
-	public void setClassifier(Classifier classifier) {
+	public void setClassifier(Classifier classifier, Column classClassifier) {
 		this.classifier = classifier;
+		this.classClassifier = classClassifier;
 		List<IPoint> points = new ArrayList<>();
-		// On récupère nos données actuelles
 		for(Dataset category : allCategories()) {
 			category.forEach(point -> points.add(point)); 
 		}
-		//creer 
-		//classifier les datas
+		resetCategories();
+		createCategories();
+		for(IPoint point : points) addPoint(point);
 	}
 	
 	public void addPoint(IPoint point) {
-		
+		if(haveClassifier()) {
+			Object clazz = classifier.classifyPoint(point, classClassifier, train.getLines(), train.columns);
+			Dataset categorie = getCategory((String)clazz);
+			point.setValue(classClassifier, clazz);
+			categorie.addLine(point);
+		} else {
+			this.categories.get(0).addLine(point);
+		}
+	}
+	
+	public void createCategories() {
+		if(haveClassifier()) classClassifier.getDistinctValues().forEach(v -> addCategory(v));
+		else addCategory(train.getName());
 	}
 	
 	public void addCategory(String name) {
@@ -47,8 +62,18 @@ public class Model extends Subject {
 		addCategory(set);
 	}
 	
+	public Dataset getCategory(String name) {
+		for(Dataset category : allCategories()) 
+			if(category.getName().equals(name)) return category;
+		return null;
+	}
+	
 	public void addCategory(Dataset category) {
 		categories.add(category);
+	}
+	
+	public void resetCategories() {
+		categories.clear();
 	}
 	
 	public List<Dataset> allCategories() {
@@ -70,7 +95,7 @@ public class Model extends Subject {
 	}
 	
 	public boolean haveClassifier() {
-		return classifier != null;
+		return classifier != null && classClassifier != null;
 	}
 	
 	public boolean haveTrainDatasLoaded() {

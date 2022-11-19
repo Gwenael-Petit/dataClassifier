@@ -66,12 +66,8 @@ public class MainView extends Stage implements Observer {
 	}
 	
 	public void init() {
-		bCategorisation.setDisable(true);
-		bRobustesse.setDisable(true);
-		bNewPoint.setDisable(true);
-		xColumn.setDisable(true);
-		yColumn.setDisable(true);
-		
+		xColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setXColumn(newV));
+		yColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setYColumn(newV));
 		bLoadCSV.setOnAction(e -> {
 			try {
 				FileChooserModel fileChooserModel = new FileChooserModel();
@@ -81,8 +77,6 @@ public class MainView extends Stage implements Observer {
 				System.out.println(e1.getMessage());
 			}
 		});
-		xColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setXColumn(newV));
-		yColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setYColumn(newV));
 		
 		bCategorisation.setOnAction(e -> {
 			

@@ -1,5 +1,8 @@
 package fr.groupeh6.sae.model.columns;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import fr.groupeh6.sae.model.Dataset;
 import fr.groupeh6.sae.model.IPoint;
 
@@ -23,6 +26,17 @@ public abstract class Column implements IValueNormalizer {
 	public String getName() {
 		return name;
 	}
+	
+	public List<String> getDistinctValues() {
+		List<String> res = new ArrayList<>();
+		if(isLinkedToADataset()) {
+			for(IPoint point : dataset) {
+				String value = (String) point.getValue(this);
+				if(!res.contains(value)) res.add(value);
+			}
+		}
+		return res;
+	};
 	
 	public abstract boolean isNormalizable();
 	

@@ -4,11 +4,14 @@
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.ScatterChart?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <center>
@@ -19,6 +22,9 @@
         <yAxis>
           <NumberAxis fx:id="yAxis" autoRanging="false" lowerBound="0" side="LEFT" tickUnit="0.1" upperBound="1" />
         </yAxis>
+         <BorderPane.margin>
+            <Insets right="10.0" top="10.0" />
+         </BorderPane.margin>
       </ScatterChart>
    </center>
    <left>
@@ -31,7 +37,7 @@
                         <Insets left="10.0" right="10.0" top="5.0" />
                      </HBox.margin>
                   </Label>
-                  <ComboBox prefWidth="120.0" fx:id="xColumn" />
+                  <ComboBox disable="true" prefWidth="120.0" fx:id="xColumn" />
                </children>
                <VBox.margin>
                   <Insets bottom="20.0" top="100.0" />
@@ -44,25 +50,59 @@
                         <Insets left="10.0" right="10.0" top="5.0" />
                      </HBox.margin>
                   </Label>
-                  <ComboBox fx:id="yColumn" prefWidth="120.0" />
+                  <ComboBox fx:id="yColumn" disable="true" prefWidth="120.0" />
                </children>
                <VBox.margin>
                   <Insets bottom="20.0" top="20.0" />
                </VBox.margin>
             </HBox>
-            <Button fx:id="bCategorisation" mnemonicParsing="false" text="Categorisation" textAlignment="CENTER">
-               <VBox.margin>
-                  <Insets left="50.0" top="20.0" />
-               </VBox.margin>
-            </Button>
+            <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" style="-fx-border-color: gray; -fx-border-radius: 10;">
+               <children>
+                  <Label text="Catégorisation" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox alignment="CENTER" layoutX="11.0" layoutY="36.0" maxWidth="-Infinity" prefHeight="50.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Colonne : " />
+                        <ComboBox disable="true" prefWidth="120.0" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" maxWidth="-Infinity" prefHeight="50.0" prefWidth="200.0">
+                     <children>
+                        <Label text="K : " />
+                        <TextField disable="true" prefWidth="50.0" />
+                     </children>
+                  </HBox>
+                  <CheckBox disable="true" mnemonicParsing="false" selected="true" text="Distance par défaut" />
+                  <Button disable="true" mnemonicParsing="false" text="Définir la distance">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </Button>
+                  <HBox alignment="CENTER" maxWidth="-Infinity" prefHeight="75.0" prefWidth="200.0" spacing="10.0">
+                     <children>
+                        <Button fx:id="bCategorisation" disable="true" mnemonicParsing="false" text="Catégoriser" textAlignment="CENTER" />
+                        <Button disable="true" mnemonicParsing="false" text="Modifier" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
+         <BorderPane.margin>
+            <Insets left="15.0" />
+         </BorderPane.margin>
       </VBox>
    </left>
    <bottom>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="60.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="bRobustesse" mnemonicParsing="false" text="Robustesse" />
-            <Button fx:id="bNewPoint" mnemonicParsing="false" text="Nouveau point" />
+            <Button fx:id="bRobustesse" disable="true" mnemonicParsing="false" text="Robustesse" />
+            <Button fx:id="bNewPoint" disable="true" mnemonicParsing="false" text="Nouveau point" />
             <Button fx:id="bLoadCSV" mnemonicParsing="false" text="Charger un CSV" />
          </children>
       </HBox>
