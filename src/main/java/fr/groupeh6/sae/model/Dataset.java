@@ -13,7 +13,7 @@ public abstract class Dataset implements Iterable<IPoint> {
 	private String name;
 	protected List<IPoint> points;
 	protected List<Column> columns;
-	protected Classifier classifier;
+	//protected Classifier classifier;
 	
 	public Dataset(String name, List<Column> columns) {
 		this.name = name;
@@ -24,6 +24,10 @@ public abstract class Dataset implements Iterable<IPoint> {
 	
 	public String getName() {
 		return name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public int getNbLines() {
@@ -62,9 +66,12 @@ public abstract class Dataset implements Iterable<IPoint> {
 		return points.iterator();
 	}
 	
-	public void setClassifier(Classifier classifier) {
-		this.classifier = classifier;
+	public List<IPoint> getLines() {
+		return points;
 	}
+	/*public void setClassifier(Classifier classifier) {
+		this.classifier = classifier;
+	}*/
 	
 	public double robustesse() {
 		return 0.0;

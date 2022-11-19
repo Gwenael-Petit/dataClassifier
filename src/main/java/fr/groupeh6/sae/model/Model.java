@@ -9,35 +9,42 @@ import fr.groupeh6.sae.model.utils.Subject;
 
 public class Model extends Subject {
 	
-	private Dataset dataset;
+	private Dataset train;
 	private List<Dataset> categories = new ArrayList<Dataset>();
 	private Column xColumn;
 	private Column yColumn;
 	
-	public Column clazz;
+	private Classifier classifier;
+	private Column classClassifier;
 	
-	public void loadFromFile(String dataFile, char delimiter) {
-		if(!haveDatasetLoaded()) {
-			try {
-				dataset = CSVLoader.load(dataFile, delimiter);
-				addCategory(dataset);
-				notifyObservers(dataset);
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
+	public void loadFromFile(String dataFile, char delimiter) throws Exception {
+		if(!haveTrainDatasLoaded()) {
+			train = CSVLoader.load(dataFile, delimiter);
+			notifyObservers();
+		} else {
+			CSVLoader.load(dataFile, delimiter).getLines();
 		}
 	}
 	
-	public void loadFromString(String data) {
-		
-	}
-	
-	public void classify(Classifier classifier) {
-		
+	public void setClassifier(Classifier classifier) {
+		this.classifier = classifier;
+		List<IPoint> points = new ArrayList<>();
+		// On récupère nos données actuelles
+		for(Dataset category : allCategories()) {
+			category.forEach(point -> points.add(point)); 
+		}
+		//creer 
+		//classifier les datas
 	}
 	
 	public void addPoint(IPoint point) {
-		this.dataset.addLine(point);
+		
+	}
+	
+	public void addCategory(String name) {
+		Dataset set = Factory.getInstance().getDataset(train.columns);
+		set.setName(name);
+		addCategory(set);
 	}
 	
 	public void addCategory(Dataset category) {
@@ -49,19 +56,7 @@ public class Model extends Subject {
 	}
 	
 	public int nbColumns() {
-		return dataset.getColumns().size();
-	}
-
-	public Dataset getDataset() {
-		return this.dataset;
-	}
-
-	public Column getxColumn() {
-		return xColumn;
-	}
-
-	public Column getyColumn() {
-		return yColumn;
+		return train.getColumns().size();
 	}
 	
 	public void setxColumn(Column xColumn) {
@@ -74,7 +69,23 @@ public class Model extends Subject {
 		notifyObservers();
 	}
 	
-	public boolean haveDatasetLoaded() {
-		return dataset != null;
+	public boolean haveClassifier() {
+		return classifier != null;
+	}
+	
+	public boolean haveTrainDatasLoaded() {
+		return train != null;
+	}
+	
+	public Dataset getTrainDataset() {
+		return this.train;
+	}
+
+	public Column getxColumn() {
+		return xColumn;
+	}
+
+	public Column getyColumn() {
+		return yColumn;
 	}
 }

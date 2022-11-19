@@ -68,13 +68,13 @@ class DatasetTest {
 		assertEquals("[sepal.length, sepal.width, petal.length, petal.width, variety]", irisDataset.getNormalizableColumns().toString());
 	}
 	
-	@Test 
+	/*@Test 
 	void test_setClassifier() {
 		KnnClassifier knn = new KnnClassifier(3);
 		assertEquals(null, irisDataset.classifier);
 		irisDataset.setClassifier(knn);
 		assertEquals(knn, irisDataset.classifier);
-	}
+	}*/
 	
 	@Test
 	void test_iterator() {

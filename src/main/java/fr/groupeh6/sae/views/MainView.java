@@ -40,11 +40,9 @@ public class MainView extends Stage implements Observer {
 	@FXML
 	ScatterChart<Number,Number> sc;
 	@FXML
-	ComboBox<Column> xColumn, yColumn, column;
+	ComboBox<Column> xColumn, yColumn;
 	@FXML
 	Button bCategorisation, bRobustesse, bNewPoint, bLoadCSV;
-	@FXML
-	TextField k;
 	
 	Popup pointPopup;
 	
@@ -87,11 +85,7 @@ public class MainView extends Stage implements Observer {
 		yColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setYColumn(newV));
 		
 		bCategorisation.setOnAction(e -> {
-			int kval = Integer.valueOf(this.k.getText());
-			Column clazz = this.column.getValue();
-			model.clazz = clazz;
-			Classifier c = Factory.getInstance().knnClassifier(kval, new DistanceEuclidienne());
-			model.classify(c);
+			
 		});
 	}
 	
@@ -102,7 +96,7 @@ public class MainView extends Stage implements Observer {
 
 	@Override
 	public void update(Subject subj, Object data) {
-		List<Column> columns = model.getDataset().getNormalizableColumns();
+		List<Column> columns = model.getTrainDataset().getNormalizableColumns();
 		xColumn.getItems().addAll(columns);
 		yColumn.getItems().addAll(columns);
 		bCategorisation.setDisable(false);
@@ -111,11 +105,10 @@ public class MainView extends Stage implements Observer {
 		xColumn.setDisable(false);
 		yColumn.setDisable(false);
 		
-		column.getItems().addAll(columns);
 	}
 	
 	public void updateScatterChart() {
-		if(model.haveDatasetLoaded()) {
+		if(model.haveTrainDatasLoaded()) {
 			sc.getData().clear();
 			if(model.getxColumn() != null && model.getyColumn() != null) {
 				for(Dataset category : model.allCategories()) {

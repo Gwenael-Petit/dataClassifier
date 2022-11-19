@@ -9,7 +9,7 @@ import fr.groupeh6.sae.model.datas.pokemon.PokemonPoint;
 import fr.groupeh6.sae.model.datas.titanic.TitanicDataset;
 import fr.groupeh6.sae.model.datas.titanic.TitanicPoint;
 
-public enum StoredDatas implements IStoredDatas {
+public enum StoredDatas {
 	
 	IRIS() {
 		@Override
@@ -40,6 +40,9 @@ public enum StoredDatas implements IStoredDatas {
 		public IPoint point() {
 			return new PokemonPoint();
 		}
-	}
+	};
+	
+	public abstract Dataset dataset();
+	public abstract IPoint point();
 
 }

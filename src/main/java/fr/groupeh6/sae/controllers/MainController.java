@@ -20,6 +20,10 @@ public class MainController {
 	}
 	
 	public void loadCSV(String filePath, char delimiter) {
-		this.model.loadFromFile(filePath, delimiter);
+		try {
+			this.model.loadFromFile(filePath, delimiter);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
