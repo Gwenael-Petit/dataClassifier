@@ -15,6 +15,7 @@ import fr.groupeh6.sae.model.utils.Subject;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.NumberAxis;
@@ -74,6 +75,7 @@ public class MainView extends Stage implements Observer {
 		xColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setXColumn(newV));
 		yColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setYColumn(newV));
 		columnClass.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setClassClassifier(newV));
+		//defaultDistance.setSelected(true);
 		
 		bLoadTrain.setOnAction(e -> {
 				FileChooserModel fileChooserModel = new FileChooserModel(controller, true);
@@ -88,8 +90,18 @@ public class MainView extends Stage implements Observer {
 		});
 		
 		bCategorisation.setOnAction(e -> {
-			
+			//double k = Double.valueOf(tfK.getText());
+			setEnable(List.of(bModify), true);
+			setEnable(List.of(columnClass, tfK, defaultDistance, bCategorisation, bSetDistance), false);
 		});
+		
+		bModify.setOnAction(e -> {
+			setEnable(List.of(columnClass, tfK, defaultDistance, bCategorisation), true);
+			setEnable(List.of(bModify), false);
+			bSetDistance.setDisable(defaultDistance.isSelected());
+		});
+		
+		defaultDistance.selectedProperty().addListener((obs, oldV, newV) -> bSetDistance.setDisable(newV));
 	}
 	
 	@Override
@@ -103,18 +115,9 @@ public class MainView extends Stage implements Observer {
 		List<Column> columns = model.getTrainDataset().getNormalizableColumns();
 		xColumn.getItems().addAll(columns);
 		yColumn.getItems().addAll(columns);
+		columnClass.getItems().addAll(columns);
 
-		xColumn.setDisable(false);
-		yColumn.setDisable(false);
-		columnClass.setDisable(false);
-		bLoadCSV.setDisable(false);
-		bNewPoint.setDisable(false);
-		bCategorisation.setDisable(false);
-		bModify.setDisable(false);
-		bSetDistance.setDisable(false);
-		bNewPoint.setDisable(false);
-		tfK.setDisable(false);
-		defaultDistance.setDisable(false);
+		setEnable(List.of(xColumn, yColumn, columnClass, bLoadCSV, bNewPoint, bCategorisation, tfK, defaultDistance), true);
 	}
 	
 	public void updateScatterChart() {
@@ -155,5 +158,9 @@ public class MainView extends Stage implements Observer {
 				});
 			}
 		}
+	}
+	
+	public void setEnable(List<Node> nodes, boolean enable) {
+		nodes.forEach(n -> n.setDisable(!enable));
 	}
 }

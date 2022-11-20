@@ -45,7 +45,7 @@
                   <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
             </VBox>
-            <VBox alignment="TOP_CENTER" prefHeight="275.0" style="-fx-border-color: gray; -fx-border-radius: 10;">
+            <VBox alignment="TOP_CENTER" prefHeight="275.0" style="-fx-border-color: gray; -fx-border-radius: 10;" VBox.vgrow="ALWAYS">
                <children>
                   <Label text="Catégorisation" textAlignment="CENTER">
                      <font>
@@ -108,6 +108,9 @@
                <padding>
                   <Insets bottom="10.0" />
                </padding>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
             </VBox>
          </children>
          <BorderPane.margin>
@@ -118,7 +121,7 @@
    <center>
       <VBox alignment="TOP_CENTER" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <ScatterChart fx:id="sc" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity">
+            <ScatterChart fx:id="sc" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS">
               <xAxis>
                 <NumberAxis autoRanging="false" lowerBound="0" side="BOTTOM" tickUnit="0.1" upperBound="1.0" fx:id="xAxis" />
               </xAxis>
@@ -126,7 +129,7 @@
                 <NumberAxis fx:id="yAxis" autoRanging="false" lowerBound="0" side="LEFT" tickUnit="0.1" upperBound="1" />
               </yAxis>
             </ScatterChart>
-            <HBox alignment="CENTER" maxHeight="-Infinity" prefHeight="75.0" prefWidth="200.0" spacing="60.0">
+            <HBox alignment="CENTER" maxHeight="-Infinity" prefHeight="100.0" prefWidth="200.0" spacing="60.0">
                <children>
                   <HBox alignment="CENTER">
                      <children>
