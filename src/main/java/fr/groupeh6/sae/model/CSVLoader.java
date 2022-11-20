@@ -44,8 +44,8 @@ public class CSVLoader {
 				parse();
 	}
 	
-	public static Dataset load(File file, char delimiter) throws NoSuchElementException, IOException {
-		if(!isValid(file)) throw new NoSuchElementException();
+	public static Dataset load(File file, char delimiter) throws TypeNotRegisteredException, IOException {
+		if(!isValid(file)) throw new IOException();
 		Dataset dataset;
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		dataset = loadFromReader(br, delimiter);
@@ -53,19 +53,20 @@ public class CSVLoader {
 		return dataset;
 	}
 
-	public static Dataset loadFromReader(BufferedReader br, char delimiter) throws IOException, FileNotFoundException {
+	public static Dataset loadFromReader(BufferedReader br, char delimiter) throws IOException, TypeNotRegisteredException {
 		Dataset dataset;
 		br.mark(1);
 		String line = br.readLine().replace("\"", "");
 		String[] columns = getColumnsName(line, delimiter);
 		dataset = Factory.getInstance().getDataset(getColumns(columns));
+		if(dataset == null) throw new TypeNotRegisteredException();
 		IPoint dataType = dataset.getType();
 		br.reset();
 		dataset.setLines(loadDatas(br, dataType, delimiter));
 		return dataset;
 	}
 	
-	public static Dataset load(String fileName, char delimiter) throws Exception {
+	public static Dataset load(String fileName, char delimiter) throws IOException, TypeNotRegisteredException {
 		return load(new File(fileName), delimiter);
 	}
 	

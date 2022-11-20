@@ -1,5 +1,6 @@
 package fr.groupeh6.sae.model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,18 +18,16 @@ public class Model extends Subject {
 	private Classifier classifier;
 	private Column classClassifier;
 	
-	public void loadFromFile(String dataFile, char delimiter, boolean toTrain) throws Exception {
+	public void loadFromFile(String dataFile, char delimiter, boolean toTrain) throws NotSameTypeException, IOException, TypeNotRegisteredException {
 		Dataset loaded = CSVLoader.load(dataFile, delimiter);
-		if(toTrain) {
-			if(!haveTrainDatasLoaded()) {
-				train = loaded;
-				createCategories();
-				notifyObservers(train);
-			} else {
-				train.addAllLine(loaded.getLines());
-			}
+		if(!haveTrainDatasLoaded()) {
+			train = loaded;
+			createCategories();
+			notifyObservers(loaded);
 		} else {
-			loaded.getLines().forEach(l -> addPoint(l));
+			if(!loaded.getName().equals(train.getName())) throw new NotSameTypeException();
+			if(toTrain) train.addAllLine(loaded.getLines());
+			else loaded.getLines().forEach(l -> addPoint(l));
 			notifyObservers();
 		}
 	}

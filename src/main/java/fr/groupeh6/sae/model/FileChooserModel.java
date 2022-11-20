@@ -1,6 +1,7 @@
 package fr.groupeh6.sae.model;
 
 import java.io.File;
+import java.io.IOException;
 
 import fr.groupeh6.sae.controllers.MainController;
 import fr.groupeh6.sae.model.utils.Subject;
@@ -19,7 +20,7 @@ public class FileChooserModel extends Subject {
 		this.toTrain = toTrain;
 	}
 	
-	public void loadCSV() {
+	public void loadCSV() throws NotSameTypeException, IOException, TypeNotRegisteredException {
 		mainController.loadCSV(file.getAbsolutePath(), delimiter, toTrain);
 	}
 	

@@ -1,6 +1,10 @@
 package fr.groupeh6.sae.controllers;
 
+import java.io.IOException;
+
 import fr.groupeh6.sae.model.Model;
+import fr.groupeh6.sae.model.NotSameTypeException;
+import fr.groupeh6.sae.model.TypeNotRegisteredException;
 import fr.groupeh6.sae.model.columns.Column;
 
 
@@ -19,12 +23,8 @@ public class MainController {
 		this.model.setyColumn(column);
 	}
 	
-	public void loadCSV(String filePath, char delimiter, boolean toTrain) {
-		try {
-			this.model.loadFromFile(filePath, delimiter, toTrain);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+	public void loadCSV(String filePath, char delimiter, boolean toTrain) throws NotSameTypeException, IOException, TypeNotRegisteredException {
+		this.model.loadFromFile(filePath, delimiter, toTrain);
 	}
 	
 	public void setClassClassifier(Column column) {

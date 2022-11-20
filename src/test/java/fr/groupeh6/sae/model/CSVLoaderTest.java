@@ -90,7 +90,7 @@ class CSVLoaderTest {
 	}
 	
 	@Test
-	void test_load_from_file() throws NoSuchElementException, IOException {
+	void test_load_from_file() throws NoSuchElementException, IOException, TypeNotRegisteredException {
 		StringBuilder sb = new StringBuilder();
 		Dataset dataset = CSVLoader.load(file, ',');
 		dataset.iterator().forEachRemaining(e -> sb.append(e));

@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import fr.groupeh6.sae.controllers.FileChooserController;
 import fr.groupeh6.sae.model.FileChooserModel;
+import fr.groupeh6.sae.model.NotSameTypeException;
+import fr.groupeh6.sae.model.TypeNotRegisteredException;
 import fr.groupeh6.sae.model.utils.Observer;
 import fr.groupeh6.sae.model.utils.Subject;
 import javafx.fxml.FXML;
@@ -23,6 +25,8 @@ import javafx.stage.Window;
 
 public class FileChooserView extends AbstractModalView implements Observer {
 	
+	private Window owner;
+	
 	private FileChooserModel model;
 	private FileChooserController controller;
 	
@@ -39,6 +43,7 @@ public class FileChooserView extends AbstractModalView implements Observer {
 	
 	public FileChooserView(Window owner, FileChooserModel model, FileChooserController controller) {
 		super(owner);
+		this.owner = owner;
 		this.model = model;
 		this.controller = controller;
 		model.attach(this);
@@ -88,7 +93,15 @@ public class FileChooserView extends AbstractModalView implements Observer {
 			e.consume();
 		});
 		bCharger.setOnAction(e -> {
-			this.controller.load();
+			try {
+				this.controller.load();
+			} catch (NotSameTypeException ex) {
+				new ErrorView(owner, "Le type n'est pas compatible avec le modèle actuel.");
+			} catch (IOException ex) {
+				new ErrorView(owner, "Une erreur est survenu durant la lecture des données.");
+			} catch (TypeNotRegisteredException ex) {
+				new ErrorView(owner, "Le type n'est pas reconnu par le programme.");
+			}
 			this.close();
 		});
 	}
