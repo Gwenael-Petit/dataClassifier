@@ -75,7 +75,6 @@ public class MainView extends Stage implements Observer {
 		xColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setXColumn(newV));
 		yColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setYColumn(newV));
 		columnClass.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setClassClassifier(newV));
-		//defaultDistance.setSelected(true);
 		
 		bLoadTrain.setOnAction(e -> {
 				FileChooserModel fileChooserModel = new FileChooserModel(controller, true);

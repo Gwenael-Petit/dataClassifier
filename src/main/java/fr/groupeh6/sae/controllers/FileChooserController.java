@@ -2,6 +2,7 @@ package fr.groupeh6.sae.controllers;
 
 import java.io.File;
 
+import fr.groupeh6.sae.model.CSVLoader;
 import fr.groupeh6.sae.model.FileChooserModel;
 
 public class FileChooserController {
@@ -13,7 +14,7 @@ public class FileChooserController {
 	}
 	
 	public void setFile(File file) {
-		model.setFile(file);
+		if(CSVLoader.isValid(file)) model.setFile(file);
 	}
 	
 	public void setDelimiter(String s) {

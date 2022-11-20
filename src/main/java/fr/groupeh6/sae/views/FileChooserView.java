@@ -14,6 +14,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Window;
@@ -26,11 +29,11 @@ public class FileChooserView extends AbstractModalView implements Observer {
 	private FileChooser chooser = new FileChooser();
 	
 	@FXML
+	private VBox vBox;
+	@FXML
 	private Label fileLabel;
-	
 	@FXML
 	private Button bFileChooser, bCharger;
-	
 	@FXML
 	private TextField tfDelimiter;
 	
@@ -69,6 +72,20 @@ public class FileChooserView extends AbstractModalView implements Observer {
 		bFileChooser.setOnAction(e -> {
 			File file = chooser.showOpenDialog(this);
 			if(file != null) this.controller.setFile(file);
+		});
+		vBox.setOnDragOver(e -> {
+			if(e.getGestureSource() != vBox && e.getDragboard().hasFiles()) e.acceptTransferModes(TransferMode.COPY);
+			e.consume();
+		});
+		vBox.setOnDragDropped(e -> {
+			Dragboard db = e.getDragboard();
+			boolean success = false;
+			if(db.hasFiles()) {
+				this.controller.setFile(db.getFiles().get(0));
+				success = true;
+			}
+			e.setDropCompleted(success);
+			e.consume();
 		});
 		bCharger.setOnAction(e -> {
 			this.controller.load();
