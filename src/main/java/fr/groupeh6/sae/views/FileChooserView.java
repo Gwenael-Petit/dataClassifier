@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.IOException;
 
 import fr.groupeh6.sae.controllers.FileChooserController;
-import fr.groupeh6.sae.controllers.MainController;
 import fr.groupeh6.sae.model.FileChooserModel;
+import fr.groupeh6.sae.model.utils.Observer;
 import fr.groupeh6.sae.model.utils.Subject;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,11 +18,10 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Window;
 
-public class FileChooserView extends AbstractModalView {
+public class FileChooserView extends AbstractModalView implements Observer {
 	
 	private FileChooserModel model;
 	private FileChooserController controller;
-	private MainController mainController;
 	
 	private FileChooser chooser = new FileChooser();
 	
@@ -35,29 +34,30 @@ public class FileChooserView extends AbstractModalView {
 	@FXML
 	private TextField tfDelimiter;
 	
-	
-	public FileChooserView(Window owner, FileChooserModel model, FileChooserController controller, MainController mainController) throws IOException {
+	public FileChooserView(Window owner, FileChooserModel model, FileChooserController controller) {
 		super(owner);
 		this.model = model;
 		this.controller = controller;
-		this.mainController = mainController;
 		model.attach(this);
 		
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("filechooserview.fxml"));
-		loader.setController(this);
-		Parent root = loader.load();
-		
-		Scene scene = new Scene(root, 300, 300);
-		this.setScene(scene);
-		this.setTitle("CSV Loader");
-		this.show();
-		
-		chooser.setTitle("Select CSV");
-		chooser.getExtensionFilters().add(new ExtensionFilter("CSV files", "*.csv"));
-		tfDelimiter.setDisable(true);
-		bCharger.setDisable(true);
-		initEvents();
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("filechooserview.fxml"));
+			loader.setController(this);
+			Parent root = loader.load();
+			Scene scene = new Scene(root, 300, 300);
+			this.setScene(scene);
+			this.setTitle("CSV Loader");
+			this.show();
+			
+			chooser.setTitle("Select CSV");
+			chooser.getExtensionFilters().add(new ExtensionFilter("CSV files", "*.csv"));
+			tfDelimiter.setDisable(true);
+			bCharger.setDisable(true);
+			initEvents();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	public void initEvents() {
@@ -71,7 +71,7 @@ public class FileChooserView extends AbstractModalView {
 			if(file != null) this.controller.setFile(file);
 		});
 		bCharger.setOnAction(e -> {
-			this.mainController.loadCSV(this.model.getFile().getAbsolutePath(), this.model.getDelimiter());
+			this.controller.load();
 			this.close();
 		});
 	}

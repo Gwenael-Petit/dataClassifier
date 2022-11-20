@@ -19,13 +19,16 @@ public class MainController {
 		this.model.setyColumn(column);
 	}
 	
-	public void loadCSV(String filePath, char delimiter) {
+	public void loadCSV(String filePath, char delimiter, boolean toTrain) {
 		try {
-			this.model.loadFromFile(filePath, delimiter);
+			this.model.loadFromFile(filePath, delimiter, toTrain);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
 	
+	public void setClassClassifier(Column column) {
+		this.model.setClassClassifier(column);
+	}
 	
 }

@@ -14,49 +14,38 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <ScatterChart fx:id="sc" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" BorderPane.alignment="CENTER">
-        <xAxis>
-          <NumberAxis autoRanging="false" lowerBound="0" side="BOTTOM" tickUnit="0.1" upperBound="1.0" fx:id="xAxis" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis fx:id="yAxis" autoRanging="false" lowerBound="0" side="LEFT" tickUnit="0.1" upperBound="1" />
-        </yAxis>
-         <BorderPane.margin>
-            <Insets right="10.0" top="10.0" />
-         </BorderPane.margin>
-      </ScatterChart>
-   </center>
    <left>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox layoutX="10.0" layoutY="10.0">
+            <VBox alignment="TOP_CENTER" maxHeight="-Infinity" prefHeight="100.0" prefWidth="100.0" style="-fx-border-color: gray; -fx-border-radius: 10;">
                <children>
-                  <Label text="XColumn">
-                     <HBox.margin>
-                        <Insets left="10.0" right="10.0" top="5.0" />
-                     </HBox.margin>
+                  <Label text="Modèle" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
                   </Label>
-                  <ComboBox disable="true" prefWidth="120.0" fx:id="xColumn" />
-               </children>
-               <VBox.margin>
-                  <Insets bottom="20.0" top="100.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox>
-               <children>
-                  <Label text="YColumn">
-                     <HBox.margin>
-                        <Insets left="10.0" right="10.0" top="5.0" />
-                     </HBox.margin>
+                  <Label fx:id="modelType" text="Type : ">
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
                   </Label>
-                  <ComboBox fx:id="yColumn" disable="true" prefWidth="120.0" />
+                  <Button fx:id="bLoadTrain" mnemonicParsing="false" text="Charger un modèle">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Button>
                </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
                <VBox.margin>
-                  <Insets bottom="20.0" top="20.0" />
+                  <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
-            </HBox>
-            <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="250.0" style="-fx-border-color: gray; -fx-border-radius: 10;">
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="275.0" style="-fx-border-color: gray; -fx-border-radius: 10;">
                <children>
                   <Label text="Catégorisation" textAlignment="CENTER">
                      <font>
@@ -69,28 +58,56 @@
                   <HBox alignment="CENTER" layoutX="11.0" layoutY="36.0" maxWidth="-Infinity" prefHeight="50.0" prefWidth="200.0">
                      <children>
                         <Label text="Colonne : " />
-                        <ComboBox disable="true" prefWidth="120.0" />
+                        <ComboBox fx:id="columnClass" disable="true" prefWidth="120.0" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" maxWidth="-Infinity" prefHeight="50.0" prefWidth="200.0">
+                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                      <children>
                         <Label text="K : " />
-                        <TextField disable="true" prefWidth="50.0" />
+                        <TextField fx:id="tfK" disable="true" prefWidth="50.0" />
                      </children>
                   </HBox>
-                  <CheckBox disable="true" mnemonicParsing="false" selected="true" text="Distance par défaut" />
-                  <Button disable="true" mnemonicParsing="false" text="Définir la distance">
+                  <CheckBox fx:id="defaultDistance" disable="true" mnemonicParsing="false" selected="true" text="Distance par défaut" />
+                  <Button fx:id="bSetDistance" disable="true" mnemonicParsing="false" text="Définir la distance">
                      <VBox.margin>
                         <Insets top="15.0" />
                      </VBox.margin>
                   </Button>
-                  <HBox alignment="CENTER" maxWidth="-Infinity" prefHeight="75.0" prefWidth="200.0" spacing="10.0">
+                  <HBox alignment="CENTER" maxWidth="-Infinity" prefHeight="70.0" prefWidth="200.0" spacing="10.0">
                      <children>
                         <Button fx:id="bCategorisation" disable="true" mnemonicParsing="false" text="Catégoriser" textAlignment="CENTER" />
-                        <Button disable="true" mnemonicParsing="false" text="Modifier" />
+                        <Button fx:id="bModify" disable="true" mnemonicParsing="false" text="Modifier" />
                      </children>
                   </HBox>
+                  <Label fx:id="robustesseLabel" text="Robustesse : " textAlignment="CENTER">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
                </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="150.0" prefWidth="200.0" spacing="20.0" style="-fx-border-color: gray; -fx-border-radius: 10;">
+               <children>
+                  <Label text="Données" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Button fx:id="bLoadCSV" disable="true" mnemonicParsing="false" text="Charger un CSV" />
+                  <Button fx:id="bNewPoint" disable="true" mnemonicParsing="false" text="Nouveau point" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding>
             </VBox>
          </children>
          <BorderPane.margin>
@@ -98,13 +115,45 @@
          </BorderPane.margin>
       </VBox>
    </left>
-   <bottom>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="60.0" BorderPane.alignment="CENTER">
+   <center>
+      <VBox alignment="TOP_CENTER" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="bRobustesse" disable="true" mnemonicParsing="false" text="Robustesse" />
-            <Button fx:id="bNewPoint" disable="true" mnemonicParsing="false" text="Nouveau point" />
-            <Button fx:id="bLoadCSV" mnemonicParsing="false" text="Charger un CSV" />
+            <ScatterChart fx:id="sc" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity">
+              <xAxis>
+                <NumberAxis autoRanging="false" lowerBound="0" side="BOTTOM" tickUnit="0.1" upperBound="1.0" fx:id="xAxis" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis fx:id="yAxis" autoRanging="false" lowerBound="0" side="LEFT" tickUnit="0.1" upperBound="1" />
+              </yAxis>
+            </ScatterChart>
+            <HBox alignment="CENTER" maxHeight="-Infinity" prefHeight="75.0" prefWidth="200.0" spacing="60.0">
+               <children>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Label text="XColumn">
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" top="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <ComboBox disable="true" prefWidth="120.0" fx:id="xColumn" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Label text="YColumn">
+                           <HBox.margin>
+                              <Insets left="10.0" right="10.0" top="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <ComboBox fx:id="yColumn" disable="true" prefWidth="120.0" />
+                     </children>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
          </children>
-      </HBox>
-   </bottom>
+      </VBox>
+   </center>
 </BorderPane>

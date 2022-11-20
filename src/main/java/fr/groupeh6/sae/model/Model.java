@@ -17,13 +17,18 @@ public class Model extends Subject {
 	private Classifier classifier;
 	private Column classClassifier;
 	
-	public void loadFromFile(String dataFile, char delimiter) throws Exception {
-		if(!haveTrainDatasLoaded()) {
-			train = CSVLoader.load(dataFile, delimiter);
-			createCategories();
-			notifyObservers(train);
+	public void loadFromFile(String dataFile, char delimiter, boolean toTrain) throws Exception {
+		Dataset loaded = CSVLoader.load(dataFile, delimiter);
+		if(toTrain) {
+			if(!haveTrainDatasLoaded()) {
+				train = loaded;
+				createCategories();
+				notifyObservers(train);
+			} else {
+				train.addAllLine(loaded.getLines());
+			}
 		} else {
-			CSVLoader.load(dataFile, delimiter).getLines().forEach(l -> addPoint(l));
+			loaded.getLines().forEach(l -> addPoint(l));
 			notifyObservers();
 		}
 	}
@@ -92,6 +97,10 @@ public class Model extends Subject {
 	public void setyColumn(Column yColumn) {
 		this.yColumn = yColumn;
 		notifyObservers();
+	}
+	
+	public void setClassClassifier(Column classClassifier) {
+		this.classClassifier = classClassifier;
 	}
 	
 	public boolean haveClassifier() {

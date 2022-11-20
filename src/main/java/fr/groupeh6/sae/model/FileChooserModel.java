@@ -2,6 +2,7 @@ package fr.groupeh6.sae.model;
 
 import java.io.File;
 
+import fr.groupeh6.sae.controllers.MainController;
 import fr.groupeh6.sae.model.utils.Subject;
 
 public class FileChooserModel extends Subject {
@@ -10,7 +11,17 @@ public class FileChooserModel extends Subject {
 	
 	private Character delimiter;
 	
-	public FileChooserModel() {}
+	private boolean toTrain;
+	private MainController mainController;
+	
+	public FileChooserModel(MainController mainController, boolean toTrain) {
+		this.mainController = mainController;
+		this.toTrain = toTrain;
+	}
+	
+	public void loadCSV() {
+		mainController.loadCSV(file.getAbsolutePath(), delimiter, toTrain);
+	}
 	
 	public File getFile() {
 		return file;

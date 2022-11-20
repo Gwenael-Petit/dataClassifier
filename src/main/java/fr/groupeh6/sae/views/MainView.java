@@ -3,16 +3,13 @@ package fr.groupeh6.sae.views;
 import java.io.IOException;
 import java.util.List;
 
-import fr.groupeh6.sae.controllers.MainController;
 import fr.groupeh6.sae.controllers.FileChooserController;
+import fr.groupeh6.sae.controllers.MainController;
 import fr.groupeh6.sae.model.Dataset;
-import fr.groupeh6.sae.model.Factory;
 import fr.groupeh6.sae.model.FileChooserModel;
 import fr.groupeh6.sae.model.IPoint;
 import fr.groupeh6.sae.model.Model;
-import fr.groupeh6.sae.model.classifier.Classifier;
 import fr.groupeh6.sae.model.columns.Column;
-import fr.groupeh6.sae.model.distance.DistanceEuclidienne;
 import fr.groupeh6.sae.model.utils.Observer;
 import fr.groupeh6.sae.model.utils.Subject;
 import javafx.fxml.FXML;
@@ -24,6 +21,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -40,9 +38,16 @@ public class MainView extends Stage implements Observer {
 	@FXML
 	ScatterChart<Number,Number> sc;
 	@FXML
-	ComboBox<Column> xColumn, yColumn;
+	ComboBox<Column> xColumn, yColumn, columnClass;
 	@FXML
-	Button bCategorisation, bRobustesse, bNewPoint, bLoadCSV;
+	Button bLoadTrain, bLoadCSV, bSetDistance, bModify, bCategorisation, bNewPoint;
+	@FXML
+	TextField tfK;
+	@FXML
+	CheckBox defaultDistance;
+	@FXML
+	Label modelType, robustesseLabel;
+	
 	
 	Popup pointPopup;
 	
@@ -68,14 +73,18 @@ public class MainView extends Stage implements Observer {
 	public void init() {
 		xColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setXColumn(newV));
 		yColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setYColumn(newV));
-		bLoadCSV.setOnAction(e -> {
-			try {
-				FileChooserModel fileChooserModel = new FileChooserModel();
+		columnClass.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setClassClassifier(newV));
+		
+		bLoadTrain.setOnAction(e -> {
+				FileChooserModel fileChooserModel = new FileChooserModel(controller, true);
 				FileChooserController fileChooserController = new FileChooserController(fileChooserModel);
-				new FileChooserView(this, fileChooserModel, fileChooserController, controller);
-			} catch (IOException e1) {
-				System.out.println(e1.getMessage());
-			}
+				new FileChooserView(this, fileChooserModel, fileChooserController);
+		});
+		
+		bLoadCSV.setOnAction(e -> {
+			FileChooserModel fileChooserModel = new FileChooserModel(controller, false);
+			FileChooserController fileChooserController = new FileChooserController(fileChooserModel);
+			new FileChooserView(this, fileChooserModel, fileChooserController);
 		});
 		
 		bCategorisation.setOnAction(e -> {
@@ -90,15 +99,22 @@ public class MainView extends Stage implements Observer {
 
 	@Override
 	public void update(Subject subj, Object data) {
+		modelType.setText(modelType.getText() + model.getTrainDataset().getName());
 		List<Column> columns = model.getTrainDataset().getNormalizableColumns();
 		xColumn.getItems().addAll(columns);
 		yColumn.getItems().addAll(columns);
-		bCategorisation.setDisable(false);
-		bRobustesse.setDisable(false);
-		bNewPoint.setDisable(false);
+
 		xColumn.setDisable(false);
 		yColumn.setDisable(false);
-		
+		columnClass.setDisable(false);
+		bLoadCSV.setDisable(false);
+		bNewPoint.setDisable(false);
+		bCategorisation.setDisable(false);
+		bModify.setDisable(false);
+		bSetDistance.setDisable(false);
+		bNewPoint.setDisable(false);
+		tfK.setDisable(false);
+		defaultDistance.setDisable(false);
 	}
 	
 	public void updateScatterChart() {
@@ -124,7 +140,7 @@ public class MainView extends Stage implements Observer {
 		for(XYChart.Series<Number, Number> serie : sc.getData()) {
 			for(XYChart.Data<Number, Number> point : serie.getData()) {
 				point.getNode().setOnMouseClicked(e -> {
-					new PointView((IPoint) point.getExtraValue());
+					new PointView(this, (IPoint) point.getExtraValue());
 				});
 				point.getNode().setOnMouseEntered(e -> {
 					pointPopup = new Popup();

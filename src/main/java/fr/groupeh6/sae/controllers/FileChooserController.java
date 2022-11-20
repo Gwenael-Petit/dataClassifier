@@ -19,5 +19,9 @@ public class FileChooserController {
 	public void setDelimiter(String s) {
 		if(!s.isBlank()) model.setDelimiter(s.charAt(0));
 	}
+	
+	public void load() {
+		model.loadCSV();
+	}
 
 }
