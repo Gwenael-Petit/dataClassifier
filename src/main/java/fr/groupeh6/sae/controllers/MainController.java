@@ -3,16 +3,17 @@ package fr.groupeh6.sae.controllers;
 import java.io.IOException;
 
 import fr.groupeh6.sae.model.Factory;
-import fr.groupeh6.sae.model.Model;
+import fr.groupeh6.sae.model.MainModel;
 import fr.groupeh6.sae.model.NotSameTypeException;
 import fr.groupeh6.sae.model.TypeNotRegisteredException;
 import fr.groupeh6.sae.model.columns.Column;
+import fr.groupeh6.sae.model.distance.Distance;
 
 
 public class MainController {
-	Model model;
+	MainModel model;
 	
-	public MainController(Model m) {
+	public MainController(MainModel m) {
 		this.model = m;
 	}
 	
@@ -32,8 +33,8 @@ public class MainController {
 		this.model.setClassClassifier(column);
 	}
 	
-	public void setClassifier(int k) {
-		this.model.setClassifier(Factory.getInstance().knnClassifier(k, null));
+	public void setClassifier(int k, Distance distance) {
+		this.model.setClassifier(Factory.getInstance().knnClassifier(k, distance));
 	}
 	
 }

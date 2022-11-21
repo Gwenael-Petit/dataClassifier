@@ -8,7 +8,7 @@ import fr.groupeh6.sae.model.classifier.Classifier;
 import fr.groupeh6.sae.model.columns.Column;
 import fr.groupeh6.sae.model.utils.Subject;
 
-public class Model extends Subject {
+public class MainModel extends Subject {
 	
 	private Dataset train;
 	private List<Dataset> categories = new ArrayList<Dataset>();
@@ -50,7 +50,7 @@ public class Model extends Subject {
 	
 	public void addPoint(IPoint point) {
 		if(haveClassifier()) {
-			Object clazz = classifier.classifyPoint(point, classClassifier, train.getLines(), train.columns);
+			Object clazz = classifier.classifyPoint(point, classClassifier, train.getLines());
 			Dataset categorie = getCategory(""+clazz);
 			point.setValue(classClassifier, clazz);
 			categorie.addLine(point);
@@ -61,7 +61,6 @@ public class Model extends Subject {
 	
 	public void createCategories() {
 		if(haveClassifier()) {
-			System.out.println(classClassifier.getDistinctValues());
 			classClassifier.getDistinctValues().forEach(v -> addCategory(v));
 		}
 		else addCategory(train.getName());

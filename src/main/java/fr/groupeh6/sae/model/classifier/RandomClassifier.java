@@ -9,7 +9,7 @@ import fr.groupeh6.sae.model.columns.Column;
 public class RandomClassifier implements Classifier {
 
 	@Override
-	public Object classifyPoint(IPoint point, Column columnClass, List<IPoint> points, List<Column> columns) {
+	public Object classifyPoint(IPoint point, Column columnClass, List<IPoint> points) {
 		points.remove(point);
 		int r = new Random().nextInt(points.size());
 		Object value = points.get(r).getValue(columnClass);

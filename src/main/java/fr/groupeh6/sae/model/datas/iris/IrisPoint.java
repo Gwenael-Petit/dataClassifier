@@ -56,16 +56,6 @@ public class IrisPoint implements IPoint {
 	}
 
 	@Override
-	public double distanceTo(IPoint other) {
-		/*List<Column> toDist = new ArrayList<>();
-		String[] cols = new String[] {"sepal.length","sepal.length","petal.width","petal.length"};
-		for(String c : cols) toDist.add(Factory.getInstance().getColumn(c));
-		return new DistanceEuclidienne().distance(this,other,toDist);*/
-		//return new DistanceEuclidienne().distance(this,other,IrisDataset.COLUMNS.subList(0, 4));
-		return 0.0;
-	}
-
-	@Override
 	public void setValue(Column col, Object o) {
 		switch(col.getName()) {
 		case "sepal.length" -> this.sepalLength = (double) o;

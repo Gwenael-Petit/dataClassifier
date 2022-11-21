@@ -20,24 +20,19 @@ public class KnnClassifier implements Classifier {
 		this.distance = distance;
 	}
 	
-	public KnnClassifier(int k) {
-		this(k, null);
-	}
-	
-	public List<IPoint> getNeighbours(IPoint point, List<IPoint> points, List<Column> columns){
+	public List<IPoint> getNeighbours(IPoint point, List<IPoint> points){
 		points.remove(point);
 		List<IPoint> neighbours = new ArrayList<>();
 		for(IPoint p : points) neighbours.add(p);
-		if(distance != null) neighbours.sort((p1,p2)->Double.compare(distance.distance(p1, point, columns),distance.distance(p2, point, columns)));
-		else neighbours.sort((p1,p2)->Double.compare(p1.distanceTo(point),p2.distanceTo(point)));
+		neighbours.sort((p1,p2)->Double.compare(distance.distance(p1, point),distance.distance(p2, point)));
 		
 		return neighbours.subList(0, k);
 	}
 
 	@Override
-	public Object classifyPoint(IPoint point, Column columnClass, List<IPoint> points, List<Column> columns) {
+	public Object classifyPoint(IPoint point, Column columnClass, List<IPoint> points) {
 		points.remove(point);
-		List<IPoint> neighbours = getNeighbours(point, points, columns);
+		List<IPoint> neighbours = getNeighbours(point, points);
 		Map<Object, Integer> valueCount = new HashMap<>();
 		for(IPoint p: neighbours) {
 			Object value = p.getValue(columnClass);

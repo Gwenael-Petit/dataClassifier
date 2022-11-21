@@ -1,14 +1,9 @@
 package fr.groupeh6.sae.model.datas.titanic;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.opencsv.bean.CsvBindByName;
 
-import fr.groupeh6.sae.model.Factory;
 import fr.groupeh6.sae.model.IPoint;
 import fr.groupeh6.sae.model.columns.Column;
-import fr.groupeh6.sae.model.distance.DistanceEuclidienne;
 
 public class TitanicPoint implements IPoint {
 
@@ -92,15 +87,6 @@ public class TitanicPoint implements IPoint {
 
 	public double getNormalizedValue(Column col) {
 		return col.getNormalizedValue(this);
-	}
-
-	@Override
-	public double distanceTo(IPoint other) {
-		/*List<Column> toDist = new ArrayList<>();
-		String[] cols = new String[] {"Survived","Pclass","Sex","Age"};
-		for(String c : cols) toDist.add(Factory.getInstance().getColumn(c));
-		return new DistanceEuclidienne().distance(this,other,toDist);*/
-		return 0.0;
 	}
 
 	@Override

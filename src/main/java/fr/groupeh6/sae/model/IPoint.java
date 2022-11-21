@@ -1,12 +1,11 @@
 package fr.groupeh6.sae.model;
 
 import fr.groupeh6.sae.model.columns.Column;
-import fr.groupeh6.sae.model.distance.Distanciable;
 
 /**
  * Decrit un Point (ou donnee, ou ligne) dans un DataSet.
  */
-public interface IPoint extends Distanciable {
+public interface IPoint {
 	/**
 	 * Retourne la valeur de ce point pour la colonne en parametre.
 	 *

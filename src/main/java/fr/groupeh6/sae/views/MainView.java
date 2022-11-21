@@ -8,7 +8,7 @@ import fr.groupeh6.sae.controllers.MainController;
 import fr.groupeh6.sae.model.Dataset;
 import fr.groupeh6.sae.model.FileChooserModel;
 import fr.groupeh6.sae.model.IPoint;
-import fr.groupeh6.sae.model.Model;
+import fr.groupeh6.sae.model.MainModel;
 import fr.groupeh6.sae.model.columns.Column;
 import fr.groupeh6.sae.model.utils.Observer;
 import fr.groupeh6.sae.model.utils.Subject;
@@ -31,7 +31,7 @@ import javafx.stage.Stage;
 
 public class MainView extends Stage implements Observer {
 	
-	Model model;
+	MainModel model;
 	MainController controller;
 	
 	@FXML
@@ -54,7 +54,7 @@ public class MainView extends Stage implements Observer {
 	
 	public MainView() {}
 	
-	public MainView(Model model, MainController controller) throws IOException {
+	public MainView(MainModel model, MainController controller) throws IOException {
 		this.model = model;
 		this.controller = controller;
 		model.attach(this);
@@ -94,7 +94,7 @@ public class MainView extends Stage implements Observer {
 			
 			if(!tfK.getText().isBlank()) {
 				int k = Integer.valueOf(tfK.getText());
-				controller.setClassifier(k);
+				controller.setClassifier(k, model.getTrainDataset());
 			}
 		});
 		

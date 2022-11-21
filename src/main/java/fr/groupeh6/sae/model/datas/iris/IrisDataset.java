@@ -7,10 +7,12 @@ import fr.groupeh6.sae.model.IPoint;
 import fr.groupeh6.sae.model.columns.Column;
 import fr.groupeh6.sae.model.columns.EnumColumn;
 import fr.groupeh6.sae.model.columns.NumberColumn;
+import fr.groupeh6.sae.model.distance.DistanceEuclidienne;
 
 public class IrisDataset extends Dataset {
 	
 	private static final String NAME = "Iris";
+	
 	public final List<Column> COLUMNS = List.of(
 			new NumberColumn("sepal.length"),
 			new NumberColumn("sepal.width"),
@@ -18,8 +20,6 @@ public class IrisDataset extends Dataset {
 			new NumberColumn("petal.width"),
 			new EnumColumn<EnumVariety>("variety", EnumVariety.class)
 			);
-	
-	
 	
 	public IrisDataset() {
 		super(NAME);
@@ -29,6 +29,11 @@ public class IrisDataset extends Dataset {
 	@Override
 	public IPoint getType() {
 		return new IrisPoint();
+	}
+
+	@Override
+	public double distance(IPoint p1, IPoint p2) {
+		return new DistanceEuclidienne(COLUMNS.subList(0, 4)).distance(p1, p2);
 	}
 
 }

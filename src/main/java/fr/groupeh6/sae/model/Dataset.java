@@ -6,8 +6,9 @@ import java.util.List;
 
 import fr.groupeh6.sae.model.columns.Column;
 import fr.groupeh6.sae.model.columns.Updatable;
+import fr.groupeh6.sae.model.distance.Distance;
 
-public abstract class Dataset implements Iterable<IPoint> {
+public abstract class Dataset implements Iterable<IPoint>, Distance {
 	
 	private String name;
 	protected List<IPoint> points = new ArrayList<IPoint>();
@@ -70,10 +71,10 @@ public abstract class Dataset implements Iterable<IPoint> {
 		return points;
 	}
 	
+	public abstract IPoint getType();
+	
 	public double robustesse() {
 		return 0.0;
 	}
-	
-	public abstract IPoint getType();
 
 }

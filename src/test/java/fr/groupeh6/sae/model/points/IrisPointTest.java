@@ -63,12 +63,12 @@ class IrisPointTest {
 		
 	}
 
-	@Test
+	/*@Test
 	void test_distanceTo() {
 		assertEquals(1.015, setosa.distanceTo(virginica),0.001);
 		assertEquals(1.154,virginica.distanceTo(setosa2),0.001);
 		assertEquals(0.511,versicolor.distanceTo(virginica),0.001);
-	}
+	}*/
 	
 	@Test
 	void test_iris_point_for_opencsv() {

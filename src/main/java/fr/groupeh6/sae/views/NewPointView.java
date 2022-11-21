@@ -1,5 +1,6 @@
 package fr.groupeh6.sae.views;
 
+import fr.groupeh6.sae.controllers.NewPointController;
 import fr.groupeh6.sae.model.NewPointModel;
 import fr.groupeh6.sae.model.utils.Observer;
 import fr.groupeh6.sae.model.utils.Subject;

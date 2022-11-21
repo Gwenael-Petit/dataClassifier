@@ -60,7 +60,7 @@ public class Resistance {
 			}
 			
 			for(IPoint p: testGroup) {
-				Object pointClass = classifier.classifyPoint(p, columnClass, datas.points, columns);
+				Object pointClass = classifier.classifyPoint(p, columnClass, datas.points);
 				if(p.getValue(columnClass) == pointClass) rightClassified++;
 			}
 			
@@ -70,7 +70,6 @@ public class Resistance {
 		}
 		double resistance = calculResistance(rateOfGroupe);
 		return resistance;
-
 	}
 
 	

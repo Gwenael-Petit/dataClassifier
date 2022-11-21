@@ -1,7 +1,7 @@
 package fr.groupeh6.sae;
 
 import fr.groupeh6.sae.controllers.MainController;
-import fr.groupeh6.sae.model.Model;
+import fr.groupeh6.sae.model.MainModel;
 import fr.groupeh6.sae.views.MainView;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -14,7 +14,7 @@ public class App extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Model model = new Model();
+		MainModel model = new MainModel();
 		MainController controller = new MainController(model);
 		
 		new MainView(model, controller);
