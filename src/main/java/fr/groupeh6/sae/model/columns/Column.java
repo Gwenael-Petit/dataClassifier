@@ -31,7 +31,7 @@ public abstract class Column implements IValueNormalizer {
 		List<String> res = new ArrayList<>();
 		if(isLinkedToADataset()) {
 			for(IPoint point : dataset) {
-				String value = (String) point.getValue(this);
+				String value = "" + point.getValue(this);
 				if(!res.contains(value)) res.add(value);
 			}
 		}

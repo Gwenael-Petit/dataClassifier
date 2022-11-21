@@ -1,5 +1,10 @@
 package fr.groupeh6.sae.model.columns;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import fr.groupeh6.sae.model.IPoint;
+
 public class EnumColumn<T extends Enum<T>> extends Column {
 
 	private Class<T> enumClass;

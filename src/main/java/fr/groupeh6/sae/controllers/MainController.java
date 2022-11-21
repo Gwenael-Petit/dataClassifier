@@ -2,6 +2,7 @@ package fr.groupeh6.sae.controllers;
 
 import java.io.IOException;
 
+import fr.groupeh6.sae.model.Factory;
 import fr.groupeh6.sae.model.Model;
 import fr.groupeh6.sae.model.NotSameTypeException;
 import fr.groupeh6.sae.model.TypeNotRegisteredException;
@@ -29,6 +30,10 @@ public class MainController {
 	
 	public void setClassClassifier(Column column) {
 		this.model.setClassClassifier(column);
+	}
+	
+	public void setClassifier(int k) {
+		this.model.setClassifier(Factory.getInstance().knnClassifier(k, null));
 	}
 	
 }

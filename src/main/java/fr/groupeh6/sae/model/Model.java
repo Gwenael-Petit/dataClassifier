@@ -32,22 +32,26 @@ public class Model extends Subject {
 		}
 	}
 	
-	public void setClassifier(Classifier classifier, Column classClassifier) {
+	public void setClassifier(Classifier classifier) {
 		this.classifier = classifier;
-		this.classClassifier = classClassifier;
 		List<IPoint> points = new ArrayList<>();
-		for(Dataset category : allCategories()) {
+		for(Dataset category : categories) {
 			category.forEach(point -> points.add(point)); 
 		}
 		resetCategories();
 		createCategories();
 		for(IPoint point : points) addPoint(point);
+		notifyObservers();
+	}
+	
+	public void setClassClassifier(Column classClassifier) {
+		this.classClassifier = classClassifier;
 	}
 	
 	public void addPoint(IPoint point) {
 		if(haveClassifier()) {
 			Object clazz = classifier.classifyPoint(point, classClassifier, train.getLines(), train.columns);
-			Dataset categorie = getCategory((String)clazz);
+			Dataset categorie = getCategory(""+clazz);
 			point.setValue(classClassifier, clazz);
 			categorie.addLine(point);
 		} else {
@@ -56,7 +60,10 @@ public class Model extends Subject {
 	}
 	
 	public void createCategories() {
-		if(haveClassifier()) classClassifier.getDistinctValues().forEach(v -> addCategory(v));
+		if(haveClassifier()) {
+			System.out.println(classClassifier.getDistinctValues());
+			classClassifier.getDistinctValues().forEach(v -> addCategory(v));
+		}
 		else addCategory(train.getName());
 	}
 	
@@ -96,10 +103,6 @@ public class Model extends Subject {
 	public void setyColumn(Column yColumn) {
 		this.yColumn = yColumn;
 		notifyObservers();
-	}
-	
-	public void setClassClassifier(Column classClassifier) {
-		this.classClassifier = classClassifier;
 	}
 	
 	public boolean haveClassifier() {

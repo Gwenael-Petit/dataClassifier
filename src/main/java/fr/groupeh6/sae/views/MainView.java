@@ -89,15 +89,30 @@ public class MainView extends Stage implements Observer {
 		});
 		
 		bCategorisation.setOnAction(e -> {
-			//double k = Double.valueOf(tfK.getText());
 			setEnable(List.of(bModify), true);
 			setEnable(List.of(columnClass, tfK, defaultDistance, bCategorisation, bSetDistance), false);
+			
+			if(!tfK.getText().isBlank()) {
+				int k = Integer.valueOf(tfK.getText());
+				controller.setClassifier(k);
+			}
 		});
 		
 		bModify.setOnAction(e -> {
 			setEnable(List.of(columnClass, tfK, defaultDistance, bCategorisation), true);
 			setEnable(List.of(bModify), false);
 			bSetDistance.setDisable(defaultDistance.isSelected());
+		});
+		
+		tfK.textProperty().addListener((obs, oldV, newV) -> {
+			if(!newV.isEmpty()) {
+				try {
+					int k = Integer.valueOf(newV);
+					if(k <= 0) tfK.setText(oldV);
+				} catch(Exception e) {
+					tfK.setText(oldV);
+				}
+			}
 		});
 		
 		defaultDistance.selectedProperty().addListener((obs, oldV, newV) -> bSetDistance.setDisable(newV));
