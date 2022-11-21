@@ -11,7 +11,7 @@ import fr.groupeh6.sae.model.columns.NumberColumn;
 public class IrisDataset extends Dataset {
 	
 	private static final String NAME = "Iris";
-	public static final List<Column> COLUMNS = List.of(
+	public final List<Column> COLUMNS = List.of(
 			new NumberColumn("sepal.length"),
 			new NumberColumn("sepal.width"),
 			new NumberColumn("petal.length"),
@@ -19,8 +19,11 @@ public class IrisDataset extends Dataset {
 			new EnumColumn<EnumVariety>("variety", EnumVariety.class)
 			);
 	
+	
+	
 	public IrisDataset() {
-		super(NAME, COLUMNS);
+		super(NAME);
+		setColumns(COLUMNS);
 	}
 
 	@Override

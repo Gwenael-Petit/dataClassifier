@@ -27,7 +27,7 @@ class KnnClassifierTest {
 	IPoint p6 = new IrisPoint(6.5, 3.5, 4.5, 3.9, EnumVariety.VERSICOLOR);
 	
 	
-	List<Column> columns = IrisDataset.COLUMNS;
+	List<Column> columns = new IrisDataset().getColumns();
 	List<IPoint> points = new ArrayList<>();
 	List<IPoint> neighbours = new ArrayList<>();
 	
@@ -35,7 +35,7 @@ class KnnClassifierTest {
 	NumberColumn spW = new NumberColumn("sepal.width");
 	NumberColumn ptL = new NumberColumn("petal.length");
 	NumberColumn ptW = new NumberColumn("petal.width");
-	Column variety = IrisDataset.COLUMNS.get(4);
+	Column variety = new IrisDataset().getColumns().get(4);
 
 	
 	KnnClassifier classifier1 = new KnnClassifier(3, new DistanceEuclidienne());

@@ -9,12 +9,11 @@ import fr.groupeh6.sae.model.columns.Column;
 import fr.groupeh6.sae.model.columns.EnumColumn;
 import fr.groupeh6.sae.model.columns.NumberColumn;
 import fr.groupeh6.sae.model.columns.StringColumn;
-import fr.groupeh6.sae.model.datas.iris.EnumVariety;
 
 public class PokemonDataset extends Dataset {
 	
 	private static final String NAME = "Pokemon";
-	public static final List<Column> COLUMNS = List.of(
+	public final List<Column> COLUMNS = List.of(
 			new StringColumn("name"),
 			new NumberColumn("attack"),
 			new NumberColumn("base_egg_steps"),
@@ -31,7 +30,8 @@ public class PokemonDataset extends Dataset {
 			);
 
 	public PokemonDataset() {
-		super(NAME, COLUMNS);
+		super(NAME);
+		setColumns(COLUMNS);
 	}
 
 	@Override

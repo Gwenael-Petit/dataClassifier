@@ -25,18 +25,18 @@ class TitanicPointTest {
 	TitanicPoint pers4 = new TitanicPoint("78", 1.0, 3, "Johnson", EnumSex.MALE, 14, 5, 0, "D446G2", 29.34, "", EnumEmbarked.C);
 	TitanicPoint pers5 = new TitanicPoint("100", 0, 1, "Anderson", EnumSex.MALE, 59, 0, 0, "364234", 16.7, "", EnumEmbarked.Q);
 
-	StringColumn passId = (StringColumn) Factory.getInstance().getColumn("PassengerId");
-	NumberColumn survived = (NumberColumn) Factory.getInstance().getColumn("Survived");
-	NumberColumn pClass = (NumberColumn) Factory.getInstance().getColumn("Pclass");
-	StringColumn name = (StringColumn) Factory.getInstance().getColumn("Name");
-	EnumColumn<EnumSex> sex = (EnumColumn<EnumSex>) Factory.getInstance().getColumn("Sex");
-	NumberColumn age = (NumberColumn) Factory.getInstance().getColumn("Age");
-	NumberColumn sibSp = (NumberColumn) Factory.getInstance().getColumn("SibSp");
-	NumberColumn parch = (NumberColumn) Factory.getInstance().getColumn("Parch");
-	StringColumn ticket = (StringColumn) Factory.getInstance().getColumn("Ticket");
-	NumberColumn fare = (NumberColumn) Factory.getInstance().getColumn("Fare");
-	StringColumn cabin = (StringColumn) Factory.getInstance().getColumn("Cabin");
-	EnumColumn<EnumEmbarked> embarked = (EnumColumn<EnumEmbarked>) Factory.getInstance().getColumn("Embarked");
+	StringColumn passId = new StringColumn("PassengerId");
+	NumberColumn survived = new NumberColumn("Survived");
+	NumberColumn pClass = new NumberColumn("Pclass");
+	StringColumn name = new StringColumn("Name");
+	EnumColumn<EnumSex> sex = new EnumColumn<EnumSex>("Sex", EnumSex.class);
+	NumberColumn age = (NumberColumn) Factory.getInstance().newColumn("Age");
+	NumberColumn sibSp = (NumberColumn) Factory.getInstance().newColumn("SibSp");
+	NumberColumn parch = (NumberColumn) Factory.getInstance().newColumn("Parch");
+	StringColumn ticket = (StringColumn) Factory.getInstance().newColumn("Ticket");
+	NumberColumn fare = (NumberColumn) Factory.getInstance().newColumn("Fare");
+	StringColumn cabin = (StringColumn) Factory.getInstance().newColumn("Cabin");
+	EnumColumn<EnumEmbarked> embarked = new EnumColumn<EnumEmbarked>("Embarked", EnumEmbarked.class);
 	
 	@BeforeEach
 	void setUp (){

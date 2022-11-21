@@ -62,11 +62,11 @@ class CSVLoaderTest {
 		String line = br.readLine().replace("\"", "");
 		br.close();
 		List<Column> res = new ArrayList<Column>();
-		res.add(Factory.getInstance().getColumn("sepal.length"));
-		res.add(Factory.getInstance().getColumn("sepal.width"));
-		res.add(Factory.getInstance().getColumn("petal.length"));
-		res.add(Factory.getInstance().getColumn("petal.width"));
-		res.add(Factory.getInstance().getColumn("variety"));
+		res.add(Factory.getInstance().newColumn("sepal.length"));
+		res.add(Factory.getInstance().newColumn("sepal.width"));
+		res.add(Factory.getInstance().newColumn("petal.length"));
+		res.add(Factory.getInstance().newColumn("petal.width"));
+		res.add(Factory.getInstance().newColumn("variety"));
 		assertTrue(res.equals(CSVLoader.getColumns(CSVLoader.getColumnsName(line, ','))));
 	}
 	
@@ -99,7 +99,7 @@ class CSVLoaderTest {
 	
 	@Test
 	void test_load_file_not_exist() {
-		assertThrows(NoSuchElementException.class, () -> CSVLoader.load("", ','));
+		assertThrows(IOException.class, () -> CSVLoader.load("", ','));
 	}
 	
 	@Test

@@ -20,11 +20,11 @@ class IrisPointTest {
 	IrisPoint setosa2 = new IrisPoint(3, 3, 0.4, 4.2, EnumVariety.SETOSA);
 	IrisPoint virginica = new IrisPoint(6.3, 3.3, 6, 2.5, EnumVariety.VIRGINICA);
 	IrisPoint versicolor = new IrisPoint(5.7, 2.8, 4.1, 1.3, EnumVariety.VERSICOLOR);
-	NumberColumn spL = (NumberColumn) Factory.getInstance().getColumn("sepal.length");
-	NumberColumn spW = (NumberColumn) Factory.getInstance().getColumn("sepal.width");
-	NumberColumn ptL = (NumberColumn) Factory.getInstance().getColumn("petal.length");
-	NumberColumn ptW = (NumberColumn) Factory.getInstance().getColumn("petal.width");
-	EnumColumn<EnumVariety> var = (EnumColumn<EnumVariety>) Factory.getInstance().getColumn("variety");
+	NumberColumn spL = new NumberColumn("sepal.length");
+	NumberColumn spW = new NumberColumn("sepal.width");
+	NumberColumn ptL = new NumberColumn("petal.length");
+	NumberColumn ptW = new NumberColumn("petal.width");
+	EnumColumn<EnumVariety> var = new EnumColumn<EnumVariety>("variety", EnumVariety.class);
 
 	@BeforeEach
 	void setUp() {

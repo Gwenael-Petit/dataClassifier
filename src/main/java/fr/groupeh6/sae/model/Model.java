@@ -68,7 +68,7 @@ public class Model extends Subject {
 	}
 	
 	public void addCategory(String name) {
-		Dataset set = Factory.getInstance().getDataset(train.columns);
+		Dataset set = Factory.getInstance().newDataset(train.columns);
 		set.setName(name);
 		addCategory(set);
 	}

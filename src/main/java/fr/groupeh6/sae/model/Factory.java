@@ -15,14 +15,14 @@ public class Factory {
 	
 	private Factory() {}
 	
-	public Dataset getDataset(List<Column> columns) {
+	public Dataset newDataset(List<Column> columns) {
 		for(StoredDatas data : StoredDatas.values()) {
 			if(data.dataset().getColumns().equals(columns)) return data.dataset();
 		}
 		return null;
 	}
 	
-	public Column getColumn(String columnName) {
+	public Column newColumn(String columnName) {
 		for(StoredDatas data : StoredDatas.values()) {
 			for(Column column : data.dataset().getColumns()) {
 				if(column.getName().equals(columnName)) return column;

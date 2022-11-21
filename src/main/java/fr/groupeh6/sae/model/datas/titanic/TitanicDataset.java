@@ -12,7 +12,7 @@ import fr.groupeh6.sae.model.columns.StringColumn;
 public class TitanicDataset extends Dataset{
 	
 	private static final String NAME = "titanic";
-	public static final List<Column> COLUMNS = List.of(
+	public final List<Column> COLUMNS = List.of(
 			new StringColumn("PassengerId"),
 			new NumberColumn("Survived"),
 			new NumberColumn("Pclass"),
@@ -28,12 +28,12 @@ public class TitanicDataset extends Dataset{
 			);
 
 	public TitanicDataset() {
-		super(NAME, COLUMNS);
+		super(NAME);
+		setColumns(COLUMNS);
 	}
 
 	@Override
 	public IPoint getType() {
-		// TODO Auto-generated method stub
 		return new TitanicPoint();
 	}
 

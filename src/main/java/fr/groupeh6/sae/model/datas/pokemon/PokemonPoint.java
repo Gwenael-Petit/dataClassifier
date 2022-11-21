@@ -111,10 +111,11 @@ public class PokemonPoint implements IPoint{
 	
 	@Override
 	public double distanceTo(IPoint other) {
-		List<Column> toDist = new ArrayList<>();
+		/*List<Column> toDist = new ArrayList<>();
 		String[] cols = new String[] {"type2","type1","experience_growth","capture_rate","base_egg_steps"};
 		for(String c : cols) toDist.add(Factory.getInstance().getColumn(c));
-		return new DistanceEuclidienne().distance(this,other,toDist);
+		return new DistanceEuclidienne().distance(this,other,toDist);*/
+		return 0.0;
 	}
 
 	@Override

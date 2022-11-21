@@ -16,19 +16,11 @@ public enum StoredDatas {
 		public Dataset dataset() {
 			return new IrisDataset();
 		}
-		@Override
-		public IPoint point() {
-			return new IrisPoint();
-		}
 	},
 	TITANIC(){
 		@Override
 		public Dataset dataset() {
 			return new TitanicDataset();
-		}
-		@Override
-		public IPoint point() {
-			return new TitanicPoint();
 		}
 	},
 	POKEMON(){
@@ -36,13 +28,8 @@ public enum StoredDatas {
 		public Dataset dataset() {
 			return new PokemonDataset();
 		}
-		@Override
-		public IPoint point() {
-			return new PokemonPoint();
-		}
 	};
 	
 	public abstract Dataset dataset();
-	public abstract IPoint point();
 
 }

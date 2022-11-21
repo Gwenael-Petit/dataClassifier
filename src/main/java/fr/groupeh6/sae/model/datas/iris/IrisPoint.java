@@ -2,6 +2,7 @@ package fr.groupeh6.sae.model.datas.iris;
 
 import com.opencsv.bean.CsvBindByName;
 
+import fr.groupeh6.sae.model.Factory;
 import fr.groupeh6.sae.model.IPoint;
 import fr.groupeh6.sae.model.columns.Column;
 import fr.groupeh6.sae.model.distance.DistanceEuclidienne;
@@ -56,7 +57,12 @@ public class IrisPoint implements IPoint {
 
 	@Override
 	public double distanceTo(IPoint other) {
-		return new DistanceEuclidienne().distance(this,other,IrisDataset.COLUMNS.subList(0, 4));
+		/*List<Column> toDist = new ArrayList<>();
+		String[] cols = new String[] {"sepal.length","sepal.length","petal.width","petal.length"};
+		for(String c : cols) toDist.add(Factory.getInstance().getColumn(c));
+		return new DistanceEuclidienne().distance(this,other,toDist);*/
+		//return new DistanceEuclidienne().distance(this,other,IrisDataset.COLUMNS.subList(0, 4));
+		return 0.0;
 	}
 
 	@Override

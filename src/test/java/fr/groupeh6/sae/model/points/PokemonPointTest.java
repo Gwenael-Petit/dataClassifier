@@ -22,19 +22,19 @@ class PokemonPointTest {
 	PokemonPoint poke3 = new PokemonPoint("Gallade", 165, 5120, 45.0, 95, 1250000, 68, 115, 110, EnumType.PSYCHIC,
 			EnumType.FIGHTING, 52.0, false);
 
-	StringColumn name = (StringColumn) Factory.getInstance().getColumn("name");
-	NumberColumn attack = (NumberColumn) Factory.getInstance().getColumn("attack");
-	NumberColumn baseEggSteps = (NumberColumn) Factory.getInstance().getColumn("base_egg_steps");
-	NumberColumn captureRate = (NumberColumn) Factory.getInstance().getColumn("capture_rate");
-	NumberColumn defense = (NumberColumn) Factory.getInstance().getColumn("defense");
-	NumberColumn expGrowth = (NumberColumn) Factory.getInstance().getColumn("experience_growth");
-	NumberColumn hp = (NumberColumn) Factory.getInstance().getColumn("hp");
-	NumberColumn spAttack = (NumberColumn) Factory.getInstance().getColumn("sp_attack");
-	NumberColumn spDefense = (NumberColumn) Factory.getInstance().getColumn("sp_defense");
-	EnumColumn<EnumType> type1 = (EnumColumn<EnumType>) Factory.getInstance().getColumn("type1");
-	EnumColumn<EnumType> type2 = (EnumColumn<EnumType>) Factory.getInstance().getColumn("type2");
-	NumberColumn speed = (NumberColumn) Factory.getInstance().getColumn("speed");
-	BooleanColumn lengendary = (BooleanColumn) Factory.getInstance().getColumn("is_legendary");
+	StringColumn name = new StringColumn("name");
+	NumberColumn attack = new NumberColumn("attack");
+	NumberColumn baseEggSteps = new NumberColumn("base_egg_steps");
+	NumberColumn captureRate = new NumberColumn("capture_rate");
+	NumberColumn defense = new NumberColumn("defense");
+	NumberColumn expGrowth = new NumberColumn("experience_growth");
+	NumberColumn hp = new NumberColumn("hp");
+	NumberColumn spAttack = new NumberColumn("sp_attack");
+	NumberColumn spDefense = new NumberColumn("sp_defense");
+	EnumColumn<EnumType> type1 = new EnumColumn<EnumType>("type1", EnumType.class);
+	EnumColumn<EnumType> type2 = new EnumColumn<EnumType>("type2", EnumType.class);
+	NumberColumn speed = new NumberColumn("speed");
+	BooleanColumn lengendary = new BooleanColumn("is_legendary");
 
 	
 	
@@ -64,7 +64,7 @@ class PokemonPointTest {
 
 	@Test
 	void getNormalizedValueTest() {
-		assertThrows(,poke1.getNormalizedValue(name));
+		//assertThrows(,poke1.getNormalizedValue(name));
 	}
 
 }

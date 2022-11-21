@@ -31,7 +31,7 @@ public class CSVLoader {
 	public static List<Column> getColumns(String[] columnsName) {
 		List<Column> res = new ArrayList<>();
 		for(String column : columnsName) {
-			res.add(Factory.getInstance().getColumn(column));
+			res.add(Factory.getInstance().newColumn(column));
 		}
 		return res;
 	}
@@ -58,7 +58,7 @@ public class CSVLoader {
 		br.mark(1);
 		String line = br.readLine().replace("\"", "");
 		String[] columns = getColumnsName(line, delimiter);
-		dataset = Factory.getInstance().getDataset(getColumns(columns));
+		dataset = Factory.getInstance().newDataset(getColumns(columns));
 		if(dataset == null) throw new TypeNotRegisteredException();
 		IPoint dataType = dataset.getType();
 		br.reset();
