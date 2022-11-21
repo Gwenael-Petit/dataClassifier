@@ -8,9 +8,9 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import fr.groupeh6.sae.model.Dataset;
 import fr.groupeh6.sae.model.IPoint;
 import fr.groupeh6.sae.model.columns.Column;
-import fr.groupeh6.sae.model.columns.NumberColumn;
 import fr.groupeh6.sae.model.datas.iris.EnumVariety;
 import fr.groupeh6.sae.model.datas.iris.IrisDataset;
 import fr.groupeh6.sae.model.datas.iris.IrisPoint;
@@ -26,47 +26,41 @@ class KnnClassifierTest {
 	IPoint p5 = new IrisPoint(7.1, 6.5, 2.3, 2.6, EnumVariety.VIRGINICA);
 	IPoint p6 = new IrisPoint(6.5, 3.5, 4.5, 3.9, EnumVariety.VERSICOLOR);
 	
+	Dataset dataset = new IrisDataset();
 	
-	List<Column> columns = new IrisDataset().getColumns();
-	List<IPoint> points = new ArrayList<>();
 	List<IPoint> neighbours = new ArrayList<>();
 	
-	NumberColumn spL = new NumberColumn("sepal.length");
-	NumberColumn spW = new NumberColumn("sepal.width");
-	NumberColumn ptL = new NumberColumn("petal.length");
-	NumberColumn ptW = new NumberColumn("petal.width");
-	Column variety = new IrisDataset().getColumns().get(4);
-
-	
-	KnnClassifier classifier1 = new KnnClassifier(3, new DistanceEuclidienne());
-	KnnClassifier classifier2 = new KnnClassifier(3, new DistanceManhattan());
-	KnnClassifier classifier3 = new KnnClassifier(3);
+	Column spL, spW, ptL, ptW, variety;
 	
 	@BeforeEach
-	void setUp() {
-		points.add(p1);
-		points.add(p2);
-		points.add(p3);
-		points.add(p4);
-		points.add(p5);
-		points.add(p6);
+	void setup() {
+		dataset = new IrisDataset();
+		spL = dataset.getColumns().get(0);
+		spW = dataset.getColumns().get(1);
+		ptL = dataset.getColumns().get(2);
+		ptW = dataset.getColumns().get(3);
+		variety = dataset.getColumns().get(4);
+		dataset.addAllLine(List.of(p1, p2, p3, p4, p5, p6));
 	}
 	
 	@Test
 	void test_Classify_With_Euclidienne() {
-		assertEquals(List.of(p2, p3, p4), classifier1.getNeighbours(p1, points, List.of(spL,spW,ptL,ptW)));
-		assertEquals(EnumVariety.VIRGINICA, classifier1.classifyPoint(p1, variety, points, List.of(spL,spW,ptL,ptW)));
+		KnnClassifier classifier = new KnnClassifier(3, new DistanceEuclidienne(List.of(spL,spW,ptL,ptW)));
+		assertEquals(List.of(p5, p2, p6), classifier.getNeighbours(p1, dataset.getLines()));
+		assertEquals(EnumVariety.VERSICOLOR, classifier.classifyPoint(p1, variety, dataset.getLines()));
 	}
 	
 	@Test
 	void test_Classify_With_Manhattan() {
-		assertEquals(List.of(p2,p3,p4), classifier2.getNeighbours(p1, points, List.of(spL,spW,ptL,ptW)));
-		assertEquals(EnumVariety.VIRGINICA, classifier2.classifyPoint(p1, variety, points, List.of(spL,spW,ptL,ptW)));
+		KnnClassifier classifier = new KnnClassifier(3, new DistanceManhattan(List.of(spL,spW,ptL,ptW)));
+		assertEquals(List.of(p5, p6, p2), classifier.getNeighbours(p1, dataset.getLines()));
+		assertEquals(EnumVariety.VERSICOLOR, classifier.classifyPoint(p1, variety, dataset.getLines()));
 	}
 	
 	@Test
 	void test_Classify_Default() {
-		assertEquals(List.of(p2,p3,p4), classifier3.getNeighbours(p1, points, List.of(spL,spW,ptL,ptW)));
-		assertEquals(EnumVariety.VIRGINICA, classifier3.classifyPoint(p1, variety, points, List.of(spL,spW,ptL,ptW)));
+		KnnClassifier classifier = new KnnClassifier(3, dataset);
+		assertEquals(List.of(p5, p2, p6), classifier.getNeighbours(p1, dataset.getLines()));
+		assertEquals(EnumVariety.VERSICOLOR, classifier.classifyPoint(p1, variety, dataset.getLines()));
 	}
 }

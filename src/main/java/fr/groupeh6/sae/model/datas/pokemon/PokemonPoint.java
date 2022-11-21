@@ -1,14 +1,9 @@
 package fr.groupeh6.sae.model.datas.pokemon;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.opencsv.bean.CsvBindByName;
 
-import fr.groupeh6.sae.model.Factory;
 import fr.groupeh6.sae.model.IPoint;
 import fr.groupeh6.sae.model.columns.Column;
-import fr.groupeh6.sae.model.distance.DistanceEuclidienne;
 
 public class PokemonPoint implements IPoint{
 	

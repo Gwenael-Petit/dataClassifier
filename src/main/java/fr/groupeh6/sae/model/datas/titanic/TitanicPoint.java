@@ -14,7 +14,7 @@ public class TitanicPoint implements IPoint {
 	private double survived;
 	
 	@CsvBindByName(column = "Pclass")
-	private double placeClass;
+	private double pClass;
 	
 	@CsvBindByName(column = "Name")
 	private String name;
@@ -43,10 +43,10 @@ public class TitanicPoint implements IPoint {
 	@CsvBindByName(column = "Embarked")
 	private EnumEmbarked embarked;
 	
-	public TitanicPoint(String passengerId, double survived, int placeClass, String name, EnumSex sex, int age, int sibSp, int parch, String ticket, double fare, String cabin, EnumEmbarked embarked ) {
+	public TitanicPoint(String passengerId, double survived, int pClass, String name, EnumSex sex, int age, int sibSp, int parch, String ticket, double fare, String cabin, EnumEmbarked embarked ) {
 		this.passengerId = passengerId;
 		this.survived = survived;
-		this.placeClass = placeClass;
+		this.pClass = pClass;
 		this.name = name;
 		this.sex = sex;
 		this.age = age;
@@ -62,7 +62,7 @@ public class TitanicPoint implements IPoint {
 
 	@Override
 	public String toString() {
-		return "TitanicPoint [passengerId=" + passengerId + ", survived=" + survived + ", placeClass=" + placeClass
+		return "TitanicPoint [passengerId=" + passengerId + ", survived=" + survived + ", placeClass=" + pClass
 				+ ", name=" + name + ", sex=" + sex + ", age=" + age + ", sibSp=" + sibSp + ", parch=" + parch
 				+ ", ticket=" + ticket + ", fare=" + fare + ", cabin=" + cabin + ", embarked=" + embarked + "]";
 	}
@@ -71,7 +71,7 @@ public class TitanicPoint implements IPoint {
 		switch(col.getName()) {
 		case "PassengerId" : return passengerId;
 		case "Survived" : return survived;
-		case "Pclass" : return placeClass;
+		case "Pclass" : return pClass;
 		case "Name" : return name;
 		case "Sex" : return sex;
 		case "Age" : return age;
@@ -94,7 +94,7 @@ public class TitanicPoint implements IPoint {
 		switch(col.getName()) {
 			case "PassengerId" -> this.passengerId = (String) o;
 			case "Survived" -> this.survived = (double) o;
-			case "Pclass" -> this.placeClass = (double) o;
+			case "Pclass" -> this.pClass = (double) o;
 			case "Name" -> this.name = (String) o;
 			case "Sex" -> this.sex = (EnumSex) o;
 			case "Age" -> this.age = (double) o;

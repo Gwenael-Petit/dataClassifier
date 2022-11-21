@@ -2,10 +2,8 @@ package fr.groupeh6.sae.model.datas.iris;
 
 import com.opencsv.bean.CsvBindByName;
 
-import fr.groupeh6.sae.model.Factory;
 import fr.groupeh6.sae.model.IPoint;
 import fr.groupeh6.sae.model.columns.Column;
-import fr.groupeh6.sae.model.distance.DistanceEuclidienne;
 
 public class IrisPoint implements IPoint {
 	
