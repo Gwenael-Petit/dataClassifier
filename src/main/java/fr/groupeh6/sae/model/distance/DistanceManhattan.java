@@ -7,7 +7,7 @@ import fr.groupeh6.sae.model.columns.Column;
 
 public class DistanceManhattan implements Distance {
 	
-	private List<Column> columns;
+	List<Column> columns;
 	
 	public DistanceManhattan(List<Column> columns) {
 		this.columns = columns;

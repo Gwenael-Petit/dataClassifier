@@ -7,7 +7,7 @@ import fr.groupeh6.sae.model.columns.Column;
 
 public class DistanceEuclidienne implements Distance {
 	
-	private List<Column> columns;
+	List<Column> columns;
 	
 	public DistanceEuclidienne(List<Column> columns) {
 		this.columns = columns;
