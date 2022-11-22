@@ -1,16 +1,33 @@
 package fr.groupeh6.sae.model;
 
-import fr.groupeh6.sae.controllers.MainController;
-import fr.groupeh6.sae.controllers.NewPointController;
-import fr.groupeh6.sae.model.utils.Subject;
-import fr.groupeh6.sae.views.NewPointView;
-
-public class NewPointModel extends Subject{
-
-	protected NewPointController npc;
+public class NewPointModel {
+	
+	public static final char delimiter = ';';
+	
+	MainModel mainModel;
+	Dataset type;
+	String[] datas;
+	
+	public NewPointModel(MainModel mainModel) {
+		this.mainModel = mainModel;
+		this.type = mainModel.getTrainDataset();
+		this.datas = new String[mainModel.getTrainDataset().columns.size()];
+	}
+	
+	public void setData(int index, String value) {
+		this.datas[index] = value;
+	}
 	
 	public void loadPoint() {
-		//MainController.loadPoint();
+		String line = datas[0];
+		for(int i=1; i<datas.length; i++) {
+			line += delimiter + datas[i];
+		}
+		//mainModel.loadFromString();
+	}
+	
+	public Dataset getType() {
+		return type;
 	}
 	
 }

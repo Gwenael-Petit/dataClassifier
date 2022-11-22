@@ -5,10 +5,12 @@ import java.util.List;
 
 import fr.groupeh6.sae.controllers.FileChooserController;
 import fr.groupeh6.sae.controllers.MainController;
+import fr.groupeh6.sae.controllers.NewPointController;
 import fr.groupeh6.sae.model.Dataset;
 import fr.groupeh6.sae.model.FileChooserModel;
 import fr.groupeh6.sae.model.IPoint;
 import fr.groupeh6.sae.model.MainModel;
+import fr.groupeh6.sae.model.NewPointModel;
 import fr.groupeh6.sae.model.columns.Column;
 import fr.groupeh6.sae.model.utils.Observer;
 import fr.groupeh6.sae.model.utils.Subject;
@@ -75,6 +77,12 @@ public class MainView extends Stage implements Observer {
 		xColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setXColumn(newV));
 		yColumn.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setYColumn(newV));
 		columnClass.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setClassClassifier(newV));
+		
+		bNewPoint.setOnAction(e -> {
+			NewPointModel npm = new NewPointModel(model);
+			NewPointController npc = new NewPointController(npm);
+			new NewPointView(this, npm, npc);
+		});
 		
 		bLoadTrain.setOnAction(e -> {
 				FileChooserModel fileChooserModel = new FileChooserModel(controller, true);

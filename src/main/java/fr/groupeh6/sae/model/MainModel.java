@@ -32,6 +32,10 @@ public class MainModel extends Subject {
 		}
 	}
 	
+	public void loadFromString(String line, char delimiter) {
+		
+	}
+	
 	public void setClassifier(Classifier classifier) {
 		this.classifier = classifier;
 		List<IPoint> points = new ArrayList<>();

@@ -14,7 +14,7 @@ public class NewPointController {
 		//if(!s.isBlank()) model.setPoint());
 	}
 	
-	public void loadPoint(String string) {
-		model.loadPoint();
+	public void loadPoint(String datas) {
+		//model.loadPoint(datas);
 	}
 }
