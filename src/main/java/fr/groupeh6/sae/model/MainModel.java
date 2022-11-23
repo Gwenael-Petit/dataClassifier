@@ -20,6 +20,8 @@ public class MainModel extends AbstractSubject {
 	private Classifier classifier;
 	private AbstractColumn classClassifier;
 	
+	private double robustesse = 0.0;
+	
 	public void loadFromFile(String dataFile, char delimiter, boolean toTrain) throws NotSameTypeException, IOException, TypeNotRegisteredException {
 		AbstractDataset loaded = CSVLoader.load(dataFile, delimiter);
 		if(!haveTrainDatasLoaded()) {
@@ -52,6 +54,7 @@ public class MainModel extends AbstractSubject {
 		resetCategories();
 		createCategories();
 		for(IPoint point : points) addPoint(point);
+		robustesse();
 		notifyObservers();
 	}
 	
@@ -99,6 +102,17 @@ public class MainModel extends AbstractSubject {
 	
 	public List<AbstractDataset> allCategories() {
 		return categories;
+	}
+	
+	public void robustesse() {
+		if(haveClassifier()) {
+			this.robustesse = train.robustesse(classifier, classClassifier);
+		}
+		//notifyObservers();
+	}
+	
+	public double getRobustesse() {
+		return robustesse;
 	}
 	
 	public int nbColumns() {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import fr.groupeh6.sae.model.classifier.Classifier;
 import fr.groupeh6.sae.model.columns.AbstractColumn;
 import fr.groupeh6.sae.model.columns.Updatable;
 import fr.groupeh6.sae.model.distance.Distance;
@@ -73,8 +74,8 @@ public abstract class AbstractDataset implements Iterable<IPoint>, Distance {
 	
 	public abstract IPoint getType();
 	
-	public double robustesse() {
-		return 0.0;
+	public double robustesse(Classifier classifier, AbstractColumn columnClass) {
+		return new Robustesse(this, classifier, columnClass).robustesse();
 	}
 
 }

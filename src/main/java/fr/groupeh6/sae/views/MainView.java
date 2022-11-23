@@ -1,6 +1,8 @@
 package fr.groupeh6.sae.views;
 
 import java.io.IOException;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import fr.groupeh6.sae.controllers.FileChooserController;
@@ -128,6 +130,7 @@ public class MainView extends Stage implements Observer {
 	
 	@Override
 	public void update(AbstractSubject subj) {
+		updateRobustesse();
 		updateScatterChart();
 	}
 
@@ -140,6 +143,13 @@ public class MainView extends Stage implements Observer {
 		columnClass.getItems().addAll(columns);
 
 		setEnable(List.of(xColumn, yColumn, columnClass, bLoadCSV, bNewPoint, bCategorisation, tfK, defaultDistance), true);
+	}
+	
+	public void updateRobustesse() {
+		DecimalFormat df = new DecimalFormat("0.00");
+		df.setRoundingMode(RoundingMode.UP);
+		double robForText = model.getRobustesse()*100.0;
+		robustesseLabel.setText("Robustesse : " + df.format(robForText) + " %");
 	}
 	
 	public void updateScatterChart() {

@@ -1,12 +1,10 @@
 package fr.groupeh6.sae.model.points;
 
-import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import com.sun.javafx.charts.Legend;
 
 import fr.groupeh6.sae.model.columns.AbstractColumn;
 import fr.groupeh6.sae.model.columns.BooleanColumn;
@@ -16,8 +14,6 @@ import fr.groupeh6.sae.model.columns.NumberColumn;
 import fr.groupeh6.sae.model.columns.StringColumn;
 import fr.groupeh6.sae.model.datas.pokemon.EnumType;
 import fr.groupeh6.sae.model.datas.pokemon.PokemonPoint;
-import fr.groupeh6.sae.model.datas.titanic.EnumEmbarked;
-import fr.groupeh6.sae.model.datas.titanic.EnumSex;
 
 class PokemonPointTest {
 
