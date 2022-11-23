@@ -26,6 +26,8 @@ class KnnClassifierTest {
 	IPoint p5 = new IrisPoint(7.1, 6.5, 2.3, 2.6, EnumVariety.VIRGINICA);
 	IPoint p6 = new IrisPoint(6.5, 3.5, 4.5, 3.9, EnumVariety.VERSICOLOR);
 	
+	IPoint p = new IrisPoint(2, 3, 2, 3, null);
+	
 	AbstractDataset dataset = new IrisDataset();
 	
 	List<IPoint> neighbours = new ArrayList<>();
@@ -46,21 +48,21 @@ class KnnClassifierTest {
 	@Test
 	void test_Classify_With_Euclidienne() {
 		KnnClassifier classifier = new KnnClassifier(3, new DistanceEuclidienne(List.of(spL,spW,ptL,ptW)));
-		assertEquals(List.of(p1, p5, p2), classifier.getNeighbours(p1, dataset.getLines()));
-		assertEquals(EnumVariety.SETOSA, classifier.classifyPoint(p1, variety, dataset.getLines()));
+		assertEquals(List.of(p1, p4, p2), classifier.getNeighbours(p, dataset.getLines()));
+		assertEquals(EnumVariety.SETOSA, classifier.classifyPoint(p, variety, dataset.getLines()));
 	}
 	
 	@Test
 	void test_Classify_With_Manhattan() {
 		KnnClassifier classifier = new KnnClassifier(3, new DistanceManhattan(List.of(spL,spW,ptL,ptW)));
-		assertEquals(List.of(p1, p5, p6), classifier.getNeighbours(p1, dataset.getLines()));
-		assertEquals(EnumVariety.VIRGINICA, classifier.classifyPoint(p1, variety, dataset.getLines()));
+		assertEquals(List.of(p1, p4, p2), classifier.getNeighbours(p, dataset.getLines()));
+		assertEquals(EnumVariety.SETOSA, classifier.classifyPoint(p, variety, dataset.getLines()));
 	}
 	
 	@Test
 	void test_Classify_Default() {
 		KnnClassifier classifier = new KnnClassifier(3, dataset);
-		assertEquals(List.of(p1, p5, p2), classifier.getNeighbours(p1, dataset.getLines()));
-		assertEquals(EnumVariety.SETOSA, classifier.classifyPoint(p1, variety, dataset.getLines()));
+		assertEquals(List.of(p1, p4, p2), classifier.getNeighbours(p, dataset.getLines()));
+		assertEquals(EnumVariety.SETOSA, classifier.classifyPoint(p, variety, dataset.getLines()));
 	}
 }
