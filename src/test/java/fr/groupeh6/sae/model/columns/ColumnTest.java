@@ -4,11 +4,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import fr.groupeh6.sae.model.AbstractDataset;
 import fr.groupeh6.sae.model.IPoint;
+import fr.groupeh6.sae.model.datas.iris.EnumVariety;
 import fr.groupeh6.sae.model.datas.iris.IrisDataset;
+import fr.groupeh6.sae.model.datas.iris.IrisPoint;
 import fr.groupeh6.sae.model.datas.pokemon.EnumType;
 import fr.groupeh6.sae.model.datas.pokemon.PokemonPoint;
 
@@ -55,4 +60,32 @@ class ColumnTest {
 		assertEquals(true, col.getDenormalizedValue(1));
 	}
 
+	@Test
+	void test_getDistinctValues() {
+		List<String> response = new ArrayList();
+		assertEquals(response ,col.getDistinctValues());
+		
+		AbstractColumn col2 = new NumberColumn("sepal-width");
+		AbstractColumn col3 = new NumberColumn("sepal-length");
+		AbstractColumn col4 = new NumberColumn("petal-width");
+		AbstractColumn col5 = new NumberColumn("petal-width");
+		AbstractColumn col6 = new EnumColumn("", EnumVariety.class);
+		List<AbstractColumn> listColumns = new ArrayList();
+		listColumns.add(col2);
+		listColumns.add(col3);
+		listColumns.add(col4);
+		listColumns.add(col5);
+		listColumns.add(col6);
+		AbstractDataset dataset = new IrisDataset();
+		IPoint point = new IrisPoint(5.1, 3.5, 1.4, .2, EnumVariety.SETOSA);
+		dataset.addLine(point);
+		dataset.setColumns(listColumns);
+		col2.setDataset(dataset);
+		col3.setDataset(dataset);
+		col4.setDataset(dataset);
+		col5.setDataset(dataset);
+		col6.setDataset(dataset);		
+		response.add("1.4");
+		assertEquals(response, col2.getDistinctValues());
+	}
 }
