@@ -1,6 +1,6 @@
 package fr.groupeh6.sae.model.datas;
 
-import fr.groupeh6.sae.model.Dataset;
+import fr.groupeh6.sae.model.AbstractDataset;
 import fr.groupeh6.sae.model.IPoint;
 import fr.groupeh6.sae.model.datas.iris.IrisDataset;
 import fr.groupeh6.sae.model.datas.iris.IrisPoint;
@@ -13,23 +13,23 @@ public enum StoredDatas {
 	
 	IRIS() {
 		@Override
-		public Dataset dataset() {
+		public AbstractDataset dataset() {
 			return new IrisDataset();
 		}
 	},
 	TITANIC(){
 		@Override
-		public Dataset dataset() {
+		public AbstractDataset dataset() {
 			return new TitanicDataset();
 		}
 	},
 	POKEMON(){
 		@Override
-		public Dataset dataset() {
+		public AbstractDataset dataset() {
 			return new PokemonDataset();
 		}
 	};
 	
-	public abstract Dataset dataset();
+	public abstract AbstractDataset dataset();
 
 }

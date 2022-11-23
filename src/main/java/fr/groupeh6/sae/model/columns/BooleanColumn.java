@@ -1,6 +1,6 @@
 package fr.groupeh6.sae.model.columns;
 
-public class BooleanColumn extends Column {
+public class BooleanColumn extends AbstractColumn {
 
 	public BooleanColumn(String name) {
 		super(name);

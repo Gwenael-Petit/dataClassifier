@@ -10,7 +10,7 @@ import java.util.List;
 
 import com.opencsv.bean.CsvToBeanBuilder;
 
-import fr.groupeh6.sae.model.columns.Column;
+import fr.groupeh6.sae.model.columns.AbstractColumn;
 
 public class CSVLoader {
 	
@@ -24,8 +24,8 @@ public class CSVLoader {
 		return firstLine.split(""+delimiter);
 	}
 	
-	public static List<Column> getColumns(String[] columnsName) {
-		List<Column> res = new ArrayList<>();
+	public static List<AbstractColumn> getColumns(String[] columnsName) {
+		List<AbstractColumn> res = new ArrayList<>();
 		for(String column : columnsName) {
 			res.add(Factory.getInstance().newColumn(column));
 		}
@@ -40,17 +40,17 @@ public class CSVLoader {
 				parse();
 	}
 	
-	public static Dataset load(File file, char delimiter) throws TypeNotRegisteredException, IOException {
+	public static AbstractDataset load(File file, char delimiter) throws TypeNotRegisteredException, IOException {
 		if(!isValid(file)) throw new IOException();
-		Dataset dataset;
+		AbstractDataset dataset;
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		dataset = loadFromReader(br, delimiter);
 		br.close();
 		return dataset;
 	}
 
-	public static Dataset loadFromReader(BufferedReader br, char delimiter) throws IOException, TypeNotRegisteredException {
-		Dataset dataset;
+	public static AbstractDataset loadFromReader(BufferedReader br, char delimiter) throws IOException, TypeNotRegisteredException {
+		AbstractDataset dataset;
 		br.mark(1);
 		String line = br.readLine().replace("\"", "");
 		String[] columns = getColumnsName(line, delimiter);
@@ -62,7 +62,7 @@ public class CSVLoader {
 		return dataset;
 	}
 	
-	public static Dataset load(String fileName, char delimiter) throws IOException, TypeNotRegisteredException {
+	public static AbstractDataset load(String fileName, char delimiter) throws IOException, TypeNotRegisteredException {
 		return load(new File(fileName), delimiter);
 	}
 

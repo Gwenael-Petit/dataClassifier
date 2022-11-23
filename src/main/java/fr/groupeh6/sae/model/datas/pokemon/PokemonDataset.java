@@ -2,18 +2,18 @@ package fr.groupeh6.sae.model.datas.pokemon;
 
 import java.util.List;
 
-import fr.groupeh6.sae.model.Dataset;
+import fr.groupeh6.sae.model.AbstractDataset;
 import fr.groupeh6.sae.model.IPoint;
 import fr.groupeh6.sae.model.columns.BooleanColumn;
-import fr.groupeh6.sae.model.columns.Column;
+import fr.groupeh6.sae.model.columns.AbstractColumn;
 import fr.groupeh6.sae.model.columns.EnumColumn;
 import fr.groupeh6.sae.model.columns.NumberColumn;
 import fr.groupeh6.sae.model.columns.StringColumn;
 
-public class PokemonDataset extends Dataset {
+public class PokemonDataset extends AbstractDataset {
 	
 	private static final String NAME = "Pokemon";
-	public final List<Column> COLUMNS = List.of(
+	public final List<AbstractColumn> columns = List.of(
 			new StringColumn("name"),
 			new NumberColumn("attack"),
 			new NumberColumn("base_egg_steps"),
@@ -31,7 +31,7 @@ public class PokemonDataset extends Dataset {
 
 	public PokemonDataset() {
 		super(NAME);
-		setColumns(COLUMNS);
+		setColumns(columns);
 	}
 
 	@Override

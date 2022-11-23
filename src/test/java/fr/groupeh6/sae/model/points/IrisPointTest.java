@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import fr.groupeh6.sae.model.Factory;
 import fr.groupeh6.sae.model.columns.BooleanColumn;
-import fr.groupeh6.sae.model.columns.Column;
+import fr.groupeh6.sae.model.columns.AbstractColumn;
 import fr.groupeh6.sae.model.columns.EnumColumn;
 import fr.groupeh6.sae.model.columns.NumberColumn;
 import fr.groupeh6.sae.model.datas.iris.EnumVariety;
@@ -50,7 +50,7 @@ class IrisPointTest {
 		assertEquals(EnumVariety.VIRGINICA, virginica.getValue(var));
 		assertEquals(1.4, setosa.getValue(ptL));
 		assertEquals(1.3, versicolor.getValue(ptW));
-		Column fake = new BooleanColumn("Fake");
+		AbstractColumn fake = new BooleanColumn("Fake");
 		assertEquals(null, setosa.getValue(fake));
 	}
 

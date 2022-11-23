@@ -2,11 +2,11 @@ package fr.groupeh6.sae.model;
 
 public class NewPointModel {
 	
-	public static final char delimiter = ';';
+	public static final char DELIMITER = ';';
 	
-	MainModel mainModel;
-	Dataset type;
-	String[] datas;
+	protected MainModel mainModel;
+	protected AbstractDataset type;
+	protected String[] datas;
 	
 	public NewPointModel(MainModel mainModel) {
 		this.mainModel = mainModel;
@@ -21,12 +21,12 @@ public class NewPointModel {
 	public void loadPoint() {
 		String line = datas[0];
 		for(int i=1; i<datas.length; i++) {
-			line += delimiter + datas[i];
+			line += DELIMITER + datas[i];
 		}
 		//mainModel.loadFromString();
 	}
 	
-	public Dataset getType() {
+	public AbstractDataset getType() {
 		return type;
 	}
 	

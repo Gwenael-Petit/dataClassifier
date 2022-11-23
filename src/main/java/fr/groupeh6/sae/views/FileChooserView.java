@@ -8,7 +8,7 @@ import fr.groupeh6.sae.model.FileChooserModel;
 import fr.groupeh6.sae.model.NotSameTypeException;
 import fr.groupeh6.sae.model.TypeNotRegisteredException;
 import fr.groupeh6.sae.model.utils.Observer;
-import fr.groupeh6.sae.model.utils.Subject;
+import fr.groupeh6.sae.model.utils.AbstractSubject;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -107,7 +107,7 @@ public class FileChooserView extends AbstractModalView implements Observer {
 	}
 
 	@Override
-	public void update(Subject subj) {
+	public void update(AbstractSubject subj) {
 		if(model.getFile() != null) {
 			fileLabel.setText("Fichier sélectionner : " + model.getFile().getName());
 			tfDelimiter.setDisable(false);
@@ -119,7 +119,7 @@ public class FileChooserView extends AbstractModalView implements Observer {
 
 
 	@Override
-	public void update(Subject subj, Object data) {
+	public void update(AbstractSubject subj, Object data) {
 		update(subj);
 	}
 

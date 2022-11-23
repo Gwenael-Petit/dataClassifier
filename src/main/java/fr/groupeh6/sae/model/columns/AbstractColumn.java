@@ -3,15 +3,15 @@ package fr.groupeh6.sae.model.columns;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.groupeh6.sae.model.Dataset;
+import fr.groupeh6.sae.model.AbstractDataset;
 import fr.groupeh6.sae.model.IPoint;
 
-public abstract class Column implements IValueNormalizer {
+public abstract class AbstractColumn implements IValueNormalizer {
 	
 	private String name;
-	protected Dataset dataset;
+	protected AbstractDataset dataset;
 	
-	public Column(String name) {
+	public AbstractColumn(String name) {
 		this.name = name;
 	}
 	
@@ -40,7 +40,7 @@ public abstract class Column implements IValueNormalizer {
 	
 	public abstract boolean isNormalizable();
 	
-	public void setDataset(Dataset dataset) {
+	public void setDataset(AbstractDataset dataset) {
 		this.dataset = dataset;
 	}
 	
@@ -52,8 +52,8 @@ public abstract class Column implements IValueNormalizer {
 	public boolean equals(Object obj) {
 		if (this == obj) return true;
 		if (obj == null) return false;
-		if (!(obj instanceof Column)) return false;
-		Column other = (Column) obj;
+		if (!(obj instanceof AbstractColumn)) return false;
+		AbstractColumn other = (AbstractColumn) obj;
 		return name.equals(other.name);
 	}
 	

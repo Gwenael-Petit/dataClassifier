@@ -4,9 +4,9 @@ import java.io.File;
 import java.io.IOException;
 
 import fr.groupeh6.sae.controllers.MainController;
-import fr.groupeh6.sae.model.utils.Subject;
+import fr.groupeh6.sae.model.utils.AbstractSubject;
 
-public class FileChooserModel extends Subject {
+public class FileChooserModel extends AbstractSubject {
 	
 	private File file;
 	

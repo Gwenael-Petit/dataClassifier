@@ -3,7 +3,7 @@ package fr.groupeh6.sae.model.datas.titanic;
 import com.opencsv.bean.CsvBindByName;
 
 import fr.groupeh6.sae.model.IPoint;
-import fr.groupeh6.sae.model.columns.Column;
+import fr.groupeh6.sae.model.columns.AbstractColumn;
 
 public class TitanicPoint implements IPoint {
 
@@ -67,7 +67,7 @@ public class TitanicPoint implements IPoint {
 				+ ", ticket=" + ticket + ", fare=" + fare + ", cabin=" + cabin + ", embarked=" + embarked + "]";
 	}
 
-	public Object getValue(Column col) {
+	public Object getValue(AbstractColumn col) {
 		switch(col.getName()) {
 		case "PassengerId" : return passengerId;
 		case "Survived" : return survived;
@@ -85,12 +85,12 @@ public class TitanicPoint implements IPoint {
 	}
 	}
 
-	public double getNormalizedValue(Column col) {
+	public double getNormalizedValue(AbstractColumn col) {
 		return col.getNormalizedValue(this);
 	}
 
 	@Override
-	public void setValue(Column col, Object o) {
+	public void setValue(AbstractColumn col, Object o) {
 		switch(col.getName()) {
 			case "PassengerId" -> this.passengerId = (String) o;
 			case "Survived" -> this.survived = (double) o;

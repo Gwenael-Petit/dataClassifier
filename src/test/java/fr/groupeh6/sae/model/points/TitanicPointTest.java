@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import fr.groupeh6.sae.model.Factory;
 import fr.groupeh6.sae.model.columns.BooleanColumn;
-import fr.groupeh6.sae.model.columns.Column;
+import fr.groupeh6.sae.model.columns.AbstractColumn;
 import fr.groupeh6.sae.model.columns.EnumColumn;
 import fr.groupeh6.sae.model.columns.NotNormalizableException;
 import fr.groupeh6.sae.model.columns.NumberColumn;
@@ -74,7 +74,7 @@ class TitanicPointTest {
 		assertEquals(16.7,pers5.getValue(fare));
 		assertEquals("",pers4.getValue(cabin));
 		assertEquals(EnumEmbarked.Q,pers2.getValue(embarked));
-		Column fake = new BooleanColumn("fake");
+		AbstractColumn fake = new BooleanColumn("fake");
 		assertEquals(null,pers1.getValue(fake));
 	}
 	

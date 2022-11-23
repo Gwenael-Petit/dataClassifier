@@ -6,22 +6,23 @@ import fr.groupeh6.sae.model.Factory;
 import fr.groupeh6.sae.model.MainModel;
 import fr.groupeh6.sae.model.NotSameTypeException;
 import fr.groupeh6.sae.model.TypeNotRegisteredException;
-import fr.groupeh6.sae.model.columns.Column;
+import fr.groupeh6.sae.model.columns.AbstractColumn;
 import fr.groupeh6.sae.model.distance.Distance;
 
 
 public class MainController {
-	MainModel model;
+	
+	protected MainModel model;
 	
 	public MainController(MainModel m) {
 		this.model = m;
 	}
 	
-	public void setXColumn(Column column) {
+	public void setXColumn(AbstractColumn column) {
 		this.model.setxColumn(column);
 	}
 
-	public void setYColumn(Column column) {
+	public void setYColumn(AbstractColumn column) {
 		this.model.setyColumn(column);
 	}
 	
@@ -29,7 +30,7 @@ public class MainController {
 		this.model.loadFromFile(filePath, delimiter, toTrain);
 	}
 	
-	public void setClassClassifier(Column column) {
+	public void setClassClassifier(AbstractColumn column) {
 		this.model.setClassClassifier(column);
 	}
 	

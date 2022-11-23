@@ -1,6 +1,6 @@
 package fr.groupeh6.sae.model.columns;
 
-public class StringColumn extends Column {
+public class StringColumn extends AbstractColumn {
 
 	public StringColumn(String name) {
 		super(name);

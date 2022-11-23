@@ -17,7 +17,7 @@ class PokemonPointTest {
 
 	PokemonPoint poke1 = new PokemonPoint("Swablu", 40, 5120, 255.0, 60, 600000, 45, 75, 50, EnumType.NORMAL,
 			EnumType.FLYING, 1.2, false);
-	PokemonPoint poke2 = new PokemonPoint("Azelf", 125, 20480, 3.0, 70, 1250000, 75, 70, 115, EnumType.PSYCHIC, 0.3,
+	PokemonPoint poke2 = new PokemonPoint("Azelf", 125, 20480, 3.0, 70, 1250000, 75, 70, 115, EnumType.PSYCHIC, null, 0.3,
 			true);
 	PokemonPoint poke3 = new PokemonPoint("Gallade", 165, 5120, 45.0, 95, 1250000, 68, 115, 110, EnumType.PSYCHIC,
 			EnumType.FIGHTING, 52.0, false);

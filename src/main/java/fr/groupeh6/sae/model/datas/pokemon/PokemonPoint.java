@@ -3,7 +3,7 @@ package fr.groupeh6.sae.model.datas.pokemon;
 import com.opencsv.bean.CsvBindByName;
 
 import fr.groupeh6.sae.model.IPoint;
-import fr.groupeh6.sae.model.columns.Column;
+import fr.groupeh6.sae.model.columns.AbstractColumn;
 
 public class PokemonPoint implements IPoint{
 	
@@ -50,22 +50,6 @@ public class PokemonPoint implements IPoint{
 		this.speed = speed;
 		this.legendary = legendary;
 	}
-	public PokemonPoint(String name, int attack, int baseEggSteps, double captureRate, int defense, int experienceGrowth,
-			int hp, int spAttack, int spDefense, EnumType type1, double speed, boolean legendary) {
-		this.name = name;
-		this.attack = attack;
-		this.baseEggSteps = baseEggSteps;
-		this.captureRate = captureRate;
-		this.defense = defense;
-		this.experienceGrowth = experienceGrowth;
-		this.hp = hp;
-		this.spAttack = spAttack;
-		this.spDefense = spDefense;
-		this.type1 = type1;
-		this.type2 = null;
-		this.speed = speed;
-		this.legendary = legendary;
-	}
 
 	public PokemonPoint() {}
 
@@ -80,7 +64,7 @@ public class PokemonPoint implements IPoint{
 	
 
 	@Override
-	public Object getValue(Column col) {
+	public Object getValue(AbstractColumn col) {
 		switch(col.getName()) {
 		case "name" :  return name;
 		case "attack" : return attack;
@@ -100,12 +84,12 @@ public class PokemonPoint implements IPoint{
 	}
 
 	@Override
-	public double getNormalizedValue(Column col) {
+	public double getNormalizedValue(AbstractColumn col) {
 		return col.getNormalizedValue(this);
 	}
 
 	@Override
-	public void setValue(Column col, Object o) {
+	public void setValue(AbstractColumn col, Object o) {
 	switch(col.getName()) {
 	case "name" -> this.name = (String) o ;
 	case "attack" -> this.attack = (double) o;

@@ -3,11 +3,11 @@ package fr.groupeh6.sae.model.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Subject {
+public abstract class AbstractSubject {
 	
 	protected List<Observer> attached;
 
-    public Subject() {
+    public AbstractSubject() {
         attached = new ArrayList<>();
     }
 

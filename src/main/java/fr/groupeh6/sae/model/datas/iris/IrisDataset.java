@@ -2,18 +2,18 @@ package fr.groupeh6.sae.model.datas.iris;
 
 import java.util.List;
 
-import fr.groupeh6.sae.model.Dataset;
+import fr.groupeh6.sae.model.AbstractDataset;
 import fr.groupeh6.sae.model.IPoint;
-import fr.groupeh6.sae.model.columns.Column;
+import fr.groupeh6.sae.model.columns.AbstractColumn;
 import fr.groupeh6.sae.model.columns.EnumColumn;
 import fr.groupeh6.sae.model.columns.NumberColumn;
 import fr.groupeh6.sae.model.distance.DistanceEuclidienne;
 
-public class IrisDataset extends Dataset {
+public class IrisDataset extends AbstractDataset {
 	
 	private static final String NAME = "Iris";
 	
-	public final List<Column> COLUMNS = List.of(
+	public final List<AbstractColumn> columns = List.of(
 			new NumberColumn("sepal.length"),
 			new NumberColumn("sepal.width"),
 			new NumberColumn("petal.length"),
@@ -23,7 +23,7 @@ public class IrisDataset extends Dataset {
 	
 	public IrisDataset() {
 		super(NAME);
-		setColumns(COLUMNS);
+		setColumns(columns);
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class IrisDataset extends Dataset {
 
 	@Override
 	public double distance(IPoint p1, IPoint p2) {
-		return new DistanceEuclidienne(COLUMNS.subList(0, 4)).distance(p1, p2);
+		return new DistanceEuclidienne(columns.subList(0, 4)).distance(p1, p2);
 	}
 
 }

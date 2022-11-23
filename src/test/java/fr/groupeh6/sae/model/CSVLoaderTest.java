@@ -16,7 +16,7 @@ import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.Test;
 
-import fr.groupeh6.sae.model.columns.Column;
+import fr.groupeh6.sae.model.columns.AbstractColumn;
 import fr.groupeh6.sae.model.datas.iris.IrisPoint;
 
 class CSVLoaderTest {
@@ -61,7 +61,7 @@ class CSVLoaderTest {
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String line = br.readLine().replace("\"", "");
 		br.close();
-		List<Column> res = new ArrayList<Column>();
+		List<AbstractColumn> res = new ArrayList<AbstractColumn>();
 		res.add(Factory.getInstance().newColumn("sepal.length"));
 		res.add(Factory.getInstance().newColumn("sepal.width"));
 		res.add(Factory.getInstance().newColumn("petal.length"));
@@ -84,7 +84,7 @@ class CSVLoaderTest {
 	void test_loadFromReader_should_return_true() throws Exception {	
 		StringBuilder sb = new StringBuilder();
 		BufferedReader br = new BufferedReader(new FileReader(file));
-		Dataset dataset = CSVLoader.loadFromReader(br, ',');
+		AbstractDataset dataset = CSVLoader.loadFromReader(br, ',');
 		dataset.iterator().forEachRemaining(e -> sb.append(e));
 		assertEquals("SETOSA[3.2,2.3,1.1,0.1]VIRGINICA[7.1,3.3,6.2,2.0]", sb.toString());
 	}
@@ -92,7 +92,7 @@ class CSVLoaderTest {
 	@Test
 	void test_load_from_file() throws NoSuchElementException, IOException, TypeNotRegisteredException {
 		StringBuilder sb = new StringBuilder();
-		Dataset dataset = CSVLoader.load(file, ',');
+		AbstractDataset dataset = CSVLoader.load(file, ',');
 		dataset.iterator().forEachRemaining(e -> sb.append(e));
 		assertEquals("SETOSA[3.2,2.3,1.1,0.1]VIRGINICA[7.1,3.3,6.2,2.0]", sb.toString());
 	}
@@ -105,7 +105,7 @@ class CSVLoaderTest {
 	@Test
 	void test_load_from_file_name() throws Exception {
 		StringBuilder sb = new StringBuilder();
-		Dataset dataset = CSVLoader.load(path, ',');
+		AbstractDataset dataset = CSVLoader.load(path, ',');
 		dataset.iterator().forEachRemaining(e -> sb.append(e));
 		assertEquals("SETOSA[3.2,2.3,1.1,0.1]VIRGINICA[7.1,3.3,6.2,2.0]", sb.toString());
 	}

@@ -2,17 +2,17 @@ package fr.groupeh6.sae.model.datas.titanic;
 
 import java.util.List;
 
-import fr.groupeh6.sae.model.Dataset;
+import fr.groupeh6.sae.model.AbstractDataset;
 import fr.groupeh6.sae.model.IPoint;
-import fr.groupeh6.sae.model.columns.Column;
+import fr.groupeh6.sae.model.columns.AbstractColumn;
 import fr.groupeh6.sae.model.columns.EnumColumn;
 import fr.groupeh6.sae.model.columns.NumberColumn;
 import fr.groupeh6.sae.model.columns.StringColumn;
 
-public class TitanicDataset extends Dataset{
+public class TitanicDataset extends AbstractDataset{
 	
 	private static final String NAME = "titanic";
-	public final List<Column> COLUMNS = List.of(
+	public final List<AbstractColumn> columns = List.of(
 			new StringColumn("PassengerId"),
 			new NumberColumn("Survived"),
 			new NumberColumn("Pclass"),
@@ -29,7 +29,7 @@ public class TitanicDataset extends Dataset{
 
 	public TitanicDataset() {
 		super(NAME);
-		setColumns(COLUMNS);
+		setColumns(columns);
 	}
 
 	@Override

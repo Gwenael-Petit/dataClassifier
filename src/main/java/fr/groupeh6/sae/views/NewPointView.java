@@ -2,9 +2,9 @@ package fr.groupeh6.sae.views;
 
 import fr.groupeh6.sae.controllers.NewPointController;
 import fr.groupeh6.sae.model.NewPointModel;
-import fr.groupeh6.sae.model.columns.Column;
+import fr.groupeh6.sae.model.columns.AbstractColumn;
 import fr.groupeh6.sae.model.utils.Observer;
-import fr.groupeh6.sae.model.utils.Subject;
+import fr.groupeh6.sae.model.utils.AbstractSubject;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
@@ -35,7 +35,7 @@ public class NewPointView extends AbstractModalView {
 		root.setSpacing(10);
 		
 		int i = 0;
-		for(Column column : npm.getType().getColumns()) {
+		for(AbstractColumn column : npm.getType().getColumns()) {
 			root.getChildren().add(createField(column.getName(), i++));
 		}
 		submit = new Button("Add a Point");
@@ -70,7 +70,7 @@ public class NewPointView extends AbstractModalView {
 		
 		@Override
 		public void changed(ObservableValue<? extends String> obs, String oldV, String newV) {
-			if(newV.contains(""+NewPointModel.delimiter)) {
+			if(newV.contains(""+NewPointModel.DELIMITER)) {
 				tf.setText(oldV);
 			}
 		}

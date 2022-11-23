@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import fr.groupeh6.sae.model.IPoint;
-import fr.groupeh6.sae.model.columns.Column;
+import fr.groupeh6.sae.model.columns.AbstractColumn;
 import fr.groupeh6.sae.model.distance.Distance;
 
 public class KnnClassifier implements Classifier {
@@ -21,7 +21,6 @@ public class KnnClassifier implements Classifier {
 	}
 	
 	public List<IPoint> getNeighbours(IPoint point, List<IPoint> points){
-		points.remove(point);
 		List<IPoint> neighbours = new ArrayList<>();
 		for(IPoint p : points) neighbours.add(p);
 		neighbours.sort((p1,p2)->Double.compare(distance.distance(p1, point),distance.distance(p2, point)));
@@ -30,8 +29,7 @@ public class KnnClassifier implements Classifier {
 	}
 
 	@Override
-	public Object classifyPoint(IPoint point, Column columnClass, List<IPoint> points) {
-		points.remove(point);
+	public Object classifyPoint(IPoint point, AbstractColumn columnClass, List<IPoint> points) {
 		List<IPoint> neighbours = getNeighbours(point, points);
 		Map<Object, Integer> valueCount = new HashMap<>();
 		for(IPoint p: neighbours) {

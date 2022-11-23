@@ -5,21 +5,21 @@ import java.util.Collections;
 import java.util.List;
 
 import fr.groupeh6.sae.model.classifier.Classifier;
-import fr.groupeh6.sae.model.columns.Column;
+import fr.groupeh6.sae.model.columns.AbstractColumn;
 import fr.groupeh6.sae.model.columns.Updatable;
 import fr.groupeh6.sae.model.distance.Distance;
 
 public class Resistance {
 	
-	Dataset datas;
-	Classifier classifier;
+	protected AbstractDataset datas;
+	protected Classifier classifier;
 	
-	public Resistance(Dataset datas, Classifier classifier) {
+	public Resistance(AbstractDataset datas, Classifier classifier) {
 		this.datas = datas;
 		this.classifier = classifier;
 	}
 	
-	int groupDivison() {
+	public int groupDivison() {
 		return 0; //datas.getNbLines()/
 	}
 	
@@ -43,9 +43,9 @@ public class Resistance {
 		return resistance;
 	}
 	
-	public double resistance(Distance distance, Column columnClass) {
+	public double resistance(Distance distance, AbstractColumn columnClass) {
 		List<List<IPoint>> groups = getSubsGroups();
-		List<Column> columns = datas.getColumns();
+		List<AbstractColumn> columns = datas.getColumns();
 		List<Double> rateOfGroupe = new ArrayList<Double>();
 		
 		
@@ -54,7 +54,7 @@ public class Resistance {
 			int rightClassified = 0;
 			datas.points.removeAll(testGroup);
 			for(IPoint p: datas.points) {
-				for(Column c: columns) {
+				for(AbstractColumn c: columns) {
 					if(c.isUpdatable()) ((Updatable)c).update(p.getValue(c));
 				}
 			}
@@ -74,7 +74,7 @@ public class Resistance {
 
 	
 	
-	public double resistance(Column columnClass) {
+	public double resistance(AbstractColumn columnClass) {
 		return resistance(null,columnClass);
 	}
 }

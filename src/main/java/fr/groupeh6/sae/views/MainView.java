@@ -6,14 +6,14 @@ import java.util.List;
 import fr.groupeh6.sae.controllers.FileChooserController;
 import fr.groupeh6.sae.controllers.MainController;
 import fr.groupeh6.sae.controllers.NewPointController;
-import fr.groupeh6.sae.model.Dataset;
+import fr.groupeh6.sae.model.AbstractDataset;
 import fr.groupeh6.sae.model.FileChooserModel;
 import fr.groupeh6.sae.model.IPoint;
 import fr.groupeh6.sae.model.MainModel;
 import fr.groupeh6.sae.model.NewPointModel;
-import fr.groupeh6.sae.model.columns.Column;
+import fr.groupeh6.sae.model.columns.AbstractColumn;
 import fr.groupeh6.sae.model.utils.Observer;
-import fr.groupeh6.sae.model.utils.Subject;
+import fr.groupeh6.sae.model.utils.AbstractSubject;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
@@ -41,7 +41,7 @@ public class MainView extends Stage implements Observer {
 	@FXML
 	ScatterChart<Number,Number> sc;
 	@FXML
-	ComboBox<Column> xColumn, yColumn, columnClass;
+	ComboBox<AbstractColumn> xColumn, yColumn, columnClass;
 	@FXML
 	Button bLoadTrain, bLoadCSV, bSetDistance, bModify, bCategorisation, bNewPoint;
 	@FXML
@@ -127,14 +127,14 @@ public class MainView extends Stage implements Observer {
 	}
 	
 	@Override
-	public void update(Subject subj) {
+	public void update(AbstractSubject subj) {
 		updateScatterChart();
 	}
 
 	@Override
-	public void update(Subject subj, Object data) {
+	public void update(AbstractSubject subj, Object data) {
 		modelType.setText(modelType.getText() + model.getTrainDataset().getName());
-		List<Column> columns = model.getTrainDataset().getNormalizableColumns();
+		List<AbstractColumn> columns = model.getTrainDataset().getNormalizableColumns();
 		xColumn.getItems().addAll(columns);
 		yColumn.getItems().addAll(columns);
 		columnClass.getItems().addAll(columns);
@@ -146,7 +146,7 @@ public class MainView extends Stage implements Observer {
 		if(model.haveTrainDatasLoaded()) {
 			sc.getData().clear();
 			if(model.getxColumn() != null && model.getyColumn() != null) {
-				for(Dataset category : model.allCategories()) {
+				for(AbstractDataset category : model.allCategories()) {
 					XYChart.Series<Number, Number> series = new XYChart.Series<>();
 					series.setName(category.getName());
 					for(IPoint point : category) {

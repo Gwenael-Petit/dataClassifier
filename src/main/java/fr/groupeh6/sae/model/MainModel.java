@@ -5,21 +5,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.groupeh6.sae.model.classifier.Classifier;
-import fr.groupeh6.sae.model.columns.Column;
-import fr.groupeh6.sae.model.utils.Subject;
+import fr.groupeh6.sae.model.columns.AbstractColumn;
+import fr.groupeh6.sae.model.utils.AbstractSubject;
 
-public class MainModel extends Subject {
+public class MainModel extends AbstractSubject {
 	
-	private Dataset train;
-	private List<Dataset> categories = new ArrayList<Dataset>();
-	private Column xColumn;
-	private Column yColumn;
+	private AbstractDataset train;
+	private List<AbstractDataset> categories = new ArrayList<AbstractDataset>();
+	private AbstractColumn xColumn;
+	private AbstractColumn yColumn;
 	
 	private Classifier classifier;
-	private Column classClassifier;
+	private AbstractColumn classClassifier;
 	
 	public void loadFromFile(String dataFile, char delimiter, boolean toTrain) throws NotSameTypeException, IOException, TypeNotRegisteredException {
-		Dataset loaded = CSVLoader.load(dataFile, delimiter);
+		AbstractDataset loaded = CSVLoader.load(dataFile, delimiter);
 		if(!haveTrainDatasLoaded()) {
 			train = loaded;
 			createCategories();
@@ -39,7 +39,7 @@ public class MainModel extends Subject {
 	public void setClassifier(Classifier classifier) {
 		this.classifier = classifier;
 		List<IPoint> points = new ArrayList<>();
-		for(Dataset category : categories) {
+		for(AbstractDataset category : categories) {
 			category.forEach(point -> points.add(point)); 
 		}
 		resetCategories();
@@ -48,14 +48,14 @@ public class MainModel extends Subject {
 		notifyObservers();
 	}
 	
-	public void setClassClassifier(Column classClassifier) {
+	public void setClassClassifier(AbstractColumn classClassifier) {
 		this.classClassifier = classClassifier;
 	}
 	
 	public void addPoint(IPoint point) {
 		if(haveClassifier()) {
 			Object clazz = classifier.classifyPoint(point, classClassifier, train.getLines());
-			Dataset categorie = getCategory(""+clazz);
+			AbstractDataset categorie = getCategory(""+clazz);
 			point.setValue(classClassifier, clazz);
 			categorie.addLine(point);
 		} else {
@@ -71,18 +71,18 @@ public class MainModel extends Subject {
 	}
 	
 	public void addCategory(String name) {
-		Dataset set = Factory.getInstance().newDataset(train.columns);
+		AbstractDataset set = Factory.getInstance().newDataset(train.columns);
 		set.setName(name);
 		addCategory(set);
 	}
 	
-	public Dataset getCategory(String name) {
-		for(Dataset category : allCategories()) 
+	public AbstractDataset getCategory(String name) {
+		for(AbstractDataset category : allCategories()) 
 			if(category.getName().equals(name)) return category;
 		return null;
 	}
 	
-	public void addCategory(Dataset category) {
+	public void addCategory(AbstractDataset category) {
 		categories.add(category);
 	}
 	
@@ -90,7 +90,7 @@ public class MainModel extends Subject {
 		categories.clear();
 	}
 	
-	public List<Dataset> allCategories() {
+	public List<AbstractDataset> allCategories() {
 		return categories;
 	}
 	
@@ -98,12 +98,12 @@ public class MainModel extends Subject {
 		return train.getColumns().size();
 	}
 	
-	public void setxColumn(Column xColumn) {
+	public void setxColumn(AbstractColumn xColumn) {
 		this.xColumn = xColumn;
 		notifyObservers();
 	}
 
-	public void setyColumn(Column yColumn) {
+	public void setyColumn(AbstractColumn yColumn) {
 		this.yColumn = yColumn;
 		notifyObservers();
 	}
@@ -116,15 +116,15 @@ public class MainModel extends Subject {
 		return train != null;
 	}
 	
-	public Dataset getTrainDataset() {
+	public AbstractDataset getTrainDataset() {
 		return this.train;
 	}
 
-	public Column getxColumn() {
+	public AbstractColumn getxColumn() {
 		return xColumn;
 	}
 
-	public Column getyColumn() {
+	public AbstractColumn getyColumn() {
 		return yColumn;
 	}
 }

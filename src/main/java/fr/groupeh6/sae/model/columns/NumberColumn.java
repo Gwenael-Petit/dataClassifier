@@ -1,6 +1,6 @@
 package fr.groupeh6.sae.model.columns;
 
-public class NumberColumn extends Column implements Updatable {
+public class NumberColumn extends AbstractColumn implements Updatable {
 	
 	protected Number max;
 	protected Number min;

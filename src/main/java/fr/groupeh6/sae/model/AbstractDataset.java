@@ -4,21 +4,21 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import fr.groupeh6.sae.model.columns.Column;
+import fr.groupeh6.sae.model.columns.AbstractColumn;
 import fr.groupeh6.sae.model.columns.Updatable;
 import fr.groupeh6.sae.model.distance.Distance;
 
-public abstract class Dataset implements Iterable<IPoint>, Distance {
+public abstract class AbstractDataset implements Iterable<IPoint>, Distance {
 	
 	private String name;
 	protected List<IPoint> points = new ArrayList<IPoint>();
-	protected List<Column> columns = new ArrayList<Column>();
+	protected List<AbstractColumn> columns = new ArrayList<AbstractColumn>();
 	
-	public Dataset(String name) {
+	public AbstractDataset(String name) {
 		this.name = name;
 	}
 	
-	public void setColumns(List<Column> columns) {
+	public void setColumns(List<AbstractColumn> columns) {
 		this.columns = columns;
 		this.columns.forEach(column -> column.setDataset(this));
 	}
@@ -46,18 +46,18 @@ public abstract class Dataset implements Iterable<IPoint>, Distance {
 	
 	public void addLine(IPoint element) {
 		this.points.add(element);
-		for(Column column : this.columns) {
+		for(AbstractColumn column : this.columns) {
 			if(column.isUpdatable()) ((Updatable)column).update(element.getValue(column));
 		}
 	}
 	
-	public List<Column> getColumns() {
+	public List<AbstractColumn> getColumns() {
 		return columns;
 	}
 	
-	public List<Column> getNormalizableColumns() {
-		List<Column> res = new ArrayList<>();
-		for(Column column : this.columns) {
+	public List<AbstractColumn> getNormalizableColumns() {
+		List<AbstractColumn> res = new ArrayList<>();
+		for(AbstractColumn column : this.columns) {
 			if(column.isNormalizable()) res.add(column);
 		}
 		return res;

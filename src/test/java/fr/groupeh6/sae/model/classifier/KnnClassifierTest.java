@@ -8,9 +8,9 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import fr.groupeh6.sae.model.Dataset;
+import fr.groupeh6.sae.model.AbstractDataset;
 import fr.groupeh6.sae.model.IPoint;
-import fr.groupeh6.sae.model.columns.Column;
+import fr.groupeh6.sae.model.columns.AbstractColumn;
 import fr.groupeh6.sae.model.datas.iris.EnumVariety;
 import fr.groupeh6.sae.model.datas.iris.IrisDataset;
 import fr.groupeh6.sae.model.datas.iris.IrisPoint;
@@ -26,11 +26,11 @@ class KnnClassifierTest {
 	IPoint p5 = new IrisPoint(7.1, 6.5, 2.3, 2.6, EnumVariety.VIRGINICA);
 	IPoint p6 = new IrisPoint(6.5, 3.5, 4.5, 3.9, EnumVariety.VERSICOLOR);
 	
-	Dataset dataset = new IrisDataset();
+	AbstractDataset dataset = new IrisDataset();
 	
 	List<IPoint> neighbours = new ArrayList<>();
 	
-	Column spL, spW, ptL, ptW, variety;
+	AbstractColumn spL, spW, ptL, ptW, variety;
 	
 	@BeforeEach
 	void setup() {

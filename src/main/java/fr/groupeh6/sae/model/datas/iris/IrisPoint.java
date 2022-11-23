@@ -3,7 +3,7 @@ package fr.groupeh6.sae.model.datas.iris;
 import com.opencsv.bean.CsvBindByName;
 
 import fr.groupeh6.sae.model.IPoint;
-import fr.groupeh6.sae.model.columns.Column;
+import fr.groupeh6.sae.model.columns.AbstractColumn;
 
 public class IrisPoint implements IPoint {
 	
@@ -38,7 +38,7 @@ public class IrisPoint implements IPoint {
 		return variety + "[" + sepalLength + "," + sepalWidth + "," + petalLength + "," + petalWidth + "]";
 	}
 
-	public Object getValue(Column col) {
+	public Object getValue(AbstractColumn col) {
 		switch(col.getName()) {
 			case "sepal.length" : return sepalLength;
 			case "sepal.width" : return sepalWidth;
@@ -49,12 +49,12 @@ public class IrisPoint implements IPoint {
 		}
 	}
 
-	public double getNormalizedValue(Column col) {
+	public double getNormalizedValue(AbstractColumn col) {
 		return col.getNormalizedValue(this);
 	}
 
 	@Override
-	public void setValue(Column col, Object o) {
+	public void setValue(AbstractColumn col, Object o) {
 		switch(col.getName()) {
 		case "sepal.length" -> this.sepalLength = (double) o;
 		case "sepal.width" -> this.sepalWidth = (double) o;
