@@ -46,21 +46,21 @@ class KnnClassifierTest {
 	@Test
 	void test_Classify_With_Euclidienne() {
 		KnnClassifier classifier = new KnnClassifier(3, new DistanceEuclidienne(List.of(spL,spW,ptL,ptW)));
-		assertEquals(List.of(p5, p2, p6), classifier.getNeighbours(p1, dataset.getLines()));
-		assertEquals(EnumVariety.VERSICOLOR, classifier.classifyPoint(p1, variety, dataset.getLines()));
+		assertEquals(List.of(p1, p5, p2), classifier.getNeighbours(p1, dataset.getLines()));
+		assertEquals(EnumVariety.SETOSA, classifier.classifyPoint(p1, variety, dataset.getLines()));
 	}
 	
 	@Test
 	void test_Classify_With_Manhattan() {
 		KnnClassifier classifier = new KnnClassifier(3, new DistanceManhattan(List.of(spL,spW,ptL,ptW)));
-		assertEquals(List.of(p5, p6, p2), classifier.getNeighbours(p1, dataset.getLines()));
-		assertEquals(EnumVariety.VERSICOLOR, classifier.classifyPoint(p1, variety, dataset.getLines()));
+		assertEquals(List.of(p1, p5, p6), classifier.getNeighbours(p1, dataset.getLines()));
+		assertEquals(EnumVariety.VIRGINICA, classifier.classifyPoint(p1, variety, dataset.getLines()));
 	}
 	
 	@Test
 	void test_Classify_Default() {
 		KnnClassifier classifier = new KnnClassifier(3, dataset);
-		assertEquals(List.of(p5, p2, p6), classifier.getNeighbours(p1, dataset.getLines()));
-		assertEquals(EnumVariety.VERSICOLOR, classifier.classifyPoint(p1, variety, dataset.getLines()));
+		assertEquals(List.of(p1, p5, p2), classifier.getNeighbours(p1, dataset.getLines()));
+		assertEquals(EnumVariety.SETOSA, classifier.classifyPoint(p1, variety, dataset.getLines()));
 	}
 }
