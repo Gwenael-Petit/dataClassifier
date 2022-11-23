@@ -22,6 +22,10 @@ public class Factory {
 		return null;
 	}
 	
+	public AbstractDataset newDataset(String name) {
+		return StoredDatas.valueOf(name).dataset();
+	}
+	
 	public AbstractColumn newColumn(String columnName) {
 		for(StoredDatas data : StoredDatas.values()) {
 			for(AbstractColumn column : data.dataset().getColumns()) {

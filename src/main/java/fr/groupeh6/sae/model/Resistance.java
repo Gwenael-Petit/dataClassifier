@@ -11,27 +11,62 @@ import fr.groupeh6.sae.model.distance.Distance;
 
 public class Resistance {
 	
-	protected AbstractDataset datas;
+	protected AbstractDataset train;
 	protected Classifier classifier;
+	protected AbstractColumn columnClass;
 	
-	public Resistance(AbstractDataset datas, Classifier classifier) {
-		this.datas = datas;
+	public Resistance(AbstractDataset train, Classifier classifier, AbstractColumn columnClass) {
+		this.train = train;
 		this.classifier = classifier;
+		this.columnClass = columnClass;
 	}
 	
 	public int groupDivison() {
 		return 0; //datas.getNbLines()/
 	}
 	
+	public double resistance() {
+		AbstractDataset ds = Factory.getInstance().newDataset(train.getName());
+		ds.setLines(train.getLines());
+		
+		
+		List<List<IPoint>> groups = getSubsGroups();
+		List<AbstractColumn> columns = train.getColumns();
+		List<Double> rateOfGroupe = new ArrayList<Double>();
+		
+		
+		for(int i = 0; i < groups.size(); i++) {
+			List<IPoint> testGroup = groups.get(i);
+			int rightClassified = 0;
+			train.points.removeAll(testGroup);
+			for(IPoint p: train.points) {
+				for(AbstractColumn c: columns) {
+					if(c.isUpdatable()) ((Updatable)c).update(p.getValue(c));
+				}
+			}
+			
+			for(IPoint p: testGroup) {
+				Object pointClass = classifier.classifyPoint(p, columnClass, train.points);
+				if(p.getValue(columnClass) == pointClass) rightClassified++;
+			}
+			
+			rateOfGroupe.add(1.0*rightClassified/testGroup.size());
+			train.points.addAll(testGroup);
+			
+		}
+		double resistance = calculResistance(rateOfGroupe);
+		return resistance;
+	}
+	
 	private List<List<IPoint>> getSubsGroups() {
 		int nbPointinGroup = groupDivison();
-		int nbGroup = datas.getNbLines()/nbPointinGroup;
+		int nbGroup = train.getNbLines()/nbPointinGroup;
 		
-		Collections.shuffle(datas.points);
+		Collections.shuffle(train.points);
 		
 		List<List<IPoint>> groups = new ArrayList<List<IPoint>>();
 		for(int i = 0; i < nbGroup; i++) {
-			groups.add(new ArrayList<IPoint>(datas.points.subList(i*nbPointinGroup, (i+1)*nbPointinGroup)));
+			groups.add(new ArrayList<IPoint>(train.points.subList(i*nbPointinGroup, (i+1)*nbPointinGroup)));
 		}
 		return groups;
 	}
@@ -41,40 +76,5 @@ public class Resistance {
 		for(Double n : rateOfGroupe) sum += n;
 		double resistance = sum/rateOfGroupe.size();
 		return resistance;
-	}
-	
-	public double resistance(Distance distance, AbstractColumn columnClass) {
-		List<List<IPoint>> groups = getSubsGroups();
-		List<AbstractColumn> columns = datas.getColumns();
-		List<Double> rateOfGroupe = new ArrayList<Double>();
-		
-		
-		for(int i = 0; i < groups.size(); i++) {
-			List<IPoint> testGroup = groups.get(i);
-			int rightClassified = 0;
-			datas.points.removeAll(testGroup);
-			for(IPoint p: datas.points) {
-				for(AbstractColumn c: columns) {
-					if(c.isUpdatable()) ((Updatable)c).update(p.getValue(c));
-				}
-			}
-			
-			for(IPoint p: testGroup) {
-				Object pointClass = classifier.classifyPoint(p, columnClass, datas.points);
-				if(p.getValue(columnClass) == pointClass) rightClassified++;
-			}
-			
-			rateOfGroupe.add(1.0*rightClassified/testGroup.size());
-			datas.points.addAll(testGroup);
-			
-		}
-		double resistance = calculResistance(rateOfGroupe);
-		return resistance;
-	}
-
-	
-	
-	public double resistance(AbstractColumn columnClass) {
-		return resistance(null,columnClass);
 	}
 }

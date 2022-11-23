@@ -1,7 +1,11 @@
 package fr.groupeh6.sae.views;
 
+import java.io.IOException;
+
 import fr.groupeh6.sae.controllers.NewPointController;
+import fr.groupeh6.sae.model.MainModel;
 import fr.groupeh6.sae.model.NewPointModel;
+import fr.groupeh6.sae.model.TypeNotRegisteredException;
 import fr.groupeh6.sae.model.columns.AbstractColumn;
 import fr.groupeh6.sae.model.utils.Observer;
 import fr.groupeh6.sae.model.utils.AbstractSubject;
@@ -36,9 +40,11 @@ public class NewPointView extends AbstractModalView {
 		
 		int i = 0;
 		for(AbstractColumn column : npm.getType().getColumns()) {
-			root.getChildren().add(createField(column.getName(), i++));
+			root.getChildren().add(createField(column.getName(), i));
+			i++;
 		}
 		submit = new Button("Add a Point");
+		submit.setOnAction(e -> load());
 		root.getChildren().add(submit);
 		
 		Scene scene = new Scene(root, 300, 300);
@@ -58,6 +64,15 @@ public class NewPointView extends AbstractModalView {
 		return hBox;
 	}
 	
+	public void load() {
+		try {
+			npc.loadPoint();
+			this.close();
+		} catch (IOException | TypeNotRegisteredException e) {
+			new ErrorView(this, "Veuillez vérifier les types des données.");
+		}
+	}
+	
 	class TextFieldListener implements ChangeListener<String> {
 
 		TextField tf;
@@ -72,6 +87,8 @@ public class NewPointView extends AbstractModalView {
 		public void changed(ObservableValue<? extends String> obs, String oldV, String newV) {
 			if(newV.contains(""+NewPointModel.DELIMITER)) {
 				tf.setText(oldV);
+			} else {
+				npc.setPoint(i, newV);
 			}
 		}
 		

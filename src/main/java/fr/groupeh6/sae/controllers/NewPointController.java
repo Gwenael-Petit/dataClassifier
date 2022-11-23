@@ -1,6 +1,9 @@
 package fr.groupeh6.sae.controllers;
 
+import java.io.IOException;
+
 import fr.groupeh6.sae.model.NewPointModel;
+import fr.groupeh6.sae.model.TypeNotRegisteredException;
 
 public class NewPointController {
 	
@@ -10,11 +13,11 @@ public class NewPointController {
 		this.model = model;
 	}
 	
-	public void setPoint(String s) {
-		//if(!s.isBlank()) model.setPoint());
+	public void setPoint(int i, String value) {
+		model.setData(i, value);
 	}
 	
-	public void loadPoint(String datas) {
-		//model.loadPoint(datas);
+	public void loadPoint() throws IOException, TypeNotRegisteredException {
+		model.loadPoint();
 	}
 }

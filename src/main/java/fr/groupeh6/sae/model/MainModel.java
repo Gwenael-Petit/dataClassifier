@@ -1,6 +1,8 @@
 package fr.groupeh6.sae.model;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,13 +29,18 @@ public class MainModel extends AbstractSubject {
 		} else {
 			if(!loaded.getName().equals(train.getName())) throw new NotSameTypeException();
 			if(toTrain) train.addAllLine(loaded.getLines());
-			else loaded.getLines().forEach(l -> addPoint(l));
+			else loaded.forEach(l -> addPoint(l));
 			notifyObservers();
 		}
 	}
 	
-	public void loadFromString(String line, char delimiter) {
-		
+	public void loadFromString(String line, char delimiter) throws IOException, TypeNotRegisteredException {
+		String columns = train.columns.get(0).getName();
+		for(int i=1; i<train.columns.size(); i++) columns += delimiter + train.columns.get(i).getName();
+		columns += "\n";
+		AbstractDataset loaded = CSVLoader.loadFromReader(new BufferedReader(new StringReader(columns + line)), delimiter);
+		loaded.forEach(l -> addPoint(l));
+		notifyObservers();
 	}
 	
 	public void setClassifier(Classifier classifier) {
@@ -78,7 +85,7 @@ public class MainModel extends AbstractSubject {
 	
 	public AbstractDataset getCategory(String name) {
 		for(AbstractDataset category : allCategories()) 
-			if(category.getName().equals(name)) return category;
+			if(category.getName().equalsIgnoreCase(name)) return category;
 		return null;
 	}
 	

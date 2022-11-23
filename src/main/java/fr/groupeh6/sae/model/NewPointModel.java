@@ -1,5 +1,7 @@
 package fr.groupeh6.sae.model;
 
+import java.io.IOException;
+
 public class NewPointModel {
 	
 	public static final char DELIMITER = ';';
@@ -18,12 +20,12 @@ public class NewPointModel {
 		this.datas[index] = value;
 	}
 	
-	public void loadPoint() {
+	public void loadPoint() throws IOException, TypeNotRegisteredException {
 		String line = datas[0];
 		for(int i=1; i<datas.length; i++) {
 			line += DELIMITER + datas[i];
 		}
-		//mainModel.loadFromString();
+		mainModel.loadFromString(line, DELIMITER);
 	}
 	
 	public AbstractDataset getType() {
