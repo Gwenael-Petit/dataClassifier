@@ -8,6 +8,7 @@ import java.util.List;
 
 import fr.groupeh6.sae.model.classifier.Classifier;
 import fr.groupeh6.sae.model.columns.AbstractColumn;
+import fr.groupeh6.sae.model.distance.Distance;
 import fr.groupeh6.sae.model.utils.AbstractSubject;
 
 public class MainModel extends AbstractSubject {
@@ -16,11 +17,10 @@ public class MainModel extends AbstractSubject {
 	protected List<AbstractDataset> categories = new ArrayList<AbstractDataset>();
 	private AbstractColumn xColumn;
 	private AbstractColumn yColumn;
-	
-	protected Classifier classifier;
 	protected AbstractColumn classClassifier;
+	protected Classifier classifier;
 	
-	
+	protected Distance distance;
 	
 	private double robustesse = 0.0;
 	

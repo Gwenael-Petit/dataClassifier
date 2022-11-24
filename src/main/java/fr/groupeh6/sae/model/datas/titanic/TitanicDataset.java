@@ -4,6 +4,7 @@ import java.util.List;
 import fr.groupeh6.sae.model.AbstractDataset;
 import fr.groupeh6.sae.model.IPoint;
 import fr.groupeh6.sae.model.columns.AbstractColumn;
+import fr.groupeh6.sae.model.columns.BooleanColumn;
 import fr.groupeh6.sae.model.columns.EnumColumn;
 import fr.groupeh6.sae.model.columns.NumberColumn;
 import fr.groupeh6.sae.model.columns.StringColumn;

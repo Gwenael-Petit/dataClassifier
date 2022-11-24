@@ -35,9 +35,9 @@ public class CSVLoader {
 	public static List<IPoint> loadDatas(Reader reader, IPoint type, char delimiter) throws IOException {
 		return new CsvToBeanBuilder<IPoint>(reader)
 				.withSeparator(delimiter)
-				.withType(type.getClass()).
-				build().
-				parse();
+				.withType(type.getClass())
+				.build()
+				.parse();
 	}
 	
 	public static AbstractDataset load(File file, char delimiter) throws TypeNotRegisteredException, IOException {
