@@ -75,8 +75,8 @@ class MainModelTest {
 	@Test
 	void test_add_point() {
 		
-		model.addPoint(p);
-		assertTrue(model.categories.get(0).getLines().contains(p));
+		//model.addPoint(p);
+		//assertTrue(model.categories.get(0).getLines().contains(p));
 		
 		try {
 			model.loadFromFile(path, ',', false);
@@ -135,17 +135,27 @@ class MainModelTest {
 	
 	@Test
 	void test_set_X_column() {
-		
+		model.setxColumn(ptL);
+		assertEquals(ptL, model.getxColumn());
 	}
 	
 	@Test
 	void test_set_Y_column() {
-		
+		model.setyColumn(ptW);
+		assertEquals(ptL, model.getyColumn());
 	}
 	
 	@Test
 	void test_have_classifier() {
-		
+		try {
+			model.loadFromFile(path, ',', false);
+		} catch (NotSameTypeException | IOException | TypeNotRegisteredException e) {
+			System.out.println(e.getMessage());
+		}
+		assertFalse(model.haveClassifier());
+		model.setClassifier(classifier);
+		model.setClassClassifier(classColumn);
+		assertTrue(model.haveClassifier());
 	}
 	
 	@Test
