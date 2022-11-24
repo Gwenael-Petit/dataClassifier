@@ -9,6 +9,7 @@ import fr.groupeh6.sae.model.columns.AbstractColumn;
 import fr.groupeh6.sae.model.columns.EnumColumn;
 import fr.groupeh6.sae.model.columns.NumberColumn;
 import fr.groupeh6.sae.model.columns.StringColumn;
+import fr.groupeh6.sae.model.distance.DistanceEuclidienne;
 
 public class PokemonDataset extends AbstractDataset {
 	
@@ -41,8 +42,7 @@ public class PokemonDataset extends AbstractDataset {
 
 	@Override
 	public double distance(IPoint p1, IPoint p2) {
-		// TODO Auto-generated method stub
-		return 0;
+		return new DistanceEuclidienne(columns.subList(1, 12)).distance(p1, p2);
 	}
 
 	
