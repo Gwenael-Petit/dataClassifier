@@ -65,11 +65,11 @@ class ColumnTest {
 		List<String> response = new ArrayList();
 		assertEquals(response ,col.getDistinctValues());
 		
-		AbstractColumn col2 = new NumberColumn("sepal-width");
-		AbstractColumn col3 = new NumberColumn("sepal-length");
-		AbstractColumn col4 = new NumberColumn("petal-width");
-		AbstractColumn col5 = new NumberColumn("petal-width");
-		AbstractColumn col6 = new EnumColumn("", EnumVariety.class);
+		AbstractColumn col2 = new NumberColumn("sepal.width");
+		AbstractColumn col3 = new NumberColumn("sepal.length");
+		AbstractColumn col4 = new NumberColumn("petal.width");
+		AbstractColumn col5 = new NumberColumn("petal.width");
+		AbstractColumn col6 = new EnumColumn("variety", EnumVariety.class);
 		List<AbstractColumn> listColumns = new ArrayList();
 		listColumns.add(col2);
 		listColumns.add(col3);
@@ -78,14 +78,20 @@ class ColumnTest {
 		listColumns.add(col6);
 		AbstractDataset dataset = new IrisDataset();
 		IPoint point = new IrisPoint(5.1, 3.5, 1.4, .2, EnumVariety.SETOSA);
+		IPoint point2 = new IrisPoint(2.6, 3.5, 2.0, .4, EnumVariety.SETOSA);
+		List<String> response2 = new ArrayList();
 		dataset.addLine(point);
+		dataset.addLine(point2);
 		dataset.setColumns(listColumns);
 		col2.setDataset(dataset);
 		col3.setDataset(dataset);
 		col4.setDataset(dataset);
 		col5.setDataset(dataset);
 		col6.setDataset(dataset);		
-		response.add("1.4");
+		response.add("3.5");
+		response2.add("5.1");
+		response2.add("2.6");
 		assertEquals(response, col2.getDistinctValues());
+		assertEquals(response2, col3.getDistinctValues());
 	}
 }
