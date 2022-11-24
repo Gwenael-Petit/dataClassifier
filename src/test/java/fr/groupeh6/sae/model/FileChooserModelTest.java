@@ -22,25 +22,23 @@ class FileChooserModelTest {
 	MainController mainController = new MainController(mainModel);
 	FileChooserModel fcm = new FileChooserModel(mainController, true);
 	
-	@BeforeEach
-	void setup() {
-		
-		fcm.setFile(file);
-		fcm.setDelimiter(',');
-	}
 
 	@Test
 	void test_set_file() {
+		fcm.setFile(file);
 		assertEquals(fcm.getFile(), file);
 	}
 	
 	@Test
 	void test_set_delimiter() {
+		fcm.setDelimiter(',');
 		assertEquals(fcm.getDelimiter(), ',');
 	}
 	
 	@Test
-	void test() {
+	void test_loadCSV() {
+		fcm.setFile(file);
+		fcm.setDelimiter(',');
 		try {
 			fcm.loadCSV();
 		} catch (NotSameTypeException | IOException | TypeNotRegisteredException e) {

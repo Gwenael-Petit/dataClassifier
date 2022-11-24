@@ -13,12 +13,12 @@ import fr.groupeh6.sae.model.utils.AbstractSubject;
 public class MainModel extends AbstractSubject {
 	
 	private AbstractDataset train;
-	private List<AbstractDataset> categories = new ArrayList<AbstractDataset>();
+	protected List<AbstractDataset> categories = new ArrayList<AbstractDataset>();
 	private AbstractColumn xColumn;
 	private AbstractColumn yColumn;
 	
-	private Classifier classifier;
-	private AbstractColumn classClassifier;
+	protected Classifier classifier;
+	protected AbstractColumn classClassifier;
 	
 	private double robustesse = 0.0;
 	
