@@ -20,6 +20,8 @@ public class MainModel extends AbstractSubject {
 	protected Classifier classifier;
 	protected AbstractColumn classClassifier;
 	
+	
+	
 	private double robustesse = 0.0;
 	
 	public void loadFromFile(String dataFile, char delimiter, boolean toTrain) throws NotSameTypeException, IOException, TypeNotRegisteredException {

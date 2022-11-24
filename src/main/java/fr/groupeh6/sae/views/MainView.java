@@ -9,6 +9,7 @@ import fr.groupeh6.sae.controllers.FileChooserController;
 import fr.groupeh6.sae.controllers.MainController;
 import fr.groupeh6.sae.controllers.NewPointController;
 import fr.groupeh6.sae.model.AbstractDataset;
+import fr.groupeh6.sae.model.DistanceModel;
 import fr.groupeh6.sae.model.FileChooserModel;
 import fr.groupeh6.sae.model.IPoint;
 import fr.groupeh6.sae.model.MainModel;
@@ -104,7 +105,11 @@ public class MainView extends Stage implements Observer {
 			
 			if(!tfK.getText().isBlank()) {
 				int k = Integer.valueOf(tfK.getText());
-				controller.setClassifier(k, model.getTrainDataset());
+				if(defaultDistance.isSelected()) {
+					controller.setClassifier(k, model.getTrainDataset());
+				} else {
+					// recuperer la distance manuel
+				}
 			}
 		});
 		
@@ -126,6 +131,8 @@ public class MainView extends Stage implements Observer {
 		});
 		
 		defaultDistance.selectedProperty().addListener((obs, oldV, newV) -> bSetDistance.setDisable(newV));
+		
+		bSetDistance.setOnAction(e -> new DistanceView(this, new DistanceModel(model)));
 	}
 	
 	@Override
