@@ -28,7 +28,6 @@ public class Robustesse {
 	}
 	
 	public AbstractDataset[] makeGroups() {
-		Collections.shuffle(train.getLines());
 		AbstractDataset[] groups = new AbstractDataset[NUMBER_GROUPS];
 		for(int gi=0; gi<NUMBER_GROUPS; gi++) {
 			groups[gi] = Factory.getInstance().newDataset(train.columns);
@@ -37,6 +36,7 @@ public class Robustesse {
 	}
 	
 	public void addDatasInGroups(AbstractDataset[] groups) {
+		Collections.shuffle(train.getLines());
 		int i=0;
 		for(IPoint point : train.getLines()) {
 			groups[i].addLine(point);
