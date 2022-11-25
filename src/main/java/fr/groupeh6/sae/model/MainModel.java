@@ -22,7 +22,7 @@ public class MainModel extends AbstractSubject {
 	
 	protected Distance distance;
 	
-	private double robustesse = 0.0;
+	protected double robustesse = 0.0;
 	
 	public void loadFromFile(String dataFile, char delimiter, boolean toTrain) throws NotSameTypeException, IOException, TypeNotRegisteredException {
 		AbstractDataset loaded = CSVLoader.load(dataFile, delimiter);
@@ -53,7 +53,7 @@ public class MainModel extends AbstractSubject {
 		for(AbstractDataset category : categories) {
 			category.forEach(point -> points.add(point)); 
 		}
-		resetCategories();
+		categories.clear();
 		createCategories();
 		for(IPoint point : points) addPoint(point);
 		robustesse();
@@ -96,10 +96,6 @@ public class MainModel extends AbstractSubject {
 	
 	public void addCategory(AbstractDataset category) {
 		categories.add(category);
-	}
-	
-	public void resetCategories() {
-		categories.clear();
 	}
 	
 	public List<AbstractDataset> allCategories() {

@@ -15,11 +15,10 @@ import fr.groupeh6.sae.model.IPoint;
 import fr.groupeh6.sae.model.MainModel;
 import fr.groupeh6.sae.model.NewPointModel;
 import fr.groupeh6.sae.model.columns.AbstractColumn;
-import fr.groupeh6.sae.model.utils.Observer;
 import fr.groupeh6.sae.model.utils.AbstractSubject;
+import fr.groupeh6.sae.model.utils.Observer;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -31,8 +30,9 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Popup;
+import javafx.scene.control.Tooltip;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class MainView extends Stage implements Observer {
 	
@@ -53,9 +53,6 @@ public class MainView extends Stage implements Observer {
 	CheckBox defaultDistance;
 	@FXML
 	Label modelType, robustesseLabel;
-	
-	
-	Popup pointPopup;
 	
 	public MainView() {}
 	
@@ -166,35 +163,18 @@ public class MainView extends Stage implements Observer {
 				for(AbstractDataset category : model.allCategories()) {
 					XYChart.Series<Number, Number> series = new XYChart.Series<>();
 					series.setName(category.getName());
+					sc.getData().add(series);
 					for(IPoint point : category) {
 						XYChart.Data<Number, Number> data = new XYChart.Data<Number, Number>(model.getxColumn().getNormalizedValue(point), model.getyColumn().getNormalizedValue(point));
-						data.setExtraValue(point);
 						series.getData().add(data);
+						Tooltip toolTip = new Tooltip(point.toString());
+						toolTip.setShowDelay(Duration.millis(10));
+						Tooltip.install(data.getNode(), toolTip);
+						data.getNode().setOnMouseClicked(e -> {
+							new PointView(this, point);
+						});
 					}
-					sc.getData().add(series);
 				}
-				setEventSCPoints();
-			}
-		}
-	}
-	
-	public void setEventSCPoints() {
-		for(XYChart.Series<Number, Number> serie : sc.getData()) {
-			for(XYChart.Data<Number, Number> point : serie.getData()) {
-				point.getNode().setOnMouseClicked(e -> {
-					new PointView(this, (IPoint) point.getExtraValue());
-				});
-				point.getNode().setOnMouseEntered(e -> {
-					pointPopup = new Popup();
-					pointPopup.getContent().add(new Label(point.getExtraValue().toString()));
-					Point2D anchor = point.getNode().localToScreen(e.getX(), e.getY());
-					pointPopup.setX(anchor.getX());
-					pointPopup.setY(anchor.getY());
-					pointPopup.show(this);
-				});
-				point.getNode().setOnMouseExited(e -> {
-					pointPopup.hide();
-				});
 			}
 		}
 	}

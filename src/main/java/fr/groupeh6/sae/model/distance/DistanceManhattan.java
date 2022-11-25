@@ -22,4 +22,9 @@ public class DistanceManhattan implements Distance {
 		return somme;
 	}
 
+	@Override
+	public List<AbstractColumn> getColumnsDistance() {
+		return columns;
+	}
+
 }

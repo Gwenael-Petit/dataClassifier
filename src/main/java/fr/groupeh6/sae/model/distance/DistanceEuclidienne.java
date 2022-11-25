@@ -22,4 +22,9 @@ public class DistanceEuclidienne implements Distance {
 		return Math.sqrt(somme);
 	}
 
+	@Override
+	public List<AbstractColumn> getColumnsDistance() {
+		return columns;
+	}
+
 }
