@@ -84,14 +84,14 @@ class TitanicPointTest {
 		assertEquals(1.0,pers4.getNormalizedValue(survived));
 		assertEquals(0.5,pers3.getNormalizedValue(pClass));
 		assertThrows(NotNormalizableException.class, () -> pers1.getNormalizedValue(name));
-		assertEquals(0.0,pers2.getNormalizedValue(sex));
+		assertEquals(0.5,pers2.getNormalizedValue(sex));
 		assertEquals(0.1818,pers4.getNormalizedValue(age),0.0001);
 		assertEquals(0.6,pers3.getNormalizedValue(sibSp));
 		assertEquals(0.2,pers3.getNormalizedValue(parch));
 		assertThrows(NotNormalizableException.class, () -> pers3.getNormalizedValue(ticket));
 		assertEquals(0.0421,pers3.getNormalizedValue(fare),0.0001);
 		assertThrows(NotNormalizableException.class, () -> pers5.getNormalizedValue(cabin));
-		assertEquals(0.5,pers4.getNormalizedValue(embarked));
+		assertEquals(0.666,pers4.getNormalizedValue(embarked),0.001);
 	}
 	
 	
@@ -111,12 +111,6 @@ class TitanicPointTest {
 		assertEquals(null, p.getValue(cabin));
 		assertEquals(null, p.getValue(embarked));
 	}
-	
-	/*@Test
-	void distanceTo() {
-		assertEquals(1.421,pers1.distanceTo(pers2),0.001);
-		assertEquals(1.130,pers2.distanceTo(pers5),0.001);
-	}*/
 	
 	@Test
 	void test_setValue() {

@@ -82,5 +82,15 @@ class DistanceManhattanTest {
 		assertEquals(2.564, dist.distance(p1, p3), DELTA);
 		assertEquals(2.609, dist.distance(p1, p2), DELTA);
 	}
+	
+	@Test
+	void test_get_columns_distance() {
+		assertEquals(null,dist.getColumnsDistance());
+		dist.columns = List.of(spL,ptL,ptW);
+		assertEquals("[sepal.length, petal.length, petal.width]",dist.getColumnsDistance().toString());
+		dist.columns = List.of(spL,ptW);
+		assertEquals("[sepal.length, petal.width]",dist.getColumnsDistance().toString());
+		
+	}
 
 }

@@ -1,19 +1,14 @@
 package fr.groupeh6.sae.model;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import fr.groupeh6.sae.model.classifier.KnnClassifier;
+import fr.groupeh6.sae.model.datas.StoredDatas;
 import fr.groupeh6.sae.model.datas.iris.EnumVariety;
 import fr.groupeh6.sae.model.datas.iris.IrisDataset;
 import fr.groupeh6.sae.model.datas.iris.IrisPoint;
@@ -21,6 +16,9 @@ import fr.groupeh6.sae.model.datas.iris.IrisPoint;
 class DatasetTest {
 
 	AbstractDataset irisDataset = new IrisDataset();
+	AbstractDataset irisDatasetEnum = StoredDatas.IRIS.dataset();
+	AbstractDataset titanicDatasetEnum = StoredDatas.TITANIC.dataset();
+	AbstractDataset pokemonDatasetEnum = StoredDatas.POKEMON.dataset();
 	IrisPoint setosa = new IrisPoint(2.1, 4.1, 3.0, 1.1, EnumVariety.SETOSA);
 	IrisPoint virginica = new IrisPoint(3.1, 4.1, 2.1, 4.2, EnumVariety.VIRGINICA);
 	

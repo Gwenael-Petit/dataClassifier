@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import fr.groupeh6.sae.model.IPoint;
 import fr.groupeh6.sae.model.columns.AbstractColumn;
 import fr.groupeh6.sae.model.columns.BooleanColumn;
 import fr.groupeh6.sae.model.columns.EnumColumn;
@@ -17,13 +18,13 @@ import fr.groupeh6.sae.model.datas.pokemon.PokemonPoint;
 
 class PokemonPointTest {
 
-	PokemonPoint poke1 = new PokemonPoint("Swablu", 40, 5120, 255.0, 60, 600000, 45, 75, 50, EnumType.NORMAL,
+	IPoint poke1 = new PokemonPoint("Swablu", 40, 5120, 255.0, 60, 600000, 45, 75, 50, EnumType.NORMAL,
 			EnumType.FLYING, 1.2, false);
-	PokemonPoint poke2 = new PokemonPoint("Azelf", 125, 20480, 3.0, 70, 1250000, 75, 70, 115, EnumType.PSYCHIC, null, 0.3,
+	IPoint poke2 = new PokemonPoint("Azelf", 125, 20480, 3.0, 70, 1250000, 75, 70, 115, EnumType.PSYCHIC, null, 0.3,
 			true);
-	PokemonPoint poke3 = new PokemonPoint("Gallade", 165, 5120, 45.0, 95, 1250000, 68, 115, 110, EnumType.PSYCHIC,
+	IPoint poke3 = new PokemonPoint("Gallade", 165, 5120, 45.0, 95, 1250000, 68, 115, 110, EnumType.PSYCHIC,
 			EnumType.FIGHTING, 52.0, false);
-	PokemonPoint pokeNull = new PokemonPoint();
+	IPoint pokeNull = new PokemonPoint();
 
 	StringColumn name = new StringColumn("name");
 	NumberColumn attack = new NumberColumn("attack");
@@ -106,8 +107,8 @@ class PokemonPointTest {
 		assertEquals(0.5076,poke3.getNormalizedValue(hp),0.0001);
 		assertEquals(0.6666,poke1.getNormalizedValue(spAttack),0.0001);
 		assertEquals(0.7272,poke3.getNormalizedValue(spDefense),0.0001);
-		assertEquals(0.8235,poke3.getNormalizedValue(type1),0.0001);
-		assertThrows(NullPointerException.class, () ->poke2.getNormalizedValue(type2));
+		assertEquals(0.8333,poke3.getNormalizedValue(type1),0.0001);
+		assertEquals(0.0,poke2.getNormalizedValue(type2));
 		assertEquals(0.3413,poke3.getNormalizedValue(speed),0.0001);
 		
 	}
@@ -167,5 +168,6 @@ class PokemonPointTest {
 		poke1.setValue(legendary, true);
 		assertEquals(true,poke1.getValue(legendary));
 	}
+	
 
 }
