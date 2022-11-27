@@ -7,7 +7,7 @@ import fr.groupeh6.sae.model.columns.AbstractColumn;
 
 public class Robustesse {
 	
-	private static int NUMBER_GROUPS = 5;
+	protected static int NUMBER_GROUPS = 5;
 	
 	protected AbstractDataset train;
 	protected Classifier classifier;
