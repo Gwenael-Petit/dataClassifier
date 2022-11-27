@@ -23,6 +23,10 @@ public class Robustesse {
 	public double robustesse() {
 		AbstractDataset[] groups = makeGroups();
 		addDatasInGroups(groups);
+		for(int i=0; i<groups.length; i++) {
+			System.out.println("Groupe " + i);
+			groups[i].forEach(p -> System.out.println("\t" + p));
+		}
 		double[] ratePerGroups = calculRatePerGroup(groups);
 		return calculRobustesse(ratePerGroups);
 	}
@@ -48,6 +52,7 @@ public class Robustesse {
 		double[] rates = new double[groups.length];
 		for(int i=0; i<groups.length; i++) {
 			rates[i] = rateOfGroup(groups, i);
+			System.out.println("Groupe " + i + " accurency = " + rates[i]*100.0 + "%");
 		}
 		return rates;
 	}
@@ -75,6 +80,7 @@ public class Robustesse {
 		for(double n : rateOfGroupe) {
 			sum += n;
 		}
+		System.out.println("Final accurency : " + (1.0*sum/rateOfGroupe.length)*100.0 + "%");
 		return 1.0*sum/rateOfGroupe.length;
 	}
 }
