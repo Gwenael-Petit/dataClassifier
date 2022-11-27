@@ -38,7 +38,7 @@ public class TitanicDataset extends AbstractDataset{
 
 	@Override
 	public double distance(IPoint p1, IPoint p2) {
-		return new DistanceEuclidienne(List.of(survived, pClass, sex, age, sibSp, parch, fare, embarked)).distance(p1, p2);
+		return new DistanceEuclidienne(List.of(pClass, sex, age, parch, embarked)).distance(p1, p2);
 	}
 
 }
