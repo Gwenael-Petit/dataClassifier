@@ -1,7 +1,11 @@
 package fr.groupeh6.sae.model.points;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import fr.groupeh6.sae.model.AbstractDataset;
@@ -17,18 +21,25 @@ class PokemonDatasetTest {
 			true);
 	IPoint poke3 = new PokemonPoint("Gallade", 165, 5120, 45.0, 95, 1250000, 68, 115, 110, EnumType.PSYCHIC,
 			EnumType.FIGHTING, 52.0, false);
-	AbstractDataset pokemon= new PokemonDataset();
+	AbstractDataset pokemonDs;
 
+	@BeforeEach
+	void setup() {
+		pokemonDs = new PokemonDataset();
+		pokemonDs.addAllLine(List.of(poke1, poke2, poke3));
+	}
+	
 	@Test
 	void get_type_test() {
-		assertEquals("Pokemon [name=null, attack=0.0, eggSteps=0.0, captureRate=0.0, defense=0.0, experience=0.0, hp=0.0, spAttack=0.0, spDefense=0.0, type1=null, type2=null, speed=0.0, legendary=false]",pokemon.getType().toString());
+		assertTrue(pokemonDs.getType() instanceof PokemonPoint);
+		//assertEquals("Pokemon [name=null, attack=0.0, eggSteps=0.0, captureRate=0.0, defense=0.0, experience=0.0, hp=0.0, spAttack=0.0, spDefense=0.0, type1=null, type2=null, speed=0.0, legendary=false]",pokemonDs.getType().toString());
 	}
 	
 	@Test
 	void test_distance() {
-		assertEquals(1.4142,pokemon.distance(poke1,poke2),0.0001);
-		assertEquals(0.0,pokemon.distance(poke1,poke1),0.0001);
-		assertEquals(1,pokemon.distance(poke2,poke3));
+		assertEquals(2.7489,pokemonDs.distance(poke1,poke2),0.0001);
+		assertEquals(0.0,pokemonDs.distance(poke1,poke1),0.0001);
+		assertEquals(2.1681,pokemonDs.distance(poke2,poke3),0.0001);
 	}
 
 }
