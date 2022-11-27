@@ -63,5 +63,7 @@ public abstract class AbstractColumn implements IValueNormalizer {
 	}
 	
 	public abstract boolean isUpdatable();
+	
+	public abstract boolean isEnumerative();
 
 }

@@ -39,4 +39,9 @@ public class EnumColumn<T extends Enum<T>> extends AbstractColumn {
 		return false;
 	}
 
+	@Override
+	public boolean isEnumerative() {
+		return true;
+	}
+
 }

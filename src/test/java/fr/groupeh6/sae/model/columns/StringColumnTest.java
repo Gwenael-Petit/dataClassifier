@@ -27,5 +27,10 @@ class StringColumnTest {
 	void should_return_not_updatable() {
 		assertFalse(col.isUpdatable());
 	}
+	
+	@Test
+	void should_return_not_enumerative() {
+		assertFalse(col.isEnumerative());
+	}
 
 }

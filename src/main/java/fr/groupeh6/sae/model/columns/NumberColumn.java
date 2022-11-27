@@ -39,4 +39,9 @@ public class NumberColumn extends AbstractColumn implements Updatable {
 		return true;
 	}
 
+	@Override
+	public boolean isEnumerative() {
+		return false;
+	}
+
 }

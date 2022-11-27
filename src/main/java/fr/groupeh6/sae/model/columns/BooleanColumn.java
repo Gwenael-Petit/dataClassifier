@@ -26,4 +26,9 @@ public class BooleanColumn extends AbstractColumn {
 		return false;
 	}
 
+	@Override
+	public boolean isEnumerative() {
+		return false;
+	}
+
 }

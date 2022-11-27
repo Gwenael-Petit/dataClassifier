@@ -45,5 +45,10 @@ class EnumColumnTest {
 		assertEquals(EnumTest.VERSICOLOR, col.denormalize(0.5));
 		assertEquals(EnumTest.VIRGINICA, col.denormalize(1));
 	}
+	
+	@Test
+	void should_return_enumerative() {
+		assertTrue(col.isEnumerative());
+	}
 
 }

@@ -26,4 +26,9 @@ public class StringColumn extends AbstractColumn {
 		return false;
 	}
 
+	@Override
+	public boolean isEnumerative() {
+		return false;
+	}
+
 }

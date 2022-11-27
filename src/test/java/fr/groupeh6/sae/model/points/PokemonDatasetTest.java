@@ -26,9 +26,9 @@ class PokemonDatasetTest {
 	
 	@Test
 	void test_distance() {
-		assertEquals(0.4581,pokemon.distance(poke1,poke2),0.0001);
+		assertEquals(1.4142,pokemon.distance(poke1,poke2),0.0001);
 		assertEquals(0.0,pokemon.distance(poke1,poke1),0.0001);
-		assertEquals(0.3333,pokemon.distance(poke2,poke3),0.0001);
+		assertEquals(1,pokemon.distance(poke2,poke3));
 	}
 
 }

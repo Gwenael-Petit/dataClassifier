@@ -50,5 +50,10 @@ class NumberColumnTest {
 		assertEquals(15.0, col.max);
 		assertEquals(-3.0, col.min);
 	}
+	
+	@Test
+	void should_return_not_enumerative() {
+		assertFalse(col.isEnumerative());
+	}
 
 }

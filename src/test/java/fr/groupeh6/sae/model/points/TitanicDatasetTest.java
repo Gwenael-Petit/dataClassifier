@@ -24,7 +24,7 @@ class TitanicDatasetTest {
 	
 	@Test
 	void test_distance() {
-		assertEquals(0.8333,titanic.distance(pers1,pers2),0.0001);
+		assertEquals(0.4142,titanic.distance(pers1,pers2),0.0001);
 		assertEquals(0.8333,titanic.distance(pers2,pers3),0.0001);
 		assertEquals(0.0,titanic.distance(pers1,pers3),0.0001);
 	}

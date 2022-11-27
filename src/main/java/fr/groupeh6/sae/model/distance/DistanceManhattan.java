@@ -17,7 +17,14 @@ public class DistanceManhattan implements Distance {
 	public double distance(IPoint p1, IPoint p2) {
 		double somme = 0;
 		for(AbstractColumn column : columns) {
-			somme += Math.abs(p1.getNormalizedValue(column)-p2.getNormalizedValue(column));
+			double val1 = p1.getNormalizedValue(column);
+			double val2 = p2.getNormalizedValue(column);
+			if(column.isEnumerative()) {
+				double dist = val1 == val2 ? 0 : 1;
+				somme += dist;
+			} else {
+				somme += Math.abs(val1-val2);
+			}
 		}
 		return somme;
 	}
