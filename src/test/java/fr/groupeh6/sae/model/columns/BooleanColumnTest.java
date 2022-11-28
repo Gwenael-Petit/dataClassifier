@@ -42,5 +42,10 @@ class BooleanColumnTest {
 	void should_return_not_enumerative() {
 		assertFalse(col.isEnumerative());
 	}
+	
+	@Test
+	void test_toString() {
+		assertEquals("Boolean:Test", col.toString());
+	}
 
 }

@@ -8,7 +8,7 @@ import fr.groupeh6.sae.model.IPoint;
 
 public abstract class AbstractColumn implements IValueNormalizer {
 	
-	private String name;
+	protected String name;
 	protected AbstractDataset dataset;
 	
 	public AbstractColumn(String name) {
@@ -55,11 +55,6 @@ public abstract class AbstractColumn implements IValueNormalizer {
 		if (!(obj instanceof AbstractColumn)) return false;
 		AbstractColumn other = (AbstractColumn) obj;
 		return name.equals(other.name);
-	}
-	
-	@Override
-	public String toString() {
-		return name;
 	}
 	
 	public abstract boolean isUpdatable();

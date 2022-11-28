@@ -3,17 +3,19 @@ package fr.groupeh6.sae.views;
 import java.io.IOException;
 
 import fr.groupeh6.sae.controllers.NewPointController;
-import fr.groupeh6.sae.model.MainModel;
 import fr.groupeh6.sae.model.NewPointModel;
 import fr.groupeh6.sae.model.TypeNotRegisteredException;
 import fr.groupeh6.sae.model.columns.AbstractColumn;
-import fr.groupeh6.sae.model.utils.Observer;
-import fr.groupeh6.sae.model.utils.AbstractSubject;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import fr.groupeh6.sae.views.listeners.BooleanListener;
+import fr.groupeh6.sae.views.listeners.EnumListener;
+import fr.groupeh6.sae.views.listeners.NumberListener;
+import fr.groupeh6.sae.views.listeners.StringListener;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -25,9 +27,9 @@ public class NewPointView extends AbstractModalView {
 	protected NewPointModel npm;
 	protected NewPointController npc;
 	
-	VBox root;
+	protected VBox root;
 	
-	Button submit;
+	protected Button submit;
 	
 	public NewPointView(Window owner, NewPointModel npm, NewPointController npc) {
 		super(owner);
@@ -35,33 +37,56 @@ public class NewPointView extends AbstractModalView {
 		this.npc = npc;
 		
 		root = new VBox();
+		root.setMinWidth(400);
 		root.setAlignment(Pos.CENTER);
 		root.setSpacing(10);
 		
 		int i = 0;
 		for(AbstractColumn column : npm.getType().getColumns()) {
-			root.getChildren().add(createField(column.getName(), i));
+			root.getChildren().add(createField(column, i));
 			i++;
 		}
 		submit = new Button("Add a Point");
 		submit.setOnAction(e -> load());
 		root.getChildren().add(submit);
 		
-		Scene scene = new Scene(root, 300, 300);
+		Scene scene = new Scene(root);
 		this.setScene(scene);
 		this.setTitle("Add Point");
 		this.show();
 	}
 
-	public HBox createField(String name, int i) {
+	public HBox createField(AbstractColumn column, int i) {
 		HBox hBox = new HBox();
 		hBox.setAlignment(Pos.CENTER);
 		hBox.setSpacing(20);
-		hBox.getChildren().add(new Label(name));
-		TextField tf = new TextField();
-		tf.textProperty().addListener(new TextFieldListener(tf, i));
-		hBox.getChildren().add(tf);
+		hBox.getChildren().add(new Label(column.getName()));
+		hBox.getChildren().add(createNode(column, i));
 		return hBox;
+	}
+	
+	public Node createNode(AbstractColumn column, int i) {
+		Node node = null;
+		switch(column.toString().split(":")[0]) {
+		case "Boolean" :
+			node = new CheckBox();
+			((CheckBox)node).selectedProperty().addListener(new BooleanListener(npm, i));
+			break;
+		case "Number" :
+			node = new TextField();
+			((TextField)node).textProperty().addListener(new NumberListener(npm, i, (TextField) node));
+			break;
+		case "Enum" :
+			node = new ComboBox<String>();
+			((ComboBox<String>)node).getItems().addAll(column.getDistinctValues());
+			((ComboBox<String>)node).getSelectionModel().selectedItemProperty().addListener(new EnumListener(npm, i));
+			break;
+		default :
+			node = new TextField();
+			((TextField)node).textProperty().addListener(new StringListener(npm, i, (TextField) node));
+			break;
+		}
+		return node;
 	}
 	
 	public void load() {
@@ -71,27 +96,6 @@ public class NewPointView extends AbstractModalView {
 		} catch (IOException | TypeNotRegisteredException e) {
 			new ErrorView(this, "Veuillez vérifier les types des données.");
 		}
-	}
-	
-	class TextFieldListener implements ChangeListener<String> {
-
-		TextField tf;
-		int i;
-		
-		public TextFieldListener(TextField tf, int i) {
-			this.tf = tf;
-			this.i = i;
-		}
-		
-		@Override
-		public void changed(ObservableValue<? extends String> obs, String oldV, String newV) {
-			if(newV.contains(""+NewPointModel.DELIMITER)) {
-				tf.setText(oldV);
-			} else {
-				npc.setPoint(i, newV);
-			}
-		}
-		
 	}
 	
 }

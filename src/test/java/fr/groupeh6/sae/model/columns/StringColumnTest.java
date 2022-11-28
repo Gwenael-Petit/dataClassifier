@@ -32,5 +32,10 @@ class StringColumnTest {
 	void should_return_not_enumerative() {
 		assertFalse(col.isEnumerative());
 	}
+	
+	@Test
+	void test_toString() {
+		assertEquals("String:Test", col.toString());
+	}
 
 }

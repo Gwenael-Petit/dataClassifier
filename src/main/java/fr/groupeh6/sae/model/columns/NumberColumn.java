@@ -43,5 +43,10 @@ public class NumberColumn extends AbstractColumn implements Updatable {
 	public boolean isEnumerative() {
 		return false;
 	}
+	
+	@Override
+	public String toString() {
+		return "Number:"+name;
+	}
 
 }

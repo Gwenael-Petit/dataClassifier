@@ -30,5 +30,10 @@ public class BooleanColumn extends AbstractColumn {
 	public boolean isEnumerative() {
 		return false;
 	}
+	
+	@Override
+	public String toString() {
+		return "Boolean:" + name;
+	}
 
 }

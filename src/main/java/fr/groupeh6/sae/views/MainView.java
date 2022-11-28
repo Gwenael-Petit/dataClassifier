@@ -170,9 +170,7 @@ public class MainView extends Stage implements Observer {
 						Tooltip toolTip = new Tooltip(point.toString());
 						toolTip.setShowDelay(Duration.millis(10));
 						Tooltip.install(data.getNode(), toolTip);
-						data.getNode().setOnMouseClicked(e -> {
-							new PointView(this, point);
-						});
+						data.getNode().setOnMouseClicked(e -> new PointView(this, point));
 					}
 				}
 			}

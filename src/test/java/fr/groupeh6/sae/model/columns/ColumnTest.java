@@ -36,11 +36,6 @@ class ColumnTest {
 	}
 	
 	@Test
-	void should_toString_return_the_name_column() {
-		assertEquals("Test", col.toString());
-	}
-	
-	@Test
 	void test_link_to_a_dataset() {
 		assertFalse(col.isLinkedToADataset());
 		AbstractDataset ds = new IrisDataset();

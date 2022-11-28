@@ -56,4 +56,8 @@ class NumberColumnTest {
 		assertFalse(col.isEnumerative());
 	}
 
+	@Test
+	void test_toString() {
+		assertEquals("Number:Test", col.toString());
+	}
 }

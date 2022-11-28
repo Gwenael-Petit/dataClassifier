@@ -31,4 +31,8 @@ public class StringColumn extends AbstractColumn {
 		return false;
 	}
 
+	@Override
+	public String toString() {
+		return "String:"+name;
+	}
 }
