@@ -10,5 +10,7 @@ public interface Distance {
 	public double distance(IPoint p1, IPoint p2);
 	
 	public List<AbstractColumn> getColumnsDistance();
+	
+	public String name();
 
 }

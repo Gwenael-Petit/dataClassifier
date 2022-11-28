@@ -7,6 +7,8 @@ import fr.groupeh6.sae.model.columns.AbstractColumn;
 
 public class DistanceManhattan implements Distance {
 	
+	public final static String NAME = "Manhattan";
+	
 	protected List<AbstractColumn> columns;
 	
 	public DistanceManhattan(List<AbstractColumn> columns) {
@@ -32,6 +34,11 @@ public class DistanceManhattan implements Distance {
 	@Override
 	public List<AbstractColumn> getColumnsDistance() {
 		return columns;
+	}
+
+	@Override
+	public String name() {
+		return NAME;
 	}
 
 }

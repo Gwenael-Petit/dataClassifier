@@ -30,10 +30,20 @@ public class IrisDataset extends AbstractDataset {
 	public IPoint getType() {
 		return new IrisPoint();
 	}
+	
+	@Override
+	public List<AbstractColumn> getColumnsDistance() {
+		return null;
+	}
 
 	@Override
 	public double distance(IPoint p1, IPoint p2) {
 		return new DistanceEuclidienne(columns.subList(0, 4)).distance(p1, p2);
+	}
+
+	@Override
+	public String name() {
+		return DistanceEuclidienne.NAME;
 	}
 
 }

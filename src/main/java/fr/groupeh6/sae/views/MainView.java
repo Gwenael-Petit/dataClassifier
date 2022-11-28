@@ -105,6 +105,7 @@ public class MainView extends Stage implements Observer {
 				if(defaultDistance.isSelected()) {
 					controller.setClassifier(k, model.getTrainDataset());
 				} else {
+					controller.setClassClassifier(null);
 					// recuperer la distance manuel
 				}
 			}

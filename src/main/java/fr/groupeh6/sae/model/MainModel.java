@@ -19,7 +19,6 @@ public class MainModel extends AbstractSubject {
 	private AbstractColumn yColumn;
 	protected AbstractColumn classClassifier;
 	protected Classifier classifier;
-	
 	protected Distance distance;
 	
 	protected double robustesse = 0.0;
@@ -28,6 +27,7 @@ public class MainModel extends AbstractSubject {
 		AbstractDataset loaded = CSVLoader.load(dataFile, delimiter);
 		if(!haveTrainDatasLoaded()) {
 			train = loaded;
+			distance = loaded;
 			createCategories();
 			notifyObservers(loaded);
 		} else {
@@ -106,7 +106,6 @@ public class MainModel extends AbstractSubject {
 		if(haveClassifier()) {
 			this.robustesse = train.robustesse(classifier, classClassifier);
 		}
-		//notifyObservers();
 	}
 	
 	public double getRobustesse() {
@@ -145,5 +144,13 @@ public class MainModel extends AbstractSubject {
 
 	public AbstractColumn getyColumn() {
 		return yColumn;
+	}
+	
+	public Distance getDistance() {
+		return distance;
+	}
+	
+	public void setDistance(Distance distance) {
+		this.distance = distance;
 	}
 }

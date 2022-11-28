@@ -1,10 +1,10 @@
 package fr.groupeh6.sae.model.datas.titanic;
 
 import java.util.List;
+
 import fr.groupeh6.sae.model.AbstractDataset;
 import fr.groupeh6.sae.model.IPoint;
 import fr.groupeh6.sae.model.columns.AbstractColumn;
-import fr.groupeh6.sae.model.columns.BooleanColumn;
 import fr.groupeh6.sae.model.columns.EnumColumn;
 import fr.groupeh6.sae.model.columns.NumberColumn;
 import fr.groupeh6.sae.model.columns.StringColumn;
@@ -35,10 +35,20 @@ public class TitanicDataset extends AbstractDataset{
 	public IPoint getType() {
 		return new TitanicPoint();
 	}
+	
+	@Override
+	public List<AbstractColumn> getColumnsDistance() {
+		return List.of(pClass, sex, age, parch, embarked);
+	}
 
 	@Override
 	public double distance(IPoint p1, IPoint p2) {
 		return new DistanceEuclidienne(List.of(pClass, sex, age, parch, embarked)).distance(p1, p2);
+	}
+
+	@Override
+	public String name() {
+		return DistanceEuclidienne.NAME;
 	}
 
 }

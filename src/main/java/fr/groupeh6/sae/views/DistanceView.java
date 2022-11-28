@@ -36,13 +36,13 @@ public class DistanceView extends AbstractModalView {
 		
 		type.getItems().add("Euclidienne");
 		type.getItems().add("Manhattan");
-		type.getSelectionModel().select(0);
+		type.getSelectionModel().select(model.getCalcul());
 		
 		initHbox();
 		submit = new Button("Valider");
 		submit.setOnAction(e -> this.close());
 		
-		vbox.getChildren().addAll(hbox, submit);
+		vbox.getChildren().addAll(type, hbox, submit);
 		
 		Scene scene = new Scene(vbox);
 		this.setScene(scene);
@@ -65,7 +65,7 @@ public class DistanceView extends AbstractModalView {
 		col.setSpacing(10);
 		Label colLabel = new Label(column.getName());
 		CheckBox cb = new CheckBox();
-		if(model.getSelected().contains(column)) cb.setSelected(true);	
+		if(model.isSelected(column)) cb.setSelected(true);
 		cb.selectedProperty().addListener(new CheckBoxListener(column));
 		col.getChildren().addAll(colLabel, cb);
 		return col;

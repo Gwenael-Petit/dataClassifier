@@ -77,10 +77,5 @@ public abstract class AbstractDataset implements Iterable<IPoint>, Distance {
 	public double robustesse(Classifier classifier, AbstractColumn columnClass) {
 		return new Robustesse(this, classifier, columnClass).robustesse();
 	}
-	
-	@Override
-	public List<AbstractColumn> getColumnsDistance() {
-		return null;
-	}
 
 }
