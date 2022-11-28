@@ -70,20 +70,20 @@ public class NewPointView extends AbstractModalView {
 		switch(column.toString().split(":")[0]) {
 		case "Boolean" :
 			node = new CheckBox();
-			((CheckBox)node).selectedProperty().addListener(new BooleanListener(npm, i));
+			((CheckBox)node).selectedProperty().addListener(new BooleanListener(npc, i));
 			break;
 		case "Number" :
 			node = new TextField();
-			((TextField)node).textProperty().addListener(new NumberListener(npm, i, (TextField) node));
+			((TextField)node).textProperty().addListener(new NumberListener(npc, i, (TextField) node));
 			break;
 		case "Enum" :
 			node = new ComboBox<String>();
 			((ComboBox<String>)node).getItems().addAll(column.getDistinctValues());
-			((ComboBox<String>)node).getSelectionModel().selectedItemProperty().addListener(new EnumListener(npm, i));
+			((ComboBox<String>)node).getSelectionModel().selectedItemProperty().addListener(new EnumListener(npc, i));
 			break;
 		default :
 			node = new TextField();
-			((TextField)node).textProperty().addListener(new StringListener(npm, i, (TextField) node));
+			((TextField)node).textProperty().addListener(new StringListener(npc, i, (TextField) node));
 			break;
 		}
 		return node;

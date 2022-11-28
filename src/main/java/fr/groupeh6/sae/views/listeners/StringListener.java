@@ -1,5 +1,6 @@
 package fr.groupeh6.sae.views.listeners;
 
+import fr.groupeh6.sae.controllers.NewPointController;
 import fr.groupeh6.sae.model.NewPointModel;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -9,7 +10,7 @@ public class StringListener extends AbstractListener implements ChangeListener<S
 	
 	protected TextField tf;
 
-	public StringListener(NewPointModel npc, int i, TextField tf) {
+	public StringListener(NewPointController npc, int i, TextField tf) {
 		super(npc, i);
 		this.tf = tf;
 	}

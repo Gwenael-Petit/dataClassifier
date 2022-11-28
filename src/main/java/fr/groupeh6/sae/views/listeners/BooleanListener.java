@@ -1,12 +1,12 @@
 package fr.groupeh6.sae.views.listeners;
 
-import fr.groupeh6.sae.model.NewPointModel;
+import fr.groupeh6.sae.controllers.NewPointController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
 public class BooleanListener extends AbstractListener implements ChangeListener<Boolean> {
 
-	public BooleanListener(NewPointModel npc, int i) {
+	public BooleanListener(NewPointController npc, int i) {
 		super(npc, i);
 	}
 
