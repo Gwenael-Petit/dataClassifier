@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import fr.groupeh6.sae.model.IPoint;
+import fr.groupeh6.sae.model.columns.EnumColumn;
 import fr.groupeh6.sae.model.columns.NumberColumn;
 import fr.groupeh6.sae.model.datas.iris.EnumVariety;
 import fr.groupeh6.sae.model.datas.iris.IrisPoint;
@@ -24,6 +25,7 @@ class DistanceManhattanTest {
 	NumberColumn spW = new NumberColumn("sepal.width");
 	NumberColumn ptL = new NumberColumn("petal.length");
 	NumberColumn ptW = new NumberColumn("petal.width");
+	EnumColumn var = new EnumColumn("variety", EnumVariety.class);
 	
 	DistanceManhattan dist = new DistanceManhattan(null);
 	
@@ -84,13 +86,19 @@ class DistanceManhattanTest {
 	}
 	
 	@Test
+	void test_distanceColEnumerative() {
+		dist.columns = List.of(var);
+		assertEquals(1.0, dist.distance(p1, p2));
+		assertEquals(0.0, dist.distance(p3, p2));
+	}
+	
+	@Test
 	void test_get_columns_distance() {
 		assertEquals(null,dist.getColumnsDistance());
 		dist.columns = List.of(spL,ptL,ptW);
 		assertEquals("[sepal.length, petal.length, petal.width]",dist.getColumnsDistance().toString());
 		dist.columns = List.of(spL,ptW);
 		assertEquals("[sepal.length, petal.width]",dist.getColumnsDistance().toString());
-		
 	}
 
 }

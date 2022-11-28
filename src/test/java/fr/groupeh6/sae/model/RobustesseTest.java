@@ -86,7 +86,7 @@ class RobustesseTest {
 		robusPtL.addDatasInGroups(groups);
 		//double[] ratePerGroup  = new double[] {0.0, 0.0, 0.0, 0.0, 0.0};
 		assertEquals(5, robusPtL.calculRatePerGroup(groups).length);
-		//assertEquals(ratePerGroup, robusPtL.calculRatePerGroup(groups));
+		//assertEquals(ratePerGroup.toString(), robusPtL.calculRatePerGroup(groups).toString());
 	}
 	
 	@Test
