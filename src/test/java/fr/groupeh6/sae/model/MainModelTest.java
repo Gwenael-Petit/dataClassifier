@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import fr.groupeh6.sae.model.classifier.Classifier;
@@ -23,6 +24,9 @@ class MainModelTest {
 	IPoint p1 = new IrisPoint(5.1, 3.5, 1.4, 0.2, EnumVariety.SETOSA);
 	IPoint p2 = new IrisPoint(6.3, 3.3, 6, 2.5, EnumVariety.VIRGINICA);
 	IPoint p3 = new IrisPoint(3.2, 4.2, 4, 1.6, EnumVariety.VIRGINICA);
+	IPoint p4 = new IrisPoint(3.2, 4.2, 4, 1.6, EnumVariety.VIRGINICA);
+	IPoint p5 = new IrisPoint(3.2, 4.2, 4, 1.6, EnumVariety.VIRGINICA);
+	IPoint p6 = new IrisPoint(3.2, 4.2, 4, 1.6, EnumVariety.VIRGINICA);
 	
 	NumberColumn spL = new NumberColumn("sepal.length");
 	NumberColumn spW = new NumberColumn("sepal.width");
@@ -36,14 +40,9 @@ class MainModelTest {
 	protected File file = new File(path);
 	
 	MainModel model = new MainModel();
-	Classifier classifier = new KnnClassifier(3, new DistanceEuclidienne(List.of(spL,spW,ptL,ptW)));
-	AbstractColumn classColumn = new StringColumn("columntest");
+	AbstractColumn classColumn = new StringColumn("variety");
+	Classifier classifier = new KnnClassifier(2, new DistanceEuclidienne(List.of(spL,spW,ptL,ptW)));
 	IPoint p = new IrisPoint();
-
-	@Test
-	void test() {
-		fail("Not yet implemented");
-	}
 	
 	@Test
 	void test_load_from_file() {
@@ -75,22 +74,29 @@ class MainModelTest {
 	@Test
 	void test_add_point() {
 		
-		//model.addPoint(p);
-		//assertTrue(model.categories.get(0).getLines().contains(p));
-		
 		try {
 			model.loadFromFile(path, ',', false);
 		} catch (NotSameTypeException | IOException | TypeNotRegisteredException e) {
 			System.out.println(e.getMessage());
 		}
-		model.setClassifier(classifier);
+		
 		model.addPoint(p);
-		assertTrue(model.getCategory("Iris").getLines().contains(p));
+		assertTrue(model.categories.get(0).getLines().contains(p));
+		model.setClassifier(classifier);
+		model.setClassClassifier(classColumn);
+		//model.addPoint(p);
+		//assertTrue(model.getCategory("Iris").getLines().contains(p));
 	}
 	
 	@Test
 	void test_create_categories() {
-		
+		try {
+			model.loadFromFile(path, ',', false);
+		} catch (NotSameTypeException | IOException | TypeNotRegisteredException e) {
+			System.out.println(e.getMessage());
+		}
+		model.createCategories();
+		assertEquals(2,model.allCategories().size());
 	}
 	
 	@Test
@@ -135,14 +141,16 @@ class MainModelTest {
 	
 	@Test
 	void test_set_X_column() {
+		assertEquals(null, model.getxColumn());
 		model.setxColumn(ptL);
 		assertEquals(ptL, model.getxColumn());
 	}
 	
 	@Test
 	void test_set_Y_column() {
+		assertEquals(null, model.getyColumn());
 		model.setyColumn(ptW);
-		assertEquals(ptL, model.getyColumn());
+		assertEquals(ptW, model.getyColumn());
 	}
 	
 	@Test
@@ -160,22 +168,37 @@ class MainModelTest {
 	
 	@Test
 	void test_have_train_data_loaded() {
-		
+		assertEquals(null,model.getTrainDataset());
+		try {
+			model.loadFromFile(path, ',', true);
+		} catch (NotSameTypeException | IOException | TypeNotRegisteredException e) {
+			System.out.println(e.getMessage());
+		}
+		model.getTrainDataset();
+		assertEquals(2,model.getTrainDataset().getNbLines());
 	}
 	
 	@Test
 	void test_get_train_dataset() {
-		
+		try {
+			model.loadFromFile(path, ',', true);
+		} catch (NotSameTypeException | IOException | TypeNotRegisteredException e) {
+			System.out.println(e.getMessage());
+		}
+		model.getTrainDataset();
+		assertEquals(2,model.getTrainDataset().getNbLines());
 	}
 	
 	@Test
 	void test_get_X_column() {
-		
+		model.setxColumn(ptL);
+		assertEquals(ptL, model.getxColumn());
 	}
 	
 	@Test
 	void test_get_Y_column() {
-		
+		model.setyColumn(ptW);
+		assertEquals(ptW, model.getyColumn());
 	}
 	
 	
