@@ -40,7 +40,7 @@ class RobustesseTest {
 		ptW = dataset.getColumns().get(3);
 		variety = dataset.getColumns().get(4);
 		dataset.addAllLine(List.of(point1, point2, point3, point4, point5, point6, point7, point8, point9, point10, point11, point12));
-		classifier = new KnnClassifier(1, new DistanceEuclidienne(List.of(spL,spW,ptL,ptW)));
+		classifier = new KnnClassifier(1, new DistanceEuclidienne(List.of(spL,spW,ptL,ptW, variety)));
 		robusPtL = new Robustesse(dataset, classifier, ptL);
 	}
 	
