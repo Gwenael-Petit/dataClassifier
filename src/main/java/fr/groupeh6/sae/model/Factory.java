@@ -8,6 +8,8 @@ import fr.groupeh6.sae.model.classifier.RandomClassifier;
 import fr.groupeh6.sae.model.columns.AbstractColumn;
 import fr.groupeh6.sae.model.datas.StoredDatas;
 import fr.groupeh6.sae.model.distance.Distance;
+import fr.groupeh6.sae.model.distance.DistanceEuclidienne;
+import fr.groupeh6.sae.model.distance.DistanceManhattan;
 
 public class Factory {
 	
@@ -41,6 +43,20 @@ public class Factory {
 	
 	public Classifier randomClassifier() {
 		return new RandomClassifier();
+	}
+	
+	public Distance distanceFromName(String name, List<AbstractColumn> columns) {
+		if(name.equalsIgnoreCase("Euclidienne")) return euclidienne(columns);
+		if(name.equalsIgnoreCase("manhattan")) return manhattan(columns);
+		return null;
+	}
+	
+	public Distance euclidienne(List<AbstractColumn> columns) {
+		return new DistanceEuclidienne(columns);
+	}
+	
+	public Distance manhattan(List<AbstractColumn> columns) {
+		return new DistanceManhattan(columns);
 	}
 	
 	public static Factory getInstance() {

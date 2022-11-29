@@ -18,5 +18,13 @@ public class DistanceController {
 	public void removeSelected(AbstractColumn column) {
 		model.getSelected().remove(column);
 	}
+	
+	public void setCalcul(String calcul) {
+		model.setCalcul(calcul);
+	}
+	
+	public void submit() {
+		model.submit();
+	}
 
 }

@@ -33,7 +33,7 @@ public class IrisDataset extends AbstractDataset {
 	
 	@Override
 	public List<AbstractColumn> getColumnsDistance() {
-		return null;
+		return columns.subList(0, 4);
 	}
 
 	@Override

@@ -37,10 +37,14 @@ public class DistanceView extends AbstractModalView {
 		type.getItems().add("Euclidienne");
 		type.getItems().add("Manhattan");
 		type.getSelectionModel().select(model.getCalcul());
+		type.getSelectionModel().selectedItemProperty().addListener((obs, oldV, newV) -> controller.setCalcul(newV));
 		
 		initHbox();
 		submit = new Button("Valider");
-		submit.setOnAction(e -> this.close());
+		submit.setOnAction(e -> {
+			controller.submit();
+			this.close();
+		});
 		
 		vbox.getChildren().addAll(type, hbox, submit);
 		

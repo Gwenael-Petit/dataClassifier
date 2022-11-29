@@ -14,25 +14,24 @@ import fr.groupeh6.sae.model.distance.DistanceEuclidienne;
 public class PokemonDataset extends AbstractDataset {
 	
 	private static final String NAME = "Pokemon";
-	public final List<AbstractColumn> columns = List.of(
-			new StringColumn("name"),
-			new NumberColumn("attack"),
-			new NumberColumn("base_egg_steps"),
-			new NumberColumn("capture_rate"),
-			new NumberColumn("defense"),
-			new NumberColumn("experience_growth"),
-			new NumberColumn("hp"),
-			new NumberColumn("sp_attack"),
-			new NumberColumn("sp_defense"),
-			new EnumColumn<EnumType>("type1", EnumType.class),
-			new EnumColumn<EnumType>("type2", EnumType.class),
-			new NumberColumn("speed"),
-			new BooleanColumn("is_legendary")
-			);
+	
+	private AbstractColumn name = new StringColumn("name");
+	private AbstractColumn attack = new NumberColumn("attack");
+	private AbstractColumn egg_steps = new NumberColumn("base_egg_steps");
+	private AbstractColumn captureRate = new NumberColumn("capture_rate");
+	private AbstractColumn defense = new NumberColumn("defense");
+	private AbstractColumn expGrowth = new NumberColumn("experience_growth");
+	private AbstractColumn hp = new NumberColumn("hp");
+	private AbstractColumn spAttack = new NumberColumn("sp_attack");
+	private AbstractColumn spDefense = new NumberColumn("sp_defense");
+	private AbstractColumn type1 = new EnumColumn<EnumType>("type1", EnumType.class);
+	private AbstractColumn type2 = new EnumColumn<EnumType>("type2", EnumType.class);
+	private AbstractColumn speed = new NumberColumn("speed");
+	private AbstractColumn legendary = new BooleanColumn("is_legendary");
 
 	public PokemonDataset() {
 		super(NAME);
-		setColumns(columns);
+		setColumns(List.of(name, attack, egg_steps, captureRate, defense, expGrowth, hp, spAttack, spDefense, type1, type2, speed, legendary));
 	}
 
 	@Override
@@ -42,7 +41,7 @@ public class PokemonDataset extends AbstractDataset {
 	
 	@Override
 	public List<AbstractColumn> getColumnsDistance() {
-		return null;
+		return columns.subList(1, 12);
 	}
 
 	@Override

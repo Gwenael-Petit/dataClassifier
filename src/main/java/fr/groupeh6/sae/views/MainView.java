@@ -102,12 +102,7 @@ public class MainView extends Stage implements Observer {
 			
 			if(!tfK.getText().isBlank()) {
 				int k = Integer.valueOf(tfK.getText());
-				if(defaultDistance.isSelected()) {
-					controller.setClassifier(k, model.getTrainDataset());
-				} else {
-					controller.setClassClassifier(null);
-					// recuperer la distance manuel
-				}
+				controller.setClassifier(k);
 			}
 		});
 		
@@ -128,7 +123,10 @@ public class MainView extends Stage implements Observer {
 			}
 		});
 		
-		defaultDistance.selectedProperty().addListener((obs, oldV, newV) -> bSetDistance.setDisable(newV));
+		defaultDistance.selectedProperty().addListener((obs, oldV, newV) -> {
+			bSetDistance.setDisable(newV);
+			if(newV) controller.setDistance(model.getTrainDataset());
+		});
 		
 		bSetDistance.setOnAction(e -> new DistanceView(this, new DistanceModel(model)));
 	}

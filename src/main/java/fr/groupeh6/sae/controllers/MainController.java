@@ -34,8 +34,12 @@ public class MainController {
 		this.model.setClassClassifier(column);
 	}
 	
-	public void setClassifier(int k, Distance distance) {
-		this.model.setClassifier(Factory.getInstance().knnClassifier(k, distance));
+	public void setDistance(Distance distance) {
+		model.setDistance(distance);
+	}
+	
+	public void setClassifier(int k) {
+		this.model.setClassifier(Factory.getInstance().knnClassifier(k, model.getDistance()));
 	}
 	
 }
