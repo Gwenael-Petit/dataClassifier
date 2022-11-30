@@ -43,4 +43,8 @@ public class KnnClassifier implements Classifier {
 		Entry<Object, Integer> entry = valueCount.entrySet().stream().max((e1, e2) -> Integer.compare(e1.getValue(), e2.getValue())).get();
 		return entry.getKey();
 	}
+	
+	public String getName() {
+		return this.distance.name()+" classifier";
+	}
 }

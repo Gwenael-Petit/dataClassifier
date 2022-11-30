@@ -9,4 +9,6 @@ public interface Classifier {
 	
 	public Object classifyPoint(IPoint point, AbstractColumn columnClass, List<IPoint> points);
 
+	public Object getName();
+
 }
