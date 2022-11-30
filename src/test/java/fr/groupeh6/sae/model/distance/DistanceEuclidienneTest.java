@@ -87,10 +87,14 @@ class DistanceEuclidienneTest {
 	void test_get_columns_distance() {
 		assertEquals(null,dist.getColumnsDistance());
 		dist.columns = List.of(spL,ptL,ptW);
-		assertEquals("[sepal.length, petal.length, petal.width]",dist.getColumnsDistance().toString());
+		assertEquals("[Number:sepal.length, Number:petal.length, Number:petal.width]",dist.getColumnsDistance().toString());
 		dist.columns = List.of(spL,ptW);
-		assertEquals("[sepal.length, petal.width]",dist.getColumnsDistance().toString());
-		
+		assertEquals("[Number:sepal.length, Number:petal.width]",dist.getColumnsDistance().toString());
+	}
+	
+	@Test 
+	void test_Name() {
+		assertEquals("Euclidienne", dist.name());
 	}
 
 }
