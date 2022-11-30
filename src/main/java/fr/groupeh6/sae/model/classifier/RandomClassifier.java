@@ -15,4 +15,9 @@ public class RandomClassifier implements Classifier {
 		return value;
 	}
 
+	@Override
+	public Object getName() {
+		return "Random Classifier";
+	}
+
 }

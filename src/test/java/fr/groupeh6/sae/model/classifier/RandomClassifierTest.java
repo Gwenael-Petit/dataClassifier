@@ -56,4 +56,8 @@ class RandomClassifierTest {
 		assertTrue(varieties.contains(rClassifier.classifyPoint(p, variety, dataset.getLines())));
 	}
 
+	@Test void test_get_name(){
+		RandomClassifier rClassifier = new RandomClassifier();
+		assertEquals("Random Classifier", rClassifier.getName());
+	}
 }

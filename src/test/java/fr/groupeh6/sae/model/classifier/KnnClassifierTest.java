@@ -65,4 +65,10 @@ class KnnClassifierTest {
 		assertEquals(List.of(p1, p4, p2), classifier.getNeighbours(p, dataset.getLines()));
 		assertEquals(EnumVariety.SETOSA, classifier.classifyPoint(p, variety, dataset.getLines()));
 	}
+	
+	@Test
+	void test_get_name() {
+		KnnClassifier classifier = new KnnClassifier(3, new DistanceManhattan(List.of(spL,spW,ptL,ptW)));
+		assertEquals("Manhattan classifier", classifier.getName());
+	}
 }

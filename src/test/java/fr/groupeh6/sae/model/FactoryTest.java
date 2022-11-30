@@ -1,6 +1,6 @@
 package fr.groupeh6.sae.model;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,4 +40,8 @@ class FactoryTest {
 		assertEquals("Euclidienne",Factory.getInstance().euclidienne(list).name());
 	}
 
+	@Test
+	void test_random_classifier() {
+		assertEquals("Random Classifier",Factory.getInstance().randomClassifier().getName());
+	}
 }
