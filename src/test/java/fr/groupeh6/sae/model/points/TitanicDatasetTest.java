@@ -3,6 +3,7 @@ package fr.groupeh6.sae.model.points;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -10,6 +11,9 @@ import org.junit.jupiter.api.Test;
 
 import fr.groupeh6.sae.model.AbstractDataset;
 import fr.groupeh6.sae.model.IPoint;
+import fr.groupeh6.sae.model.columns.AbstractColumn;
+import fr.groupeh6.sae.model.columns.EnumColumn;
+import fr.groupeh6.sae.model.columns.NumberColumn;
 import fr.groupeh6.sae.model.datas.titanic.EnumEmbarked;
 import fr.groupeh6.sae.model.datas.titanic.EnumSex;
 import fr.groupeh6.sae.model.datas.titanic.TitanicDataset;
@@ -38,6 +42,22 @@ class TitanicDatasetTest {
 		assertEquals(2.0235,titanicDs.distance(pers1,pers2),0.0001);
 		assertEquals(1.9723,titanicDs.distance(pers2,pers3),0.0001);
 		assertEquals(0.877,titanicDs.distance(pers1,pers3),0.001);
+	}
+	
+	@Test
+	void test_getColumnDistance() {
+		List<AbstractColumn> listeDist = new ArrayList<AbstractColumn>();
+		listeDist.add(new NumberColumn("Pclass")); 
+		listeDist.add(new EnumColumn<EnumSex>("Sex", EnumSex.class));
+		listeDist.add(new NumberColumn("Age"));
+		listeDist.add(new NumberColumn("Parch"));
+		listeDist.add(new EnumColumn<EnumEmbarked>("Embarked", EnumEmbarked.class));
+		assertEquals(listeDist, titanicDs.getColumnsDistance());
+	}
+	
+	@Test
+	void test_Name() {
+		assertEquals("Euclidienne", titanicDs.name());
 	}
 
 }
