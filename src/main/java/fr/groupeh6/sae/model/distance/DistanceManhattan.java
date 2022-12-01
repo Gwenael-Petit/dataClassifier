@@ -37,7 +37,7 @@ public class DistanceManhattan implements Distance {
 	}
 
 	@Override
-	public String name() {
+	public String getDistanceName() {
 		return NAME;
 	}
 

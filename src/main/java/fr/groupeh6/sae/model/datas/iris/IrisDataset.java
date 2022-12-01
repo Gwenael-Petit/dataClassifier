@@ -42,7 +42,7 @@ public class IrisDataset extends AbstractDataset {
 	}
 
 	@Override
-	public String name() {
+	public String getDistanceName() {
 		return DistanceEuclidienne.NAME;
 	}
 

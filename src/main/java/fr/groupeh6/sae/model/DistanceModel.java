@@ -18,7 +18,7 @@ public class DistanceModel {
 		this.mainModel = model;
 		columns = new ArrayList<AbstractColumn>(model.getTrainDataset().getNormalizableColumns());
 		selected = new ArrayList<AbstractColumn>(model.getDistance().getColumnsDistance());
-		calcul = model.getDistance().name();
+		calcul = model.getDistance().getDistanceName();
 	}
 	
 	public List<AbstractColumn> getColumns() {

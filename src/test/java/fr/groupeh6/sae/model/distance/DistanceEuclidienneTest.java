@@ -94,7 +94,7 @@ class DistanceEuclidienneTest {
 	
 	@Test 
 	void test_Name() {
-		assertEquals("Euclidienne", dist.name());
+		assertEquals("Euclidienne", dist.getDistanceName());
 	}
 
 }

@@ -58,10 +58,10 @@ class DistanceModelTest {
 	void test_submit() {
 		DistanceModel distModel = new DistanceModel(model);
 		
-		assertEquals("Euclidienne",model.getDistance().name());
+		assertEquals("Euclidienne",model.getDistance().getDistanceName());
 		distModel.setCalcul("Manhattan");
 		distModel.submit();
-		assertEquals("Manhattan",model.getDistance().name());
+		assertEquals("Manhattan",model.getDistance().getDistanceName());
 	}
 	
 	

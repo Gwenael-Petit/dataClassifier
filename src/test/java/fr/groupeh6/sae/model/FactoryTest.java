@@ -37,7 +37,7 @@ class FactoryTest {
 	
 	@Test
 	void test_euclidienne() {
-		assertEquals("Euclidienne",Factory.getInstance().euclidienne(list).name());
+		assertEquals("Euclidienne",Factory.getInstance().euclidienne(list).getDistanceName());
 	}
 
 	@Test
@@ -47,8 +47,8 @@ class FactoryTest {
 	
 	@Test
 	void test_distance_from_name() {
-		assertEquals("Manhattan",Factory.getInstance().distanceFromName("manhattan", list).name());
-		assertEquals("Euclidienne",Factory.getInstance().distanceFromName("Euclidienne", list).name());
+		assertEquals("Manhattan",Factory.getInstance().distanceFromName("manhattan", list).getDistanceName());
+		assertEquals("Euclidienne",Factory.getInstance().distanceFromName("Euclidienne", list).getDistanceName());
 		assertEquals(null,Factory.getInstance().distanceFromName("test", list));
 	}
 }

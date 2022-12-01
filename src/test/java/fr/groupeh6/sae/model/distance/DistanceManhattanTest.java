@@ -103,7 +103,7 @@ class DistanceManhattanTest {
 	
 	@Test
 	void test_Name() {
-		assertEquals("Manhattan", dist.name());
+		assertEquals("Manhattan", dist.getDistanceName());
 	}
 
 }

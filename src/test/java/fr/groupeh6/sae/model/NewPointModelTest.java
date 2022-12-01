@@ -45,7 +45,7 @@ class NewPointModelTest {
 	
 	@Test
 	void test_getType() {
-		assertEquals(new IrisDataset().name(), npm.getType().name());
+		assertEquals(new IrisDataset().getDistanceName(), npm.getType().getDistanceName());
 	}
 
 }

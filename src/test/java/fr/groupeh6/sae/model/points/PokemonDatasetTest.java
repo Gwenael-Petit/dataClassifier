@@ -39,7 +39,6 @@ class PokemonDatasetTest {
 	@Test
 	void get_type_test() {
 		assertTrue(pokemonDs.getType() instanceof PokemonPoint);
-		//assertEquals("Pokemon [name=null, attack=0.0, eggSteps=0.0, captureRate=0.0, defense=0.0, experience=0.0, hp=0.0, spAttack=0.0, spDefense=0.0, type1=null, type2=null, speed=0.0, legendary=false]",pokemonDs.getType().toString());
 	}
 	
 	@Test
@@ -68,7 +67,7 @@ class PokemonDatasetTest {
 	
 	@Test
 	void test_Name() {
-		assertEquals("Euclidienne", pokemonDs.name());
+		assertEquals("Euclidienne", pokemonDs.getDistanceName());
 	}
 
 }

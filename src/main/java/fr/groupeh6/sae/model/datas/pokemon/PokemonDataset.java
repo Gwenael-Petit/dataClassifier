@@ -50,7 +50,7 @@ public class PokemonDataset extends AbstractDataset {
 	}
 
 	@Override
-	public String name() {
+	public String getDistanceName() {
 		return DistanceEuclidienne.NAME;
 	}
 	

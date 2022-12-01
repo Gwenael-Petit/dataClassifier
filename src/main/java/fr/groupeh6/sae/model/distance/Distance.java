@@ -11,6 +11,6 @@ public interface Distance {
 	
 	public List<AbstractColumn> getColumnsDistance();
 	
-	public String name();
+	public String getDistanceName();
 
 }

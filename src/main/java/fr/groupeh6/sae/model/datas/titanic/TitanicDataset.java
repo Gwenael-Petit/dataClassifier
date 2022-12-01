@@ -47,7 +47,7 @@ public class TitanicDataset extends AbstractDataset{
 	}
 
 	@Override
-	public String name() {
+	public String getDistanceName() {
 		return DistanceEuclidienne.NAME;
 	}
 

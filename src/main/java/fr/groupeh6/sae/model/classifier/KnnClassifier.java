@@ -45,6 +45,6 @@ public class KnnClassifier implements Classifier {
 	}
 	
 	public String getName() {
-		return this.distance.name()+" classifier";
+		return this.distance.getDistanceName()+" classifier";
 	}
 }
