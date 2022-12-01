@@ -44,4 +44,11 @@ class FactoryTest {
 	void test_random_classifier() {
 		assertEquals("Random Classifier",Factory.getInstance().randomClassifier().getName());
 	}
+	
+	@Test
+	void test_distance_from_name() {
+		assertEquals("Manhattan",Factory.getInstance().distanceFromName("manhattan", list).name());
+		assertEquals("Euclidienne",Factory.getInstance().distanceFromName("Euclidienne", list).name());
+		assertEquals(null,Factory.getInstance().distanceFromName("test", list));
+	}
 }

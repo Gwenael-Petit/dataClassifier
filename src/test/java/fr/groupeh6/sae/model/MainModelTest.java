@@ -32,6 +32,7 @@ class MainModelTest {
 	
 	protected String sep = System.getProperty("file.separator");
 	protected String path = System.getProperty("user.dir") + sep + "src" + sep + "main" + sep + "resources" + sep + "fr" + sep + "groupeh6" + sep + "sae" + sep + "iris.csv";
+	protected String otherPath = System.getProperty("user.dir") + sep + "src" + sep + "main" + sep + "resources" + sep + "fr" + sep + "groupeh6" + sep + "sae" + sep + "pokemon_train.csv";
 	protected File file = new File(path);
 	
 	MainModel model = new MainModel();
@@ -49,6 +50,16 @@ class MainModelTest {
 		}
 		try {
 			model.loadFromFile(path, ',', false);
+		} catch (NotSameTypeException | IOException | TypeNotRegisteredException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			model.loadFromFile(path, ',', true);
+		} catch (NotSameTypeException | IOException | TypeNotRegisteredException e) {
+			System.out.println(e.getMessage());
+		}
+		try {
+			model.loadFromFile(otherPath, ',', true);
 		} catch (NotSameTypeException | IOException | TypeNotRegisteredException e) {
 			System.out.println(e.getMessage());
 		}
