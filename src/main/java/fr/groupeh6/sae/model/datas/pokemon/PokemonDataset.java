@@ -17,7 +17,7 @@ public class PokemonDataset extends AbstractDataset {
 	
 	private AbstractColumn name = new StringColumn("name");
 	private AbstractColumn attack = new NumberColumn("attack");
-	private AbstractColumn egg_steps = new NumberColumn("base_egg_steps");
+	private AbstractColumn eggSteps = new NumberColumn("base_egg_steps");
 	private AbstractColumn captureRate = new NumberColumn("capture_rate");
 	private AbstractColumn defense = new NumberColumn("defense");
 	private AbstractColumn expGrowth = new NumberColumn("experience_growth");
@@ -31,7 +31,7 @@ public class PokemonDataset extends AbstractDataset {
 
 	public PokemonDataset() {
 		super(NAME);
-		setColumns(List.of(name, attack, egg_steps, captureRate, defense, expGrowth, hp, spAttack, spDefense, type1, type2, speed, legendary));
+		setColumns(List.of(name, attack, eggSteps, captureRate, defense, expGrowth, hp, spAttack, spDefense, type1, type2, speed, legendary));
 	}
 
 	@Override

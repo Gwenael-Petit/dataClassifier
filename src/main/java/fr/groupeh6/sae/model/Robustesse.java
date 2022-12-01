@@ -7,7 +7,7 @@ import fr.groupeh6.sae.model.columns.AbstractColumn;
 
 public class Robustesse {
 	
-	protected static int NUMBER_GROUPS = 5;
+	protected final static int NUMBERGROUPS = 5;
 	
 	protected AbstractDataset train;
 	protected Classifier classifier;
@@ -32,8 +32,8 @@ public class Robustesse {
 	}
 	
 	public AbstractDataset[] makeGroups() {
-		AbstractDataset[] groups = new AbstractDataset[NUMBER_GROUPS];
-		for(int gi=0; gi<NUMBER_GROUPS; gi++) {
+		AbstractDataset[] groups = new AbstractDataset[NUMBERGROUPS];
+		for(int gi=0; gi<NUMBERGROUPS; gi++) {
 			groups[gi] = Factory.getInstance().newDataset(train.columns);
 		}
 		return groups;
@@ -44,7 +44,7 @@ public class Robustesse {
 		int i=0;
 		for(IPoint point : train.getLines()) {
 			groups[i].addLine(point);
-			i = (i+1)%NUMBER_GROUPS;
+			i = (i+1)%NUMBERGROUPS;
 		}
 	}
 	

@@ -46,8 +46,8 @@ class RobustesseTest {
 	
 	@Test
 	void test_makeGroups() {
-		AbstractDataset[] res = new AbstractDataset[Robustesse.NUMBER_GROUPS];
-		for(int i = 0; i < Robustesse.NUMBER_GROUPS; i++) {
+		AbstractDataset[] res = new AbstractDataset[Robustesse.NUMBERGROUPS];
+		for(int i = 0; i < Robustesse.NUMBERGROUPS; i++) {
 			res[i] = Factory.getInstance().newDataset(dataset.columns);
 		}
 		assertEquals(res.length, robusPtL.makeGroups().length);
